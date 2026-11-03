@@ -1816,10 +1816,8 @@ img {
 }
 
 .prop-unified-header {
-  position: -webkit-sticky;
-  position: sticky;
-  top: 72px;
-  z-index: 990;
+  position: relative;
+  z-index: 50;
   background: #ffffff;
   padding: 12px 0 10px;
   margin-bottom: 22px;
@@ -3218,8 +3216,8 @@ img {
 }
 
 .rent-sidebar-col {
-  position: sticky;
-  top: 86px;
+  position: relative !important;
+  top: 0 !important;
   z-index: 20;
 }
 
@@ -3798,13 +3796,11 @@ img {
   }
 
   .prop-unified-header {
-    position: -webkit-sticky !important;
-    position: sticky !important;
-    top: 65px !important;
-    z-index: 990 !important;
+    position: relative !important;
+    top: 0 !important;
+    z-index: 50 !important;
     background: #ffffff !important;
     padding: 8px 0 6px !important;
-    box-shadow: 0 4px 16px rgba(15, 23, 42, 0.08) !important;
     border-bottom: 1px solid #f1f5f9 !important;
   }
 
