@@ -1041,8 +1041,7 @@ img {
   z-index: 1;
 }
 
-.property-card:hover,
-.property-card.is-card-flipped {
+.property-card:hover {
   z-index: 60 !important;
 }
 
@@ -1054,9 +1053,8 @@ img {
   will-change: transform;
 }
 
-/* 180 DEGREE FLIP ON HOVER (CARD 180 DEGREE GHUME) */
-.property-card:hover .property-card-inner,
-.property-card.is-card-flipped .property-card-inner {
+/* 180 DEGREE FLIP ON HOVER ONLY (CLICK PAR FREEZE/RUK NAHI JAYEGA) */
+.property-card:hover .property-card-inner {
   transform: rotateY(180deg);
 }
 

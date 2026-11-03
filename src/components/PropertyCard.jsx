@@ -4,7 +4,6 @@ import { MapPin, Share2, Check } from "lucide-react";
 
 export default function PropertyCard({ property, onEnquiry }) {
     const [copied, setCopied] = useState(false);
-    const [isFlipped, setIsFlipped] = useState(false);
 
     const handleShare = async (e) => {
         e.preventDefault();
@@ -39,15 +38,8 @@ export default function PropertyCard({ property, onEnquiry }) {
         }
     };
 
-    const handleMobileToggle = () => {
-        setIsFlipped((prev) => !prev);
-    };
-
     return (
-        <article
-            className={`property-card ${isFlipped ? "is-card-flipped" : ""}`}
-            onClick={handleMobileToggle}
-        >
+        <article className="property-card">
             <div className="property-card-inner">
                 {/* 1. FRONT FACE (0 DEGREE) */}
                 <div className="property-card-front">
