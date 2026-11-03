@@ -1,12 +1,11 @@
-import { useState, useMemo, useEffect, useRef } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import PropertyCard from "../components/PropertyCard";
 import PropertySection from "../components/PropertySection";
 import WhyChooseUs from "../components/WhyChooseUs";
 import SearchFilterRentals from "../components/SearchFilterRentals";
 import { useProperty } from "../context/PropertyContext";
-import { popularLocations } from "../data/popularLocationsData";
-import { Building2, Home as HomeIcon, Sparkles, Search, X, MapPin, SlidersHorizontal, ChevronDown, ChevronUp } from "lucide-react";
+import { Building2, Home as HomeIcon, Search, X, SlidersHorizontal, ChevronDown, ChevronUp } from "lucide-react";
 
 export default function Rent() {
     const [searchParams, setSearchParams] = useSearchParams();
@@ -15,74 +14,20 @@ export default function Rent() {
     const initialType = searchParams.get("type") || "all";
     const [activeTab, setActiveTab] = useState(initialType);
     const [search, setSearch] = useState(searchParams.get("search") || "");
-    const [searchInput, setSearchInput] = useState(searchParams.get("search") || "");
     const [budgetLimit, setBudgetLimit] = useState(200000);
     const [sortBy, setSortBy] = useState("recommended");
-    const [showSuggestions, setShowSuggestions] = useState(false);
-    const [isScrolled, setIsScrolled] = useState(false);
     const [showMobileFilter, setShowMobileFilter] = useState(false);
-
-    const searchContainerRef = useRef(null);
-
-    // Track scroll for sticky search bar
-    useEffect(() => {
-        const handleScroll = () => {
-            setIsScrolled(window.scrollY > 80);
-        };
-        window.addEventListener("scroll", handleScroll, { passive: true });
-        return () => window.removeEventListener("scroll", handleScroll);
-    }, []);
-
-    // Click outside listener for search suggestions
-    useEffect(() => {
-        const handleClickOutside = (e) => {
-            if (searchContainerRef.current && !searchContainerRef.current.contains(e.target)) {
-                setShowSuggestions(false);
-            }
-        };
-        document.addEventListener("mousedown", handleClickOutside);
-        return () => document.removeEventListener("mousedown", handleClickOutside);
-    }, []);
 
     useEffect(() => {
         const typeParam = searchParams.get("type") || "all";
         const queryParam = searchParams.get("search") || "";
         setActiveTab(typeParam);
         setSearch(queryParam);
-        setSearchInput(queryParam);
     }, [searchParams]);
 
     useEffect(() => {
         document.title = "Jaipur ki Property - Flats & Rentals";
     }, []);
-
-    // Real-time matching locations as user types (SAME AS HOME PAGE)
-    const matchedLocations = useMemo(() => {
-        if (!searchInput.trim()) return [];
-        const clean = searchInput.trim().toLowerCase();
-        return popularLocations.filter((loc) =>
-            loc.name.toLowerCase().includes(clean)
-        );
-    }, [searchInput]);
-
-    const handleSearchSubmit = (e) => {
-        if (e) e.preventDefault();
-        setShowSuggestions(false);
-        const trimmed = searchInput.trim();
-        setSearch(trimmed);
-        if (trimmed) {
-            setSearchParams(activeTab !== "all" ? { type: activeTab, search: trimmed } : { search: trimmed });
-        } else {
-            setSearchParams(activeTab !== "all" ? { type: activeTab } : {});
-        }
-    };
-
-    const handleSelectSuggestion = (locName) => {
-        setSearchInput(locName);
-        setSearch(locName);
-        setShowSuggestions(false);
-        setSearchParams(activeTab !== "all" ? { type: activeTab, search: locName } : { search: locName });
-    };
 
     // Filter properties
     const filtered = useMemo(() => {
@@ -210,6 +155,35 @@ export default function Rent() {
                                 </button>
                             </div>
 
+                            {/* SEARCH BOX IN MOBILE DRAWER */}
+                            <div style={{ marginBottom: "14px" }}>
+                                <label style={{ fontSize: "12.5px", fontWeight: 600, color: "#334155", display: "block", marginBottom: "6px" }}>Search by Title or Locality:</label>
+                                <div style={{ display: "flex", alignItems: "center", gap: "8px", background: "#f8fafc", border: "1.5px solid #fbcfe8", borderRadius: "10px", padding: "7px 12px" }}>
+                                    <Search size={16} color="#ec268f" style={{ flexShrink: 0 }} />
+                                    <input
+                                        type="text"
+                                        placeholder="Search locality, flat, area..."
+                                        value={search}
+                                        onChange={(e) => {
+                                            const val = e.target.value;
+                                            setSearch(val);
+                                            setSearchParams(activeTab !== "all" ? (val ? { type: activeTab, search: val } : { type: activeTab }) : (val ? { search: val } : {}));
+                                        }}
+                                        style={{ width: "100%", border: "none", outline: "none", background: "transparent", fontSize: "13px" }}
+                                    />
+                                    {search && (
+                                        <X
+                                            size={16}
+                                            style={{ cursor: "pointer", color: "#94a3b8" }}
+                                            onClick={() => {
+                                                setSearch("");
+                                                setSearchParams(activeTab !== "all" ? { type: activeTab } : {});
+                                            }}
+                                        />
+                                    )}
+                                </div>
+                            </div>
+
                             <div className="prop-drawer-budget-row">
                                 <span>Budget Limit:</span>
                                 <strong>Rs {Number(budgetLimit).toLocaleString("en-IN")}</strong>
@@ -258,72 +232,6 @@ export default function Rent() {
                 </div>
             </div>
 
-            {/* PROMINENT SEARCH BAR (STICKY ON SCROLL ACROSS ENTIRE PAGE) */}
-            <div className={`rent-search-sticky-wrap ${isScrolled ? "is-sticky" : ""}`}>
-                <div className="container">
-                    <div className="home-search-hero-bar" ref={searchContainerRef}>
-                        <form onSubmit={handleSearchSubmit} className="home-search-input-row">
-                            <div className="home-search-input-box">
-                                <Search size={18} color="#ec268f" style={{ flexShrink: 0 }} />
-                                <input
-                                    type="text"
-                                    placeholder="Search locality, flat, area in Jaipur..."
-                                    value={searchInput}
-                                    onChange={(e) => {
-                                        setSearchInput(e.target.value);
-                                        setShowSuggestions(true);
-                                    }}
-                                    onFocus={() => {
-                                        if (searchInput.trim()) setShowSuggestions(true);
-                                    }}
-                                />
-                                {searchInput && (
-                                    <X
-                                        size={16}
-                                        style={{ cursor: "pointer", color: "#94a3b8" }}
-                                        onClick={() => {
-                                            setSearchInput("");
-                                            setSearch("");
-                                            setShowSuggestions(false);
-                                            setSearchParams(activeTab !== "all" ? { type: activeTab } : {});
-                                        }}
-                                    />
-                                )}
-                            </div>
-                            <button type="submit" className="home-search-btn">
-                                <Search size={16} /> <span>Search</span>
-                            </button>
-                        </form>
-
-                        {/* AUTOCOMPLETE LOCATION SUGGESTIONS */}
-                        {showSuggestions && searchInput.trim() && (
-                            <div className="home-search-suggestions-dropdown">
-                                {matchedLocations.length > 0 ? (
-                                    <div className="home-suggestions-list">
-                                        {matchedLocations.map((loc) => (
-                                            <button
-                                                key={loc.id}
-                                                type="button"
-                                                className="home-suggestion-item"
-                                                onClick={() => handleSelectSuggestion(loc.name)}
-                                            >
-                                                <MapPin size={16} className="suggestion-pin-icon" />
-                                                <span className="suggestion-name">{loc.name}</span>
-                                                <span className="suggestion-tag">Jaipur</span>
-                                            </button>
-                                        ))}
-                                    </div>
-                                ) : (
-                                    <div className="home-suggestion-no-match">
-                                        <span>Press Enter to search all properties for <strong>"{searchInput}"</strong></span>
-                                    </div>
-                                )}
-                            </div>
-                        )}
-                    </div>
-                </div>
-            </div>
-
             {/* MAIN 2-COLUMN LAYOUT: SIDEBAR WIDGET + LISTINGS */}
             <div className="container rent-layout-container">
                 {/* LEFT SIDEBAR: EXACT "Search and Filter Rentals" CARD AS SCREENSHOT (HIDDEN ON MOBILE SO CARDS SHOW IMMEDIATELY) */}
@@ -333,7 +241,6 @@ export default function Rent() {
                         search={search}
                         setSearch={(val) => {
                             setSearch(val);
-                            setSearchInput(val);
                             setSearchParams(activeTab !== "all" ? (val ? { type: activeTab, search: val } : { type: activeTab }) : (val ? { search: val } : {}));
                         }}
                         budgetLimit={budgetLimit}
@@ -343,6 +250,9 @@ export default function Rent() {
                         placeholder="Search by title or location"
                         onReset={() => {
                             setActiveTab("all");
+                            setSearch("");
+                            setBudgetLimit(200000);
+                            setSortBy("recommended");
                             setSearchParams({});
                         }}
                     />
