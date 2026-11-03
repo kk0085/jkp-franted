@@ -361,8 +361,8 @@ export default function Properties() {
 
             {/* DESKTOP 2-COLUMN & MOBILE 1-COLUMN LISTINGS LAYOUT */}
             <div className="rent-layout-container prop-layout-container">
-                {/* LEFT SIDEBAR: VISIBLE ONLY ON DESKTOP SCREENS TO AVOID MOBILE OVERCROWDING */}
-                <div className="rent-sidebar-col desktop-only-sidebar">
+                {/* LEFT SIDEBAR: ALWAYS VISIBLE */}
+                <div className="rent-sidebar-col">
                     <SearchFilterRentals
                         search={search}
                         setSearch={(val) => {

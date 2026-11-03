@@ -3218,8 +3218,7 @@ img {
 }
 
 .rent-sidebar-col {
-  position: sticky;
-  top: 86px;
+  position: relative;
   z-index: 20;
 }
 
