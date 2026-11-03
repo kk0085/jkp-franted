@@ -27,15 +27,26 @@ export default function SearchFilterRentals({
         setLocalQuery(search);
     }, [search]);
 
-    // Click outside listener for suggestions
+    // Click / touch outside listener for suggestions
     useEffect(() => {
         const handleClickOutside = (e) => {
             if (searchContainerRef.current && !searchContainerRef.current.contains(e.target)) {
                 setShowSuggestions(false);
             }
         };
+        const handleScroll = () => {
+            setShowSuggestions(false);
+        };
         document.addEventListener("mousedown", handleClickOutside);
-        return () => document.removeEventListener("mousedown", handleClickOutside);
+        document.addEventListener("touchstart", handleClickOutside, { passive: true });
+        document.addEventListener("pointerdown", handleClickOutside);
+        window.addEventListener("scroll", handleScroll, { passive: true });
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+            document.removeEventListener("touchstart", handleClickOutside);
+            document.removeEventListener("pointerdown", handleClickOutside);
+            window.removeEventListener("scroll", handleScroll);
+        };
     }, []);
 
     // Real-time matching locations as user types (SAME AS HOME PAGE)
@@ -95,7 +106,7 @@ export default function SearchFilterRentals({
                     aria-label="Toggle filters"
                 >
                     <SlidersHorizontal size={13} />
-                    <span>{mobileFilterOpen ? "Hide" : "Budget & Sort"}</span>
+                    <span>{mobileFilterOpen ? "Close Filters" : "Budget & Sort"}</span>
                     {mobileFilterOpen ? <ChevronUp size={13} /> : <ChevronDown size={13} />}
                 </button>
             </div>
@@ -237,6 +248,17 @@ export default function SearchFilterRentals({
                             <option value="newest">Newest First</option>
                         </select>
                     </div>
+                </div>
+
+                {/* MOBILE ONLY APPLY & CLOSE BUTTON */}
+                <div className="mobile-filter-apply-row">
+                    <button
+                        type="button"
+                        className="mobile-filter-apply-btn"
+                        onClick={() => setMobileFilterOpen(false)}
+                    >
+                        Apply & Close Filters
+                    </button>
                 </div>
             </div>
         </aside>

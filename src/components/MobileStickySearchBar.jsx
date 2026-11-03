@@ -19,16 +19,17 @@ export default function MobileStickySearchBar({
         setSearchInput(search || "");
     }, [search]);
 
-    // Sticky shadow when page is scrolled
+    // Sticky shadow when page is scrolled & close open dropdown on scroll
     useEffect(() => {
         const handleScroll = () => {
             setIsScrolled(window.scrollY > 40);
+            setShowSuggestions(false);
         };
         window.addEventListener("scroll", handleScroll, { passive: true });
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
-    // Close suggestions on outside click
+    // Close suggestions on outside click / touch / scroll
     useEffect(() => {
         const handleClickOutside = (e) => {
             if (searchContainerRef.current && !searchContainerRef.current.contains(e.target)) {
@@ -36,7 +37,13 @@ export default function MobileStickySearchBar({
             }
         };
         document.addEventListener("mousedown", handleClickOutside);
-        return () => document.removeEventListener("mousedown", handleClickOutside);
+        document.addEventListener("touchstart", handleClickOutside, { passive: true });
+        document.addEventListener("pointerdown", handleClickOutside);
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+            document.removeEventListener("touchstart", handleClickOutside);
+            document.removeEventListener("pointerdown", handleClickOutside);
+        };
     }, []);
 
     // Filter matched locations as user types
@@ -145,3 +152,4 @@ export default function MobileStickySearchBar({
         </div>
     );
 }
+

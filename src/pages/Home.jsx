@@ -32,15 +32,26 @@ export default function Home() {
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
-    // Click outside listener for search suggestions
+    // Click / touch outside listener for search suggestions
     useEffect(() => {
         const handleClickOutside = (e) => {
             if (searchContainerRef.current && !searchContainerRef.current.contains(e.target)) {
                 setShowSuggestions(false);
             }
         };
+        const handleScrollClose = () => {
+            setShowSuggestions(false);
+        };
         document.addEventListener("mousedown", handleClickOutside);
-        return () => document.removeEventListener("mousedown", handleClickOutside);
+        document.addEventListener("touchstart", handleClickOutside, { passive: true });
+        document.addEventListener("pointerdown", handleClickOutside);
+        window.addEventListener("scroll", handleScrollClose, { passive: true });
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+            document.removeEventListener("touchstart", handleClickOutside);
+            document.removeEventListener("pointerdown", handleClickOutside);
+            window.removeEventListener("scroll", handleScrollClose);
+        };
     }, []);
 
     // Sync input with urlSearchQuery if url changes
