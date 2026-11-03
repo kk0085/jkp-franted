@@ -2,6 +2,29 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { MapPin, Share2, Check } from "lucide-react";
 
+const SECONDARY_IMAGES_MAP = [
+    "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=800&auto=format&fit=crop&q=80",
+    "https://images.unsplash.com/photo-1616594039964-ae9021a400a0?w=800&auto=format&fit=crop&q=80",
+    "https://images.unsplash.com/photo-1554995207-c18c203602cb?w=800&auto=format&fit=crop&q=80",
+    "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&auto=format&fit=crop&q=80",
+    "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?w=800&auto=format&fit=crop&q=80",
+    "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=800&auto=format&fit=crop&q=80",
+    "https://images.unsplash.com/photo-1524758631624-e2822e304c36?w=800&auto=format&fit=crop&q=80",
+    "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=800&auto=format&fit=crop&q=80",
+    "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=800&auto=format&fit=crop&q=80",
+    "https://images.unsplash.com/photo-1497366811353-6870744d04b2?w=800&auto=format&fit=crop&q=80",
+    "https://images.unsplash.com/photo-1497215728101-856f4ea42174?w=800&auto=format&fit=crop&q=80",
+    "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=800&auto=format&fit=crop&q=80"
+];
+
+const getSecondaryImage = (prop) => {
+    if (!prop) return SECONDARY_IMAGES_MAP[0];
+    if (prop.secondaryImage) return prop.secondaryImage;
+    if (prop.gallery && prop.gallery.length > 1) return prop.gallery[1];
+    const index = Math.abs((Number(prop.id) || 1) - 1) % SECONDARY_IMAGES_MAP.length;
+    return SECONDARY_IMAGES_MAP[index];
+};
+
 export default function PropertyCard({ property, onEnquiry }) {
     const [copied, setCopied] = useState(false);
 
@@ -38,11 +61,24 @@ export default function PropertyCard({ property, onEnquiry }) {
         }
     };
 
+    const secondaryImg = getSecondaryImage(property);
+
     return (
         <article className="property-card">
             <div className="property-image-link">
                 <div className="property-image">
-                    <img src={property.image} alt={property.title} loading="lazy" />
+                    <img
+                        src={property.image}
+                        alt={property.title}
+                        loading="lazy"
+                        className="prop-card-img prop-img-primary"
+                    />
+                    <img
+                        src={secondaryImg}
+                        alt={`${property.title} view 2`}
+                        loading="lazy"
+                        className="prop-card-img prop-img-secondary"
+                    />
 
                     <span className="property-badge">
                         {property.badge}
