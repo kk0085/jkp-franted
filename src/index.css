@@ -1036,17 +1036,33 @@ img {
   display: flex;
   flex-direction: column;
   width: 100%;
-  perspective: 1400px;
+  perspective: 1200px;
   overflow: visible !important;
   z-index: 1;
 }
 
 .property-card:hover,
-.property-card.is-spinning-active {
+.property-card.is-card-flipped {
   z-index: 60 !important;
 }
 
 .property-card-inner {
+  position: relative;
+  width: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.65s cubic-bezier(0.2, 0.8, 0.2, 1);
+  will-change: transform;
+}
+
+/* 180 DEGREE FLIP ON HOVER (CARD 180 DEGREE GHUME) */
+.property-card:hover .property-card-inner,
+.property-card.is-card-flipped .property-card-inner {
+  transform: rotateY(180deg);
+}
+
+.property-card-front {
+  position: relative;
+  width: 100%;
   background: #ffffff;
   border-radius: 12px;
   border: 1px solid #e5e7eb;
@@ -1054,34 +1070,152 @@ img {
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
   display: flex;
   flex-direction: column;
-  width: 100%;
-  height: 100%;
   box-sizing: border-box;
+  transform: rotateY(0deg);
   transform-style: preserve-3d;
-  will-change: transform;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
   transition: box-shadow 0.25s ease, border-color 0.2s ease;
 }
 
-.property-card:hover .property-card-inner {
+.property-card:hover .property-card-front {
   box-shadow: 0 14px 32px rgba(0, 0, 0, 0.12);
   border-color: #fbcfe8;
 }
 
-@keyframes spinCard360Once {
-  0% {
-    transform: rotateY(0deg) translateY(0) scale(1);
-  }
-  50% {
-    transform: rotateY(180deg) translateY(-6px) scale(0.96);
-  }
-  100% {
-    transform: rotateY(360deg) translateY(0) scale(1);
-  }
+.property-card-back {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(155deg, #ffffff 0%, #fff1f2 50%, #fdf2f8 100%);
+  border-radius: 12px;
+  border: 1.5px solid #fbcfe8;
+  box-shadow: 0 14px 32px rgba(236, 38, 143, 0.14);
+  padding: 16px 16px 14px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-sizing: border-box;
+  transform: rotateY(180deg);
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 
-/* 360 DIGREE EK BAR HO CARD */
-.card-spin-360-once {
-  animation: spinCard360Once 0.75s cubic-bezier(0.25, 0.1, 0.25, 1) 1;
+.card-back-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.card-back-price {
+  font-size: 15px;
+  font-weight: 800;
+  color: #ec268f;
+}
+
+.card-back-price small {
+  font-size: 11px;
+  font-weight: 500;
+  color: #64748b;
+}
+
+.card-back-body {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.card-back-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0 0 4px;
+  line-height: 1.35;
+}
+
+.card-back-specs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin: 8px 0;
+}
+
+.spec-pill {
+  background: #ffffff;
+  border: 1px solid #fbcfe8;
+  color: #be185d;
+  font-size: 10.5px;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 9999px;
+}
+
+.card-back-desc {
+  font-size: 11.5px;
+  color: #475569;
+  line-height: 1.45;
+  margin: 4px 0 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.card-back-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: 10px;
+  padding-top: 8px;
+  border-top: 1px solid #fce7f3;
+}
+
+.card-back-enquiry {
+  flex: 1;
+  background: #ffffff !important;
+  color: #ec268f !important;
+  border: 1.5px solid #ec268f !important;
+  padding: 6px 12px !important;
+  font-weight: 700 !important;
+  font-size: 12px !important;
+  border-radius: 9999px !important;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.card-back-enquiry:hover {
+  background: #ec268f !important;
+  color: #ffffff !important;
+}
+
+.card-back-view {
+  flex: 1;
+  text-align: center;
+  justify-content: center;
+  display: inline-flex;
+  align-items: center;
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: none !important;
+  background: #ec268f !important;
+  color: #ffffff !important;
+  padding: 6px 12px !important;
+  font-size: 12px !important;
+  font-weight: 700;
+  border-radius: 9999px !important;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.card-back-view:hover {
+  background: #db2777 !important;
 }
 
 .property-image-link {
