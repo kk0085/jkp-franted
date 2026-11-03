@@ -41,33 +41,16 @@ export const getVerifiedEmails = () => {
         let list = saved ? JSON.parse(saved) : [];
         if (!Array.isArray(list)) list = [];
 
-        // Check if there's currently a user in localStorage
-        const userSaved = localStorage.getItem("jkp_user");
-        if (userSaved) {
-            try {
-                const u = JSON.parse(userSaved);
-                if (u?.email) {
-                    const e = u.email.trim().toLowerCase();
-                    if (!list.includes(e)) list.push(e);
-                }
-            } catch {}
-        }
-
-        // Check if there's a last logged in email
+        // Check if there's a last logged in email on this device
         const lastEmail = localStorage.getItem("jkp_last_email");
         if (lastEmail) {
             const e = lastEmail.trim().toLowerCase();
-            if (!list.includes(e)) list.push(e);
+            if (e && !list.includes(e)) list.push(e);
         }
 
-        // Auto-include verified owner email from previous verification
-        if (!list.includes("kkbagda73@gmail.com")) {
-            list.push("kkbagda73@gmail.com");
-        }
-
-        return list;
+        return list.map((e) => e.trim().toLowerCase()).filter(Boolean);
     } catch {
-        return ["kkbagda73@gmail.com"];
+        return [];
     }
 };
 

@@ -60,7 +60,9 @@ export default function PropertyCard({ property, onEnquiry }) {
 
                 <div className="property-price">
                     Rs {Number(property.price).toLocaleString("en-IN")}
-                    <span className="per-month"> / month</span>
+                    {property.category === "rent" && (
+                        <span className="per-month"> / month</span>
+                    )}
                 </div>
 
                 <div className="property-actions">

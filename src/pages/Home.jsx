@@ -7,7 +7,7 @@ import PropertyCard from "../components/PropertyCard";
 import WhyChooseUs from "../components/WhyChooseUs";
 import { useProperty } from "../context/PropertyContext";
 import { popularLocations } from "../data/popularLocationsData";
-import { MapPin, Search, X, Building2, Sparkles, SlidersHorizontal } from "lucide-react";
+import { MapPin, Search, X, Building2, Sparkles, SlidersHorizontal, Home as HomeIcon, ArrowRight } from "lucide-react";
 
 export default function Home() {
     const { properties, openEnquiry } = useProperty();
@@ -19,8 +19,18 @@ export default function Home() {
     const [selectedLocality, setSelectedLocality] = useState("all");
     const [selectedCategory, setSelectedCategory] = useState("all");
     const [showSuggestions, setShowSuggestions] = useState(false);
+    const [isScrolled, setIsScrolled] = useState(false);
 
     const searchContainerRef = useRef(null);
+
+    // Track scroll for sticky search bar elevation
+    useEffect(() => {
+        const handleScroll = () => {
+            setIsScrolled(window.scrollY > 80);
+        };
+        window.addEventListener("scroll", handleScroll, { passive: true });
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, []);
 
     // Click outside listener for search suggestions
     useEffect(() => {
@@ -55,6 +65,8 @@ export default function Home() {
         setSelectedLocality(locName);
         setShowSuggestions(false);
         setSearchParams({ search: locName });
+        const elem = document.getElementById("locality-projects");
+        if (elem) elem.scrollIntoView({ behavior: "smooth" });
     };
 
     useEffect(() => {
@@ -76,9 +88,9 @@ export default function Home() {
         }
     }, [location]);
 
-    // Filter projects based on selected locality, search input, and category
+    // Filter projects based on selected locality, search input, and category (Limit to 8 projects only)
     const displayedProjects = useMemo(() => {
-        return properties.filter((p) => {
+        const filtered = properties.filter((p) => {
             // Locality filter
             if (selectedLocality !== "all") {
                 const locMatch = p.location.toLowerCase().includes(selectedLocality.toLowerCase()) ||
@@ -105,6 +117,8 @@ export default function Home() {
 
             return true;
         });
+
+        return filtered.slice(0, 8);
     }, [properties, selectedLocality, searchInput, selectedCategory]);
 
     const handleLocalityClick = (locName) => {
@@ -123,6 +137,8 @@ export default function Home() {
         e.preventDefault();
         if (searchInput.trim()) {
             setSearchParams({ search: searchInput.trim() });
+            const elem = document.getElementById("locality-projects");
+            if (elem) elem.scrollIntoView({ behavior: "smooth" });
         } else {
             setSearchParams({});
         }
@@ -142,15 +158,16 @@ export default function Home() {
         <div className="home-page">
             <HeroSlider />
 
-            {/* PROMINENT SEARCH BAR RIGHT BELOW HERO */}
-            <section className="container" style={{ margin: "-28px auto 32px" }}>
-                <div className="home-search-hero-bar" ref={searchContainerRef}>
+            {/* PROMINENT SEARCH BAR RIGHT BELOW HERO (STICKY ON SCROLL) */}
+            <section className={`home-search-section ${isScrolled ? "is-sticky" : ""}`}>
+                <div className="container">
+                    <div className="home-search-hero-bar" ref={searchContainerRef}>
                     <form onSubmit={handleSearchSubmit} className="home-search-input-row">
                         <div className="home-search-input-box">
                             <Search size={18} color="#ec268f" style={{ flexShrink: 0 }} />
                             <input
                                 type="text"
-                                placeholder="Search locality (e.g. Mansarovar, Jagatpura, C Scheme, Vaishali Nagar)..."
+                                placeholder="Search locality, flat, area in Jaipur..."
                                 value={searchInput}
                                 onChange={(e) => {
                                     setSearchInput(e.target.value);
@@ -174,7 +191,7 @@ export default function Home() {
                             )}
                         </div>
                         <button type="submit" className="home-search-btn">
-                            <Search size={16} /> Search
+                            <Search size={16} /> <span>Search</span>
                         </button>
                     </form>
 
@@ -204,7 +221,8 @@ export default function Home() {
                         </div>
                     )}
                 </div>
-            </section>
+            </div>
+        </section>
 
             {/* FEATURED PROJECTS BY LOCALITY SHOWCASE SECTION */}
             <section className="container" style={{ margin: "28px auto 40px" }} id="locality-projects">
@@ -265,20 +283,32 @@ export default function Home() {
                     </div>
                 </div>
 
-                {/* PROPERTY CARDS GRID */}
+                {/* PROPERTY CARDS GRID (ONLY 8 PROJECTS) */}
                 {displayedProjects.length > 0 ? (
-                    <div
-                        className="property-grid"
-                        style={{
-                            display: "grid",
-                            gridTemplateColumns: "repeat(auto-fill, minmax(250px, 1fr))",
-                            gap: "20px",
-                        }}
-                    >
-                        {displayedProjects.map((p) => (
-                            <PropertyCard key={p.id} property={p} onEnquiry={openEnquiry} />
-                        ))}
-                    </div>
+                    <>
+                        <div className="property-grid cols-4">
+                            {displayedProjects.map((p) => (
+                                <PropertyCard key={p.id} property={p} onEnquiry={openEnquiry} />
+                            ))}
+                        </div>
+
+                        <div style={{ textAlign: "center", marginTop: "28px" }}>
+                            <Link
+                                to="/properties"
+                                className="primary-btn"
+                                style={{
+                                    display: "inline-flex",
+                                    alignItems: "center",
+                                    gap: "8px",
+                                    padding: "10px 26px",
+                                    fontSize: "13.5px",
+                                    fontWeight: "700",
+                                }}
+                            >
+                                View All Properties in Jaipur →
+                            </Link>
+                        </div>
+                    </>
                 ) : (
                     <div className="no-results-box" style={{ textAlign: "center", padding: "40px 20px", background: "#f8fafc", borderRadius: "14px" }}>
                         <Building2 size={36} color="#94a3b8" style={{ margin: "0 auto 10px" }} />
@@ -304,28 +334,49 @@ export default function Home() {
                 <ListingPlans />
             </div>
 
-            {/* DEFAULT FOR RENT SECTIONS */}
-            <section className="for-rent-container container" id="for-rent" style={{ marginTop: "36px" }}>
-                <h2 className="for-rent-heading">Popular Rental Categories</h2>
+            {/* POPULAR RENTAL CATEGORIES FULL SIZE SECTION */}
+            <section className="home-popular-rentals-section" id="for-rent">
+                <div className="container">
+                    <div className="home-section-header" style={{ marginBottom: "26px" }}>
+                        <div className="home-section-title-wrap">
+                            <h2>
+                                <HomeIcon size={24} color="#ec268f" />
+                                Popular Rental Categories
+                            </h2>
+                            <p>
+                                Explore verified flats, duplex homes & luxury villas for rent across Jaipur
+                            </p>
+                        </div>
+                        <Link to="/rent" className="home-cat-tab-btn active" style={{ padding: "8px 18px", fontSize: "13px" }}>
+                            View All Rentals (25+) →
+                        </Link>
+                    </div>
 
-                <div id="flat-homes">
-                    <PropertySection
-                        title="Flat Homes"
-                        subtitle="Verified deals for families and working professionals."
-                        properties={rentProperties}
-                        moreLink="/properties?type=flat"
-                        onEnquiry={openEnquiry}
-                    />
-                </div>
+                    {/* SECTION 1: FLAT HOMES */}
+                    <div id="flat-homes" className="popular-rent-block">
+                        <PropertySection
+                            title="Flat Homes for Rent"
+                            subtitle="Verified apartments & flat deals for families and working professionals."
+                            properties={rentProperties}
+                            moreLink="/rent?type=flat"
+                            moreText="Explore Flats →"
+                            onEnquiry={openEnquiry}
+                            columns={4}
+                        />
+                    </div>
 
-                <div id="independent-houses" style={{ marginTop: "36px" }}>
-                    <PropertySection
-                        title="Independent Houses & Luxury Villas"
-                        subtitle="Private houses and villas with personal lawns and car parking."
-                        properties={houseProperties}
-                        moreLink="/properties?type=house"
-                        onEnquiry={openEnquiry}
-                    />
+                    {/* SECTION 2: INDEPENDENT HOUSES & LUXURY VILLAS */}
+                    <div id="independent-houses" className="popular-rent-block" style={{ marginTop: "40px" }}>
+                        <PropertySection
+                            title="Independent Houses & Luxury Villas"
+                            subtitle="Private houses, duplexes and villas with dedicated parking and private space."
+                            properties={houseProperties}
+                            moreLink="/rent?type=house"
+                            moreText="Explore Houses & Villas →"
+                            onEnquiry={openEnquiry}
+                            columns={4}
+                        />
+                    </div>
                 </div>
             </section>
 

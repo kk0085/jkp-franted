@@ -6,7 +6,9 @@ export default function PropertySection({
     subtitle,
     properties,
     moreLink = "/properties",
+    moreText = "More",
     onEnquiry,
+    columns = 3,
 }) {
     return (
         <div className="property-subsection">
@@ -16,10 +18,10 @@ export default function PropertySection({
                     <p className="subsection-subtitle">{subtitle}</p>
                 </div>
 
-                <Link to={moreLink} className="subsection-more">More</Link>
+                <Link to={moreLink} className="subsection-more">{moreText}</Link>
             </div>
 
-            <div className="property-grid">
+            <div className={`property-grid cols-${columns}`}>
                 {properties.map((property) => (
                     <PropertyCard
                         key={property.id}

@@ -64,7 +64,9 @@ export default function PropertyDetails() {
 
                     <div className="details-price-box">
                         <h2>Rs {Number(property.price).toLocaleString("en-IN")}</h2>
-                        <span className="per-month-tag">/ month</span>
+                        {property.category === "rent" && (
+                            <span className="per-month-tag">/ month</span>
+                        )}
                     </div>
 
                     <div className="details-features">

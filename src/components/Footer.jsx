@@ -39,7 +39,7 @@ export default function Footer() {
                         <Link to="/post-property">Post Property Free</Link>
                         <Link to="/properties?category=flat">Flat</Link>
                         <Link to="/properties?category=house">Independent House</Link>
-                        <Link to="/properties?category=commercial">Commercial Office</Link>
+                        <Link to="/commercial">Commercial Office</Link>
                     </div>
                 </div>
 

@@ -5,6 +5,7 @@ import Footer from "./components/Footer";
 import FloatingWhatsApp from "./components/FloatingWhatsApp";
 import Home from "./pages/Home";
 import Rent from "./pages/Rent";
+import Commercial from "./pages/Commercial";
 import Properties from "./pages/Properties";
 import PropertyDetails from "./pages/PropertyDetails";
 import Login from "./pages/Login";
@@ -46,6 +47,8 @@ function AppContent() {
           <Route path="/" element={<Home />} />
           <Route path="/rent" element={<Rent />} />
           <Route path="/flats" element={<Rent />} />
+          <Route path="/commercial" element={<Commercial />} />
+          <Route path="/commercial-office" element={<Commercial />} />
           <Route path="/properties" element={<Properties />} />
           <Route path="/properties/:id" element={<PropertyDetails />} />
           <Route path="/login" element={<Login />} />
