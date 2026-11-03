@@ -2,6 +2,7 @@ import { useState, useMemo, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import PropertyCard from "../components/PropertyCard";
 import SearchFilterRentals from "../components/SearchFilterRentals";
+import MobileStickySearchBar from "../components/MobileStickySearchBar";
 import { useProperty } from "../context/PropertyContext";
 import { MapPin } from "lucide-react";
 
@@ -200,6 +201,22 @@ export default function Properties() {
                     </span>
                 </div>
             </div>
+
+            {/* MOBILE ONLY STICKY SEARCH BAR (SAME AS HOME PAGE ON SCROLL) */}
+            <MobileStickySearchBar
+                search={search}
+                setSearch={(val) => {
+                    setSearch(val);
+                    updateParams({ search: val });
+                }}
+                placeholder={
+                    category === "sale"
+                        ? "Search property for sale in Jaipur..."
+                        : typeFilter === "commercial"
+                        ? "Search office, commercial space in Jaipur..."
+                        : "Search locality, flat, area in Jaipur..."
+                }
+            />
 
             {/* DESKTOP 2-COLUMN & MOBILE 1-COLUMN LISTINGS LAYOUT */}
             <div className="rent-layout-container prop-layout-container">

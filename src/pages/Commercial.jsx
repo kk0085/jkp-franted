@@ -4,6 +4,7 @@ import PropertyCard from "../components/PropertyCard";
 import PropertySection from "../components/PropertySection";
 import WhyChooseUs from "../components/WhyChooseUs";
 import SearchFilterRentals from "../components/SearchFilterRentals";
+import MobileStickySearchBar from "../components/MobileStickySearchBar";
 import { useProperty } from "../context/PropertyContext";
 import { Building2, Briefcase, Sparkles } from "lucide-react";
 
@@ -160,6 +161,19 @@ export default function Commercial() {
                     </div>
                 </div>
             </div>
+
+            {/* MOBILE ONLY STICKY SEARCH BAR (SAME AS HOME PAGE ON SCROLL) */}
+            <MobileStickySearchBar
+                search={search}
+                setSearch={(val) => {
+                    setSearch(val);
+                    const nextParams = {};
+                    if (activeTab !== "all") nextParams.category = activeTab;
+                    if (val) nextParams.search = val;
+                    setSearchParams(nextParams);
+                }}
+                placeholder="Search office, commercial space in Jaipur..."
+            />
 
             {/* MAIN 2-COLUMN LAYOUT: SIDEBAR WIDGET + LISTINGS */}
             <div className="container rent-layout-container">

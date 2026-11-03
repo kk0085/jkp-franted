@@ -3265,6 +3265,9 @@ img {
 }
 
 @media (max-width: 960px) {
+  .mobile-only-sticky-search {
+    display: block !important;
+  }
   .rent-layout-container {
     grid-template-columns: 1fr;
     gap: 20px;
@@ -3772,6 +3775,11 @@ img {
 
 .rent-search-sticky-wrap {
   margin: 0 auto 16px;
+}
+
+/* MOBILE-ONLY STICKY SEARCH BAR (HIDDEN ON DESKTOP, VISIBLE ON MOBILE) */
+.mobile-only-sticky-search {
+  display: none !important;
 }
 
 .home-search-section.is-sticky,

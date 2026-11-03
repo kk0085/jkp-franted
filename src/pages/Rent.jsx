@@ -4,6 +4,7 @@ import PropertyCard from "../components/PropertyCard";
 import PropertySection from "../components/PropertySection";
 import WhyChooseUs from "../components/WhyChooseUs";
 import SearchFilterRentals from "../components/SearchFilterRentals";
+import MobileStickySearchBar from "../components/MobileStickySearchBar";
 import { useProperty } from "../context/PropertyContext";
 import { Building2, Home as HomeIcon, Sparkles, Search, X, SlidersHorizontal, ChevronDown, ChevronUp } from "lucide-react";
 
@@ -130,6 +131,16 @@ export default function Rent() {
                     </div>
                 </div>
             </div>
+
+            {/* MOBILE ONLY STICKY SEARCH BAR (SAME AS HOME PAGE ON SCROLL) */}
+            <MobileStickySearchBar
+                search={search}
+                setSearch={(val) => {
+                    setSearch(val);
+                    setSearchParams(activeTab !== "all" ? (val ? { type: activeTab, search: val } : { type: activeTab }) : (val ? { search: val } : {}));
+                }}
+                placeholder="Search flat, house, villa in Jaipur..."
+            />
 
             {/* MAIN 2-COLUMN LAYOUT: SIDEBAR WIDGET + LISTINGS */}
             <div className="container rent-layout-container">
