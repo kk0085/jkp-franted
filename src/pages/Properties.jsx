@@ -23,7 +23,6 @@ export default function Properties() {
         const typeParam = searchParams.get("type") || "all";
         const catParam = searchParams.get("category") || "all";
         setSearch(queryParam);
-        setSearchInput(queryParam);
         setTypeFilter(typeParam);
         setCategory(catParam);
         if (catParam === "sale" || typeParam === "commercial") {
