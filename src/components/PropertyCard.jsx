@@ -4,12 +4,14 @@ import { MapPin, Share2, Check } from "lucide-react";
 
 export default function PropertyCard({ property, onEnquiry }) {
     const [copied, setCopied] = useState(false);
-    const [hasSpun, setHasSpun] = useState(false);
+    const [isSpinning, setIsSpinning] = useState(false);
 
     const handleMouseEnter = () => {
-        if (!hasSpun) {
-            setHasSpun(true);
-        }
+        setIsSpinning(true);
+    };
+
+    const handleMouseLeave = () => {
+        setIsSpinning(false);
     };
 
     const handleShare = async (e) => {
@@ -49,9 +51,10 @@ export default function PropertyCard({ property, onEnquiry }) {
         <article
             className="property-card"
             onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
             onTouchStart={handleMouseEnter}
         >
-            <div className={`property-card-inner ${hasSpun ? "card-spin-360-once" : ""}`}>
+            <div className={`property-card-inner ${isSpinning ? "card-spin-360-once" : ""}`}>
                 <div className="property-image-link">
                     <div className="property-image">
                         <img src={property.image} alt={property.title} loading="lazy" />
