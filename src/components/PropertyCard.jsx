@@ -49,7 +49,7 @@ export default function PropertyCard({ property, onEnquiry }) {
 
     return (
         <article
-            className="property-card"
+            className={`property-card ${isSpinning ? "is-spinning-active" : ""}`}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
             onTouchStart={handleMouseEnter}
