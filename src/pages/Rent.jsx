@@ -5,7 +5,7 @@ import PropertySection from "../components/PropertySection";
 import WhyChooseUs from "../components/WhyChooseUs";
 import SearchFilterRentals from "../components/SearchFilterRentals";
 import { useProperty } from "../context/PropertyContext";
-import { Building2, Home as HomeIcon, Search, X, SlidersHorizontal, ChevronDown, ChevronUp } from "lucide-react";
+import { Building2, Home as HomeIcon, Sparkles, Search, X, SlidersHorizontal, ChevronDown, ChevronUp } from "lucide-react";
 
 export default function Rent() {
     const [searchParams, setSearchParams] = useSearchParams();
