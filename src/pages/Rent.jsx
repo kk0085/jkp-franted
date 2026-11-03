@@ -16,7 +16,6 @@ export default function Rent() {
     const [search, setSearch] = useState(searchParams.get("search") || "");
     const [budgetLimit, setBudgetLimit] = useState(200000);
     const [sortBy, setSortBy] = useState("recommended");
-    const [showMobileFilter, setShowMobileFilter] = useState(false);
 
     useEffect(() => {
         const typeParam = searchParams.get("type") || "all";
@@ -128,114 +127,14 @@ export default function Rent() {
                         >
                             Luxury Villas
                         </button>
-
-                        {/* MOBILE FILTER TOGGLE BUTTON */}
-                        <button
-                            type="button"
-                            className={`rent-tab-btn mobile-filter-toggle-pill ${showMobileFilter ? "active" : ""}`}
-                            onClick={() => setShowMobileFilter(!showMobileFilter)}
-                        >
-                            <SlidersHorizontal size={13} />
-                            <span>Filter & Budget</span>
-                            {showMobileFilter ? <ChevronUp size={13} /> : <ChevronDown size={13} />}
-                        </button>
                     </div>
-
-                    {/* MOBILE ACCORDION FILTER DRAWER */}
-                    {showMobileFilter && (
-                        <div className="prop-mobile-filter-drawer" style={{ marginTop: "14px", maxWidth: "660px", margin: "14px auto 0" }}>
-                            <div className="prop-drawer-header">
-                                <h4>Filter by Budget & Sorting</h4>
-                                <button
-                                    type="button"
-                                    className="prop-drawer-close"
-                                    onClick={() => setShowMobileFilter(false)}
-                                >
-                                    <X size={16} />
-                                </button>
-                            </div>
-
-                            {/* SEARCH BOX IN MOBILE DRAWER */}
-                            <div style={{ marginBottom: "14px" }}>
-                                <label style={{ fontSize: "12.5px", fontWeight: 600, color: "#334155", display: "block", marginBottom: "6px" }}>Search by Title or Locality:</label>
-                                <div style={{ display: "flex", alignItems: "center", gap: "8px", background: "#f8fafc", border: "1.5px solid #fbcfe8", borderRadius: "10px", padding: "7px 12px" }}>
-                                    <Search size={16} color="#ec268f" style={{ flexShrink: 0 }} />
-                                    <input
-                                        type="text"
-                                        placeholder="Search locality, flat, area..."
-                                        value={search}
-                                        onChange={(e) => {
-                                            const val = e.target.value;
-                                            setSearch(val);
-                                            setSearchParams(activeTab !== "all" ? (val ? { type: activeTab, search: val } : { type: activeTab }) : (val ? { search: val } : {}));
-                                        }}
-                                        style={{ width: "100%", border: "none", outline: "none", background: "transparent", fontSize: "13px" }}
-                                    />
-                                    {search && (
-                                        <X
-                                            size={16}
-                                            style={{ cursor: "pointer", color: "#94a3b8" }}
-                                            onClick={() => {
-                                                setSearch("");
-                                                setSearchParams(activeTab !== "all" ? { type: activeTab } : {});
-                                            }}
-                                        />
-                                    )}
-                                </div>
-                            </div>
-
-                            <div className="prop-drawer-budget-row">
-                                <span>Budget Limit:</span>
-                                <strong>Rs {Number(budgetLimit).toLocaleString("en-IN")}</strong>
-                            </div>
-
-                            <input
-                                type="range"
-                                min={10000}
-                                max={200000}
-                                step={2000}
-                                value={budgetLimit}
-                                onChange={(e) => setBudgetLimit(Number(e.target.value))}
-                                className="pink-range-slider"
-                                style={{
-                                    background: `linear-gradient(to right, #c2185b 0%, #c2185b ${((budgetLimit - 10000) / (200000 - 10000)) * 100}%, #e2e8f0 ${((budgetLimit - 10000) / (200000 - 10000)) * 100}%, #e2e8f0 100%)`,
-                                }}
-                            />
-
-                            <div className="prop-drawer-sort-row">
-                                <label style={{ fontWeight: 600, color: "#334155" }}>Sort by:</label>
-                                <select
-                                    value={sortBy}
-                                    onChange={(e) => setSortBy(e.target.value)}
-                                    className="filter-sort-select"
-                                    style={{ height: "36px", padding: "0 10px", fontSize: "13px" }}
-                                >
-                                    <option value="recommended">Recommended</option>
-                                    <option value="price-low">Price: Low to High</option>
-                                    <option value="price-high">Price: High to Low</option>
-                                    <option value="newest">Newest First</option>
-                                </select>
-                            </div>
-
-                            <div className="prop-drawer-actions">
-                                <button
-                                    type="button"
-                                    className="primary-btn"
-                                    style={{ width: "100%", height: "38px" }}
-                                    onClick={() => setShowMobileFilter(false)}
-                                >
-                                    Apply & View {filtered.length} Rentals
-                                </button>
-                            </div>
-                        </div>
-                    )}
                 </div>
             </div>
 
             {/* MAIN 2-COLUMN LAYOUT: SIDEBAR WIDGET + LISTINGS */}
             <div className="container rent-layout-container">
-                {/* LEFT SIDEBAR: EXACT "Search and Filter Rentals" CARD AS SCREENSHOT (HIDDEN ON MOBILE SO CARDS SHOW IMMEDIATELY) */}
-                <div className="rent-sidebar-col desktop-only-sidebar">
+                {/* LEFT SIDEBAR: EXACT "Search and Filter Rentals" CARD AS SCREENSHOT (ALWAYS VISIBLE) */}
+                <div className="rent-sidebar-col">
                     <SearchFilterRentals
                         title="Search and Filter Rentals"
                         search={search}

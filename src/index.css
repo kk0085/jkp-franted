@@ -3264,39 +3264,19 @@ img {
   }
 
   .mobile-filter-expand-btn {
-    display: inline-flex !important;
-    align-items: center;
-    gap: 6px;
-    background: #fdf2f8;
-    color: var(--primary);
-    border: 1px solid #fbcfe8;
-    border-radius: 9999px;
-    padding: 5px 12px;
-    font-size: 12px;
-    font-weight: 700;
-    cursor: pointer;
-    transition: all 0.15s ease;
-  }
-
-  .mobile-filter-expand-btn:active {
-    transform: scale(0.96);
+    display: none !important;
   }
 
   .filter-collapsible-body {
-    display: none;
+    display: block !important;
   }
 
   .filter-collapsible-body.mobile-open {
     display: block !important;
-    animation: fadeIn 0.2s ease-in-out;
-    margin-top: 14px;
-    padding-top: 14px;
-    border-top: 1px dashed #e2e8f0;
   }
 
-  /* CRITICAL MOBILE LISTINGS OPTIMIZATION: HIDE REDUNDANT DESKTOP SIDEBAR SO CARDS SHOW IMMEDIATELY */
   .desktop-only-sidebar {
-    display: none !important;
+    display: block !important;
   }
 
   .mobile-filter-toggle-pill {
