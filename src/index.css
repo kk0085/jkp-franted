@@ -1076,42 +1076,36 @@ img {
 .prop-img-primary {
   opacity: 1;
   z-index: 1;
-  transform: scale(1);
-  border-radius: 0;
-  clip-path: circle(100% at 50% 50%);
-  transition: transform 0.55s cubic-bezier(0.16, 1, 0.3, 1), 
-              opacity 0.4s ease, 
-              border-radius 0.55s cubic-bezier(0.16, 1, 0.3, 1),
-              clip-path 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: scale(1) rotate(0deg);
+  border-radius: 0 !important;
+  clip-path: none !important;
+  transition: transform 0.65s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.45s ease;
 }
 
 .prop-img-secondary {
   opacity: 0;
   z-index: 2;
-  transform: scale(0.92);
-  border-radius: 50%;
-  clip-path: circle(0% at 50% 50%);
-  transition: transform 0.55s cubic-bezier(0.16, 1, 0.3, 1), 
-              opacity 0.4s ease, 
-              border-radius 0.55s cubic-bezier(0.16, 1, 0.3, 1), 
-              clip-path 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: scale(1.15) rotate(-360deg);
+  border-radius: 0 !important;
+  clip-path: none !important;
+  transition: transform 0.65s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.45s ease;
 }
 
-/* ON CARD HOVER (CARD PAR AATE HI): Card ki img 100% rounded hokar change ho jati hai */
+/* ON CARD HOVER: 360 DEGREE ROTATION IMAGE CHANGE (ROUNDED NAHI, 360 DEGREE ROTATE HO) */
 .property-card:hover .prop-img-primary,
 .property-card:active .prop-img-primary {
   opacity: 0;
-  transform: scale(1.1) rotate(2deg);
-  border-radius: 50%;
-  clip-path: circle(20% at 50% 50%);
+  transform: scale(1.18) rotate(360deg);
+  border-radius: 0 !important;
+  clip-path: none !important;
 }
 
 .property-card:hover .prop-img-secondary,
 .property-card:active .prop-img-secondary {
   opacity: 1;
-  transform: scale(1.05);
-  border-radius: 0;
-  clip-path: circle(100% at 50% 50%);
+  transform: scale(1.05) rotate(0deg);
+  border-radius: 0 !important;
+  clip-path: none !important;
 }
 
 .profile-property-card-item:hover .profile-card-img {
