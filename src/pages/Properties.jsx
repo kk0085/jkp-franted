@@ -111,8 +111,8 @@ export default function Properties() {
 
     return (
         <div className="page container properties-page-wrapper">
-            {/* TOP COMPACT UNIFIED CATEGORY BAR (SCROLLS WITH PAGE) */}
-            <div className="prop-unified-header" style={{ position: "relative", top: 0 }}>
+            {/* TOP COMPACT UNIFIED CATEGORY BAR */}
+            <div className="prop-unified-header">
                 {/* 1. HORIZONTALLY SCROLLABLE CATEGORY TABS (NO MULTI-LINE BREAKING) */}
                 <div className="prop-categories-scroll-row">
                     <button

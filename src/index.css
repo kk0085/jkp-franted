@@ -1816,10 +1816,9 @@ img {
 }
 
 .prop-unified-header {
-  position: -webkit-sticky;
-  position: sticky;
-  top: 72px;
-  z-index: 990;
+  position: relative;
+  top: 0;
+  z-index: 20;
   background: #ffffff;
   padding: 12px 0 10px;
   margin-bottom: 22px;
@@ -3218,11 +3217,29 @@ img {
 }
 
 .rent-sidebar-col {
-  position: relative !important;
-  top: 0 !important;
-  z-index: 20;
-  max-height: none !important;
-  overflow: visible !important;
+  position: -webkit-sticky !important;
+  position: sticky !important;
+  top: 86px !important;
+  align-self: flex-start !important;
+  z-index: 40 !important;
+  max-height: calc(100vh - 100px);
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: thin;
+  scrollbar-color: #fbcfe8 transparent;
+}
+
+.rent-sidebar-col::-webkit-scrollbar {
+  width: 4px;
+}
+
+.rent-sidebar-col::-webkit-scrollbar-thumb {
+  background: #fbcfe8;
+  border-radius: 9999px;
+}
+
+.rent-sidebar-col::-webkit-scrollbar-thumb:hover {
+  background: #ec268f;
 }
 
 .rent-main-col {
@@ -3258,6 +3275,7 @@ img {
     top: 0 !important;
     max-height: none !important;
     overflow: visible !important;
+    align-self: auto !important;
   }
 }
 
@@ -3803,13 +3821,12 @@ img {
   }
 
   .prop-unified-header {
-    position: -webkit-sticky !important;
-    position: sticky !important;
-    top: 65px !important;
-    z-index: 990 !important;
+    position: relative !important;
+    top: 0 !important;
+    z-index: 20 !important;
     background: #ffffff !important;
     padding: 8px 0 6px !important;
-    box-shadow: 0 4px 16px rgba(15, 23, 42, 0.08) !important;
+    box-shadow: none !important;
     border-bottom: 1px solid #f1f5f9 !important;
   }
 
@@ -5210,13 +5227,9 @@ img {
   }
 }
 
-/* ENSURE ALL SEARCH FILTER SIDEBAR CARDS AND HEADERS SCROLL NATURALLY WITH THE PAGE */
-.rent-sidebar-col,
-.filter-card-widget,
-aside.filter-card-widget,
+/* KEEP UNIFIED CATEGORY HEADER RELATIVE SO IT DOES NOT OVERLAP OR CUT INTO STICKY SIDEBAR */
 .prop-unified-header {
   position: relative !important;
   top: 0 !important;
-  max-height: none !important;
-  overflow: visible !important;
+  z-index: 20 !important;
 }

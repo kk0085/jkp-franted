@@ -1,4 +1,4 @@
-import { useState, useMemo, useEffect } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import PropertyCard from "../components/PropertyCard";
 import PropertySection from "../components/PropertySection";
@@ -229,8 +229,8 @@ export default function Rent() {
                                             {activeTab === "flat"
                                                 ? "Flat Homes"
                                                 : activeTab === "house"
-                                                ? "Independent Houses"
-                                                : "Luxury Villas"}
+                                                    ? "Independent Houses"
+                                                    : "Luxury Villas"}
                                         </h3>
                                         <p className="property-section-subtitle">
                                             Showing verified properties matching your selection
