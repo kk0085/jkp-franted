@@ -1031,31 +1031,18 @@ img {
   width: 100%;
 }
 
+/* PROPERTY CARD BASE STYLES */
 .property-card {
   position: relative;
   display: flex;
   flex-direction: column;
   width: 100%;
-  perspective: 1200px;
-  overflow: visible !important;
   z-index: 1;
-}
-
-.property-card:hover {
-  z-index: 60 !important;
 }
 
 .property-card-inner {
   position: relative;
   width: 100%;
-  transform-style: preserve-3d;
-  transition: transform 0.65s cubic-bezier(0.2, 0.8, 0.2, 1);
-  will-change: transform;
-}
-
-/* 180 DEGREE FLIP ON HOVER ONLY (CLICK PAR FREEZE/RUK NAHI JAYEGA) */
-.property-card:hover .property-card-inner {
-  transform: rotateY(180deg);
 }
 
 .property-card-front {
@@ -1069,39 +1056,108 @@ img {
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
-  transform: rotateY(0deg);
-  transform-style: preserve-3d;
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
   transition: box-shadow 0.25s ease, border-color 0.2s ease;
 }
 
-.property-card:hover .property-card-front {
-  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.12);
-  border-color: #fbcfe8;
+.property-card-back {
+  display: none;
 }
 
-.property-card-back {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(155deg, #ffffff 0%, #fff1f2 50%, #fdf2f8 100%);
-  border-radius: 12px;
-  border: 1.5px solid #fbcfe8;
-  box-shadow: 0 14px 32px rgba(236, 38, 143, 0.14);
-  padding: 16px 16px 14px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  box-sizing: border-box;
-  transform: rotateY(180deg);
-  transform-style: preserve-3d;
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
+/* 180 DEGREE 3D FLIP ON DESKTOP HOVER ONLY (LARGE SCREENS WITH MOUSE/POINTER) */
+@media (min-width: 961px) and (hover: hover) {
+  .property-card {
+    perspective: 1200px;
+    overflow: visible !important;
+  }
+
+  .property-card:hover {
+    z-index: 60 !important;
+  }
+
+  .property-card-inner {
+    transform-style: preserve-3d;
+    transition: transform 0.65s cubic-bezier(0.2, 0.8, 0.2, 1);
+    will-change: transform;
+  }
+
+  .property-card:hover .property-card-inner {
+    transform: rotateY(180deg);
+  }
+
+  .property-card-front {
+    transform: rotateY(0deg);
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+  }
+
+  .property-card:hover .property-card-front {
+    box-shadow: 0 14px 32px rgba(0, 0, 0, 0.12);
+    border-color: #fbcfe8;
+  }
+
+  .property-card-back {
+    display: flex;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(155deg, #ffffff 0%, #fff1f2 50%, #fdf2f8 100%);
+    border-radius: 12px;
+    border: 1.5px solid #fbcfe8;
+    box-shadow: 0 14px 32px rgba(236, 38, 143, 0.14);
+    padding: 16px 16px 14px;
+    flex-direction: column;
+    justify-content: space-between;
+    box-sizing: border-box;
+    transform: rotateY(180deg);
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+  }
+}
+
+/* MOBILE RESPONSIVE (<= 960px OR TOUCH DEVICES): CARD BILKUL BHI NA GHUME */
+@media (max-width: 960px), (hover: none) {
+  .property-card {
+    perspective: none !important;
+    transform: none !important;
+  }
+
+  .property-card:hover {
+    z-index: 1 !important;
+  }
+
+  .property-card-inner,
+  .property-card:hover .property-card-inner,
+  .property-card:active .property-card-inner,
+  .property-card:focus .property-card-inner {
+    transform: none !important;
+    transition: none !important;
+    transform-style: flat !important;
+    will-change: auto !important;
+  }
+
+  .property-card-front {
+    transform: none !important;
+    backface-visibility: visible !important;
+    -webkit-backface-visibility: visible !important;
+  }
+
+  .property-card:hover .property-card-front {
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05) !important;
+    border-color: #e5e7eb !important;
+  }
+
+  .property-card-back {
+    display: none !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+    transform: none !important;
+  }
 }
 
 .card-back-header {
@@ -2905,7 +2961,7 @@ img {
     grid-template-columns: 1fr !important;
   }
 
-  /* PREMIUM COMPACT MOBILE CARD (SLEEK & NOT BULKY) */
+  /* PREMIUM COMPACT MOBILE CARD (SLEEK & NOT BULKY - NO FLIP/NO ROTATE) */
   .property-card {
     width: 100% !important;
     box-sizing: border-box !important;
@@ -2913,6 +2969,8 @@ img {
     border: none !important;
     box-shadow: none !important;
     overflow: visible !important;
+    perspective: none !important;
+    transform: none !important;
   }
 
   .property-card-inner {
@@ -2922,6 +2980,19 @@ img {
     width: 100% !important;
     box-sizing: border-box !important;
     overflow: hidden !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
+  .property-card-front {
+    border: none !important;
+    box-shadow: none !important;
+    border-radius: inherit !important;
+    transform: none !important;
+  }
+
+  .property-card-back {
+    display: none !important;
   }
 
   .property-image {
