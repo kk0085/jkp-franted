@@ -3282,7 +3282,7 @@ img {
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 960px) {
   .filter-card-widget {
     padding: 16px 16px 18px;
     border-radius: 16px;

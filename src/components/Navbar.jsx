@@ -40,32 +40,43 @@ export default function Navbar() {
         }, 150);
     };
 
+    const toggleDropdown = (menuName, e) => {
+        if (e) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+        if (hoverTimeoutRef.current) clearTimeout(hoverTimeoutRef.current);
+        setActiveDropdown((prev) => (prev === menuName ? null : menuName));
+    };
+
+    useEffect(() => {
+        const handleOutsideClick = (e) => {
+            if (!e.target.closest(".nav-dropdown-wrapper")) {
+                setActiveDropdown(null);
+            }
+        };
+        document.addEventListener("click", handleOutsideClick);
+        document.addEventListener("touchstart", handleOutsideClick, { passive: true });
+        return () => {
+            document.removeEventListener("click", handleOutsideClick);
+            document.removeEventListener("touchstart", handleOutsideClick);
+        };
+    }, []);
+
     const handleBuyClick = (e) => {
-        e.preventDefault();
-        setActiveDropdown(null);
-        setIsMobileMenuOpen(false);
-        navigate("/properties?category=sale");
+        toggleDropdown("buy", e);
     };
 
     const handleRentClick = (e) => {
-        e.preventDefault();
-        setActiveDropdown(null);
-        setIsMobileMenuOpen(false);
-        navigate("/rent");
+        toggleDropdown("rent", e);
     };
 
     const handleSellClick = (e) => {
-        e.preventDefault();
-        setActiveDropdown(null);
-        setIsMobileMenuOpen(false);
-        navigate("/post-property");
+        toggleDropdown("sell", e);
     };
 
     const handleCommercialClick = (e) => {
-        e.preventDefault();
-        setActiveDropdown(null);
-        setIsMobileMenuOpen(false);
-        navigate("/commercial");
+        toggleDropdown("commercial", e);
     };
 
     const handlePlansClick = (e) => {

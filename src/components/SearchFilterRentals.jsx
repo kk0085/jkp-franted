@@ -49,9 +49,9 @@ export default function SearchFilterRentals({
         };
     }, []);
 
-    // Real-time matching locations as user types (SAME AS HOME PAGE)
+    // Real-time matching locations as user types or popular locations on click
     const matchedLocations = useMemo(() => {
-        if (!localQuery.trim()) return [];
+        if (!localQuery.trim()) return popularLocations.slice(0, 8);
         const clean = localQuery.trim().toLowerCase();
         return popularLocations.filter((loc) =>
             loc.name.toLowerCase().includes(clean)
@@ -126,9 +126,8 @@ export default function SearchFilterRentals({
                                 setShowSuggestions(true);
                                 if (setSearch) setSearch(val);
                             }}
-                            onFocus={() => {
-                                if (localQuery.trim()) setShowSuggestions(true);
-                            }}
+                            onFocus={() => setShowSuggestions(true)}
+                            onClick={() => setShowSuggestions(true)}
                         />
                         {localQuery && (
                             <button
@@ -144,7 +143,7 @@ export default function SearchFilterRentals({
                 </form>
 
                 {/* AUTOCOMPLETE LOCATION SUGGESTIONS */}
-                {showSuggestions && localQuery.trim() && (
+                {showSuggestions && (
                     <div className="home-search-suggestions-dropdown" style={{ top: "calc(100% + 4px)" }}>
                         {matchedLocations.length > 0 ? (
                             <div className="home-suggestions-list">

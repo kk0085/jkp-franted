@@ -46,9 +46,9 @@ export default function MobileStickySearchBar({
         };
     }, []);
 
-    // Filter matched locations as user types
+    // Filter matched locations as user types or show top locations on click
     const matchedLocations = useMemo(() => {
-        if (!searchInput.trim()) return [];
+        if (!searchInput.trim()) return popularLocations.slice(0, 8);
         const clean = searchInput.trim().toLowerCase();
         return popularLocations.filter((loc) =>
             loc.name.toLowerCase().includes(clean)
@@ -94,9 +94,8 @@ export default function MobileStickySearchBar({
                                     setShowSuggestions(true);
                                     if (setSearch) setSearch(val);
                                 }}
-                                onFocus={() => {
-                                    if (searchInput.trim()) setShowSuggestions(true);
-                                }}
+                                onFocus={() => setShowSuggestions(true)}
+                                onClick={() => setShowSuggestions(true)}
                             />
                             {searchInput && (
                                 <button
@@ -123,7 +122,7 @@ export default function MobileStickySearchBar({
                     </form>
 
                     {/* AUTOCOMPLETE LOCATION SUGGESTIONS */}
-                    {showSuggestions && searchInput.trim() && (
+                    {showSuggestions && (
                         <div className="home-search-suggestions-dropdown">
                             {matchedLocations.length > 0 ? (
                                 <div className="home-suggestions-list">

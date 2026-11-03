@@ -62,9 +62,9 @@ export default function Home() {
         }
     }, [urlSearchQuery]);
 
-    // Real-time matching locations as user types letters/words
+    // Real-time matching locations as user types letters/words or popular locations on click
     const matchedLocations = useMemo(() => {
-        if (!searchInput.trim()) return [];
+        if (!searchInput.trim()) return popularLocations.slice(0, 8);
         const clean = searchInput.trim().toLowerCase();
         return popularLocations.filter((loc) =>
             loc.name.toLowerCase().includes(clean)
@@ -184,9 +184,8 @@ export default function Home() {
                                     setSearchInput(e.target.value);
                                     setShowSuggestions(true);
                                 }}
-                                onFocus={() => {
-                                    if (searchInput.trim()) setShowSuggestions(true);
-                                }}
+                                onFocus={() => setShowSuggestions(true)}
+                                onClick={() => setShowSuggestions(true)}
                             />
                             {searchInput && (
                                 <X
@@ -207,7 +206,7 @@ export default function Home() {
                     </form>
 
                     {/* AUTOCOMPLETE LOCATION SUGGESTIONS (WORD DALTE HI LOCATION SHOW HONI CHAHIYE) */}
-                    {showSuggestions && searchInput.trim() && (
+                    {showSuggestions && (
                         <div className="home-search-suggestions-dropdown">
                             {matchedLocations.length > 0 ? (
                                 <div className="home-suggestions-list">
