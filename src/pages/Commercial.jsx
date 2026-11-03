@@ -297,7 +297,7 @@ export default function Commercial() {
             {/* PROMINENT SEARCH BAR (STICKY ON SCROLL ACROSS ENTIRE PAGE) */}
             <div className={`rent-search-sticky-wrap ${isScrolled ? "is-sticky" : ""}`}>
                 <div className="container">
-                    <div className="home-search-hero-bar" ref={searchContainerRef} style={{ maxWidth: "920px", margin: "0 auto" }}>
+                    <div className="home-search-hero-bar" ref={searchContainerRef}>
                         <form onSubmit={handleSearchSubmit} className="home-search-input-row">
                             <div className="home-search-input-box">
                                 <Search size={18} color="#ec268f" style={{ flexShrink: 0 }} />

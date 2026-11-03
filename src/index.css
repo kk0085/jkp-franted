@@ -53,7 +53,7 @@ img {
 }
 
 .container {
-  width: min(1560px, calc(100% - 48px));
+  width: min(1880px, calc(100% - 24px));
   margin: auto;
 }
 
@@ -82,7 +82,7 @@ img {
 }
 
 .navbar .container {
-  width: min(1560px, calc(100% - 48px));
+  width: min(1880px, calc(100% - 24px));
   margin: auto;
 }
 
@@ -1497,7 +1497,7 @@ img {
 }
 
 .footer-disclaimer-bar .disclaimer-inner {
-  width: min(1560px, calc(100% - 48px));
+  width: min(1880px, calc(100% - 24px));
   margin: auto;
 }
 
@@ -2652,7 +2652,7 @@ img {
   .navbar .container,
   .footer-disclaimer-bar .disclaimer-inner,
   .profile-dashboard {
-    width: calc(100% - 32px) !important;
+    width: calc(100% - 24px) !important;
   }
 
   .property-grid,
@@ -2685,7 +2685,7 @@ img {
   .navbar .container,
   .footer-disclaimer-bar .disclaimer-inner,
   .profile-dashboard {
-    width: calc(100% - 24px) !important;
+    width: calc(100% - 20px) !important;
   }
 
   .navbar {
@@ -4836,8 +4836,8 @@ img {
    PROFILE & USER DASHBOARD STYLES
    ============================================================ */
 .profile-dashboard {
-  max-width: 1560px;
-  width: calc(100% - 48px);
+  max-width: 1880px;
+  width: calc(100% - 24px);
   margin: 0 auto;
   padding: 32px 0 80px;
 }
