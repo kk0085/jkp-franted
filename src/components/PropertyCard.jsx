@@ -7,10 +7,12 @@ export default function PropertyCard({ property, onEnquiry }) {
     const [isSpinning, setIsSpinning] = useState(false);
 
     const handleMouseEnter = () => {
-        setIsSpinning(true);
+        if (!isSpinning) {
+            setIsSpinning(true);
+        }
     };
 
-    const handleMouseLeave = () => {
+    const handleAnimationEnd = () => {
         setIsSpinning(false);
     };
 
@@ -51,10 +53,12 @@ export default function PropertyCard({ property, onEnquiry }) {
         <article
             className={`property-card ${isSpinning ? "is-spinning-active" : ""}`}
             onMouseEnter={handleMouseEnter}
-            onMouseLeave={handleMouseLeave}
             onTouchStart={handleMouseEnter}
         >
-            <div className={`property-card-inner ${isSpinning ? "card-spin-360-once" : ""}`}>
+            <div
+                className={`property-card-inner ${isSpinning ? "card-spin-360-once" : ""}`}
+                onAnimationEnd={handleAnimationEnd}
+            >
                 <div className="property-image-link">
                     <div className="property-image">
                         <img src={property.image} alt={property.title} loading="lazy" />
