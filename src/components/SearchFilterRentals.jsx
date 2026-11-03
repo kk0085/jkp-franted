@@ -79,7 +79,7 @@ export default function SearchFilterRentals({
     };
 
     return (
-        <aside className="filter-card-widget" style={{ position: "relative", top: 0 }}>
+        <aside className="filter-card-widget">
             {/* HEADER - EXACT AS SCREENSHOT */}
             <div className="filter-card-header">
                 <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>

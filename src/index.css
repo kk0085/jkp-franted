@@ -3221,6 +3221,8 @@ img {
   position: relative !important;
   top: 0 !important;
   z-index: 20;
+  max-height: none !important;
+  overflow: visible !important;
 }
 
 .rent-main-col {
@@ -3252,7 +3254,10 @@ img {
     margin-top: 18px;
   }
   .rent-sidebar-col {
-    position: static;
+    position: relative !important;
+    top: 0 !important;
+    max-height: none !important;
+    overflow: visible !important;
   }
 }
 
@@ -5205,11 +5210,13 @@ img {
   }
 }
 
-/* GLOBAL SCROLL FIX: ENSURE SIDEBAR & FILTER CARDS SCROLL NATURALLY WITH PAGE (NEVER STICKY) */
+/* ENSURE ALL SEARCH FILTER SIDEBAR CARDS AND HEADERS SCROLL NATURALLY WITH THE PAGE */
 .rent-sidebar-col,
-aside.filter-card-widget,
 .filter-card-widget,
+aside.filter-card-widget,
 .prop-unified-header {
   position: relative !important;
   top: 0 !important;
+  max-height: none !important;
+  overflow: visible !important;
 }

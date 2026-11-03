@@ -204,7 +204,7 @@ export default function Properties() {
             {/* DESKTOP 2-COLUMN & MOBILE 1-COLUMN LISTINGS LAYOUT */}
             <div className="rent-layout-container prop-layout-container">
                 {/* LEFT SIDEBAR: ALWAYS VISIBLE (SCROLLS WITH PAGE) */}
-                <div className="rent-sidebar-col" style={{ position: "relative", top: 0 }}>
+                <div className="rent-sidebar-col">
                     <SearchFilterRentals
                         title={
                             category === "sale"
