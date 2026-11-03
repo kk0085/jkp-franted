@@ -103,10 +103,9 @@ export default function PropertyCard({ property, onEnquiry }) {
                 {/* 2. BACK FACE (180 DEGREE FLIP) */}
                 <div className="property-card-back">
                     <div className="card-back-header">
-                        <span className="property-badge">{property.badge || "Verified"}</span>
                         <div className="card-back-price">
                             Rs {Number(property.price).toLocaleString("en-IN")}
-                            {property.category === "rent" && <small> / mo</small>}
+                            {property.category === "rent" && <small> / month</small>}
                         </div>
                     </div>
 
