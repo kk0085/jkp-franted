@@ -1063,8 +1063,8 @@ img {
   display: none;
 }
 
-/* 180 DEGREE 3D FLIP ON DESKTOP HOVER ONLY (LARGE SCREENS WITH MOUSE/POINTER) */
-@media (min-width: 961px) and (hover: hover) {
+/* 180 DEGREE 3D FLIP ON DESKTOP HOVER ONLY (DESKTOP SCREENS > 1024px WITH MOUSE) */
+@media (min-width: 1025px) and (hover: hover) and (pointer: fine) {
   .property-card {
     perspective: 1200px;
     overflow: visible !important;
@@ -1120,15 +1120,18 @@ img {
   }
 }
 
-/* MOBILE RESPONSIVE (<= 960px OR TOUCH DEVICES): CARD BILKUL BHI NA GHUME */
-@media (max-width: 960px), (hover: none) {
+/* MOBILE & TABLET RESPONSIVE (<= 1024px, TOUCH DEVICES, POINTER COARSE): CARD BILKUL BHI NA GHUME */
+@media (max-width: 1024px), (hover: none), (pointer: coarse) {
   .property-card {
     perspective: none !important;
     transform: none !important;
   }
 
-  .property-card:hover {
+  .property-card:hover,
+  .property-card:active,
+  .property-card:focus {
     z-index: 1 !important;
+    transform: none !important;
   }
 
   .property-card-inner,
@@ -1141,7 +1144,9 @@ img {
     will-change: auto !important;
   }
 
-  .property-card-front {
+  .property-card-front,
+  .property-card:hover .property-card-front,
+  .property-card:active .property-card-front {
     transform: none !important;
     backface-visibility: visible !important;
     -webkit-backface-visibility: visible !important;
@@ -1157,6 +1162,7 @@ img {
     visibility: hidden !important;
     pointer-events: none !important;
     transform: none !important;
+    opacity: 0 !important;
   }
 }
 
