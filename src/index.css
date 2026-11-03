@@ -1816,8 +1816,10 @@ img {
 }
 
 .prop-unified-header {
-  position: relative;
-  z-index: 50;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 72px;
+  z-index: 990;
   background: #ffffff;
   padding: 12px 0 10px;
   margin-bottom: 22px;
@@ -3796,11 +3798,13 @@ img {
   }
 
   .prop-unified-header {
-    position: relative !important;
-    top: 0 !important;
-    z-index: 50 !important;
+    position: -webkit-sticky !important;
+    position: sticky !important;
+    top: 65px !important;
+    z-index: 990 !important;
     background: #ffffff !important;
     padding: 8px 0 6px !important;
+    box-shadow: 0 4px 16px rgba(15, 23, 42, 0.08) !important;
     border-bottom: 1px solid #f1f5f9 !important;
   }
 
@@ -5199,4 +5203,13 @@ img {
     align-items: center;
     justify-content: center;
   }
+}
+
+/* GLOBAL SCROLL FIX: ENSURE SIDEBAR & FILTER CARDS SCROLL NATURALLY WITH PAGE (NEVER STICKY) */
+.rent-sidebar-col,
+aside.filter-card-widget,
+.filter-card-widget,
+.prop-unified-header {
+  position: relative !important;
+  top: 0 !important;
 }

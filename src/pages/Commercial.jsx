@@ -163,8 +163,8 @@ export default function Commercial() {
 
             {/* MAIN 2-COLUMN LAYOUT: SIDEBAR WIDGET + LISTINGS */}
             <div className="container rent-layout-container">
-                {/* LEFT SIDEBAR: EXACT "Search and Filter" CARD AS SCREENSHOT (ALWAYS VISIBLE) */}
-                <div className="rent-sidebar-col">
+                {/* LEFT SIDEBAR: EXACT "Search and Filter" CARD AS SCREENSHOT (SCROLLS WITH PAGE) */}
+                <div className="rent-sidebar-col" style={{ position: "relative", top: 0 }}>
                     <SearchFilterRentals
                         title="Search and Filter Commercial"
                         search={search}

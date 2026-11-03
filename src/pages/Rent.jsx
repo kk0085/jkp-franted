@@ -133,8 +133,8 @@ export default function Rent() {
 
             {/* MAIN 2-COLUMN LAYOUT: SIDEBAR WIDGET + LISTINGS */}
             <div className="container rent-layout-container">
-                {/* LEFT SIDEBAR: EXACT "Search and Filter Rentals" CARD AS SCREENSHOT (ALWAYS VISIBLE) */}
-                <div className="rent-sidebar-col">
+                {/* LEFT SIDEBAR: EXACT "Search and Filter Rentals" CARD AS SCREENSHOT (SCROLLS WITH PAGE) */}
+                <div className="rent-sidebar-col" style={{ position: "relative", top: 0 }}>
                     <SearchFilterRentals
                         title="Search and Filter Rentals"
                         search={search}

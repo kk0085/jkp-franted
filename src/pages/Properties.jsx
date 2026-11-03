@@ -111,8 +111,8 @@ export default function Properties() {
 
     return (
         <div className="page container properties-page-wrapper">
-            {/* TOP COMPACT UNIFIED CATEGORY BAR */}
-            <div className="prop-unified-header">
+            {/* TOP COMPACT UNIFIED CATEGORY BAR (SCROLLS WITH PAGE) */}
+            <div className="prop-unified-header" style={{ position: "relative", top: 0 }}>
                 {/* 1. HORIZONTALLY SCROLLABLE CATEGORY TABS (NO MULTI-LINE BREAKING) */}
                 <div className="prop-categories-scroll-row">
                     <button
@@ -203,8 +203,8 @@ export default function Properties() {
 
             {/* DESKTOP 2-COLUMN & MOBILE 1-COLUMN LISTINGS LAYOUT */}
             <div className="rent-layout-container prop-layout-container">
-                {/* LEFT SIDEBAR: ALWAYS VISIBLE EXACT MATCH TO RENT PAGE */}
-                <div className="rent-sidebar-col">
+                {/* LEFT SIDEBAR: ALWAYS VISIBLE (SCROLLS WITH PAGE) */}
+                <div className="rent-sidebar-col" style={{ position: "relative", top: 0 }}>
                     <SearchFilterRentals
                         title={
                             category === "sale"
