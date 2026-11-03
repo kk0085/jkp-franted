@@ -1039,13 +1039,17 @@ img {
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
   display: flex;
   flex-direction: column;
-  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease;
+  transition: transform 0.85s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.3s ease, border-color 0.25s ease;
   position: relative;
+  transform-style: preserve-3d;
+  will-change: transform;
 }
 
-.property-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
+/* ON HOVER: PURA CARD HI 360 DEGREE GHUME (IMG CHANGE NAHI HO) */
+.property-card:hover,
+.property-card:active {
+  transform: perspective(1000px) rotateY(360deg) translateY(-6px);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.16);
   border-color: #fbcfe8;
 }
 
@@ -1059,53 +1063,19 @@ img {
   height: 185px;
   position: relative;
   overflow: hidden;
-  background: #0f172a;
-  isolation: isolate;
+  background: #f3f4f6;
 }
 
-.prop-card-img {
-  position: absolute;
-  top: 0;
-  left: 0;
+.property-image img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  will-change: transform, opacity, border-radius, clip-path;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.prop-img-primary {
-  opacity: 1;
-  z-index: 1;
-  transform: scale(1) rotate(0deg);
-  border-radius: 0 !important;
-  clip-path: none !important;
-  transition: transform 0.65s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.45s ease;
-}
-
-.prop-img-secondary {
-  opacity: 0;
-  z-index: 2;
-  transform: scale(1.15) rotate(-360deg);
-  border-radius: 0 !important;
-  clip-path: none !important;
-  transition: transform 0.65s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.45s ease;
-}
-
-/* ON CARD HOVER: 360 DEGREE ROTATION IMAGE CHANGE (ROUNDED NAHI, 360 DEGREE ROTATE HO) */
-.property-card:hover .prop-img-primary,
-.property-card:active .prop-img-primary {
-  opacity: 0;
-  transform: scale(1.18) rotate(360deg);
-  border-radius: 0 !important;
-  clip-path: none !important;
-}
-
-.property-card:hover .prop-img-secondary,
-.property-card:active .prop-img-secondary {
-  opacity: 1;
-  transform: scale(1.05) rotate(0deg);
-  border-radius: 0 !important;
-  clip-path: none !important;
+.property-card:hover .property-image img,
+.profile-property-card-item:hover .profile-card-img {
+  transform: scale(1.06);
 }
 
 .profile-property-card-item:hover .profile-card-img {
