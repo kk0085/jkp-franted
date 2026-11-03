@@ -4,6 +4,13 @@ import { MapPin, Share2, Check } from "lucide-react";
 
 export default function PropertyCard({ property, onEnquiry }) {
     const [copied, setCopied] = useState(false);
+    const [hasSpun, setHasSpun] = useState(false);
+
+    const handleMouseEnter = () => {
+        if (!hasSpun) {
+            setHasSpun(true);
+        }
+    };
 
     const handleShare = async (e) => {
         e.preventDefault();
@@ -39,52 +46,58 @@ export default function PropertyCard({ property, onEnquiry }) {
     };
 
     return (
-        <article className="property-card">
-            <div className="property-image-link">
-                <div className="property-image">
-                    <img src={property.image} alt={property.title} loading="lazy" />
+        <article
+            className="property-card"
+            onMouseEnter={handleMouseEnter}
+            onTouchStart={handleMouseEnter}
+        >
+            <div className={`property-card-inner ${hasSpun ? "card-spin-360-once" : ""}`}>
+                <div className="property-image-link">
+                    <div className="property-image">
+                        <img src={property.image} alt={property.title} loading="lazy" />
 
-                    <span className="property-badge">
-                        {property.badge}
-                    </span>
-                </div>
-            </div>
-
-            <div className="property-info">
-                <h4 className="property-card-title">{property.title}</h4>
-
-                <p className="property-location">
-                    <MapPin size={12} className="location-pin" />
-                    <span>{property.location}</span>
-                </p>
-
-                <div className="property-price">
-                    Rs {Number(property.price).toLocaleString("en-IN")}
-                    {property.category === "rent" && (
-                        <span className="per-month"> / month</span>
-                    )}
+                        <span className="property-badge">
+                            {property.badge}
+                        </span>
+                    </div>
                 </div>
 
-                <div className="property-actions">
-                    <div className="property-actions-left">
-                        <button className="enquiry-btn" onClick={handleEnquiryClick}>
-                            Enquiry
-                        </button>
+                <div className="property-info">
+                    <h4 className="property-card-title">{property.title}</h4>
 
-                        <button
-                            className={`share-btn ${copied ? "copied" : ""}`}
-                            onClick={handleShare}
-                            title={copied ? "Copied!" : "Share Property"}
-                            aria-label="Share property"
-                        >
-                            {copied ? <Check size={13} color="#15803d" /> : <Share2 size={13} />}
-                        </button>
+                    <p className="property-location">
+                        <MapPin size={12} className="location-pin" />
+                        <span>{property.location}</span>
+                    </p>
+
+                    <div className="property-price">
+                        Rs {Number(property.price).toLocaleString("en-IN")}
+                        {property.category === "rent" && (
+                            <span className="per-month"> / month</span>
+                        )}
                     </div>
 
-                    {/* BOTTOM-RIGHT CORNER OF CARD */}
-                    <Link to={`/properties/${property.id}`} className="card-corner-view-btn" title="View Property Details">
-                        <span>View Details</span>
-                    </Link>
+                    <div className="property-actions">
+                        <div className="property-actions-left">
+                            <button className="enquiry-btn" onClick={handleEnquiryClick}>
+                                Enquiry
+                            </button>
+
+                            <button
+                                className={`share-btn ${copied ? "copied" : ""}`}
+                                onClick={handleShare}
+                                title={copied ? "Copied!" : "Share Property"}
+                                aria-label="Share property"
+                            >
+                                {copied ? <Check size={13} color="#15803d" /> : <Share2 size={13} />}
+                            </button>
+                        </div>
+
+                        {/* BOTTOM-RIGHT CORNER OF CARD */}
+                        <Link to={`/properties/${property.id}`} className="card-corner-view-btn" title="View Property Details">
+                            <span>View Details</span>
+                        </Link>
+                    </div>
                 </div>
             </div>
         </article>

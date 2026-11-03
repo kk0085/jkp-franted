@@ -1032,6 +1032,13 @@ img {
 }
 
 .property-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.property-card-inner {
   background: #ffffff;
   border-radius: 12px;
   border: 1px solid #e5e7eb;
@@ -1039,18 +1046,30 @@ img {
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
   display: flex;
   flex-direction: column;
-  transition: transform 0.85s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.3s ease, border-color 0.25s ease;
-  position: relative;
+  width: 100%;
+  height: 100%;
   transform-style: preserve-3d;
   will-change: transform;
+  transition: box-shadow 0.25s ease, border-color 0.2s ease, transform 0.25s ease;
 }
 
-/* ON HOVER: PURA CARD HI 360 DEGREE GHUME (IMG CHANGE NAHI HO) */
-.property-card:hover,
-.property-card:active {
-  transform: perspective(1000px) rotateY(360deg) translateY(-6px);
-  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.16);
+.property-card:hover .property-card-inner {
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
   border-color: #fbcfe8;
+}
+
+@keyframes spinCard360Once {
+  0% {
+    transform: perspective(1000px) rotateY(0deg) translateY(0);
+  }
+  100% {
+    transform: perspective(1000px) rotateY(360deg) translateY(-4px);
+  }
+}
+
+/* EK BAR HI HO: 360 DEGREE ROTATION RUNS EXACTLY ONCE ON HOVER, NEVER REPEATS CONTINUOUSLY */
+.card-spin-360-once {
+  animation: spinCard360Once 0.85s cubic-bezier(0.2, 0.8, 0.2, 1) 1 forwards;
 }
 
 .property-image-link {
@@ -2741,6 +2760,15 @@ img {
 
   /* PREMIUM COMPACT MOBILE CARD (SLEEK & NOT BULKY) */
   .property-card {
+    width: 100% !important;
+    box-sizing: border-box !important;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    overflow: visible !important;
+  }
+
+  .property-card-inner {
     border-radius: 14px !important;
     border: 1px solid #e5e7eb !important;
     box-shadow: 0 2px 10px rgba(15, 23, 42, 0.06) !important;
@@ -3988,7 +4016,17 @@ img {
     width: 100% !important;
   }
 
+  /* PREMIUM COMPACT MOBILE CARD (SLEEK & NOT BULKY) */
   .property-card {
+    width: 100% !important;
+    box-sizing: border-box !important;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    overflow: visible !important;
+  }
+
+  .property-card-inner {
     border-radius: 14px !important;
     border: 1px solid #e5e7eb !important;
     box-shadow: 0 2px 10px rgba(15, 23, 42, 0.06) !important;
