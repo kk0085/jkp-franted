@@ -6400,3 +6400,276 @@ img {
     left: 12px;
   }
 }
+
+/* ==========================================================================
+   TOP JAIPUR LOCALITIES VISUAL CARDS SECTION
+   ========================================================================== */
+.top-localities-section {
+  margin: 34px 0 28px;
+  width: 100%;
+}
+
+.top-localities-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 22px;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.localities-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #fff0f7;
+  color: #ec268f;
+  border: 1px solid #fbcfe8;
+  font-size: 11.5px;
+  font-weight: 700;
+  padding: 3px 11px;
+  border-radius: 9999px;
+  margin-bottom: 8px;
+}
+
+.localities-main-title {
+  font-size: 24px;
+  font-weight: 800;
+  color: #0f172a;
+  line-height: 1.3;
+  margin-bottom: 6px;
+}
+
+.localities-main-title .highlight-text {
+  color: #ec268f;
+}
+
+.localities-subtitle {
+  font-size: 13.5px;
+  color: #64748b;
+  max-width: 620px;
+  line-height: 1.5;
+}
+
+.locality-hint-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  color: #475569;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 6px 14px;
+  border-radius: 9999px;
+}
+
+.localities-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+}
+
+.locality-visual-card {
+  position: relative;
+  height: 220px;
+  border-radius: 16px;
+  overflow: hidden;
+  cursor: pointer;
+  border: 1.5px solid #e2e8f0;
+  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.05);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.locality-visual-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 16px 32px rgba(15, 23, 42, 0.14);
+  border-color: #fbcfe8;
+}
+
+.locality-visual-card.is-selected {
+  border-color: #ec268f !important;
+  box-shadow: 0 0 0 3px rgba(236, 38, 143, 0.3), 0 12px 28px rgba(236, 38, 143, 0.2);
+}
+
+.locality-card-img-wrap {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.locality-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.locality-visual-card:hover .locality-card-img {
+  transform: scale(1.08);
+}
+
+.locality-card-gradient {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(15, 23, 42, 0.2) 0%,
+    rgba(15, 23, 42, 0.55) 45%,
+    rgba(15, 23, 42, 0.95) 100%
+  );
+  transition: background 0.3s ease;
+}
+
+.locality-visual-card:hover .locality-card-gradient {
+  background: linear-gradient(
+    180deg,
+    rgba(15, 23, 42, 0.15) 0%,
+    rgba(15, 23, 42, 0.45) 40%,
+    rgba(15, 23, 42, 0.96) 100%
+  );
+}
+
+.locality-card-content {
+  position: relative;
+  z-index: 2;
+  height: 100%;
+  padding: 14px 14px 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.locality-top-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.locality-tag-pill {
+  font-size: 10px;
+  font-weight: 800;
+  padding: 3px 8px;
+  border-radius: 6px;
+  border: 1px solid;
+  backdrop-filter: blur(6px);
+  background: rgba(0, 0, 0, 0.4);
+  letter-spacing: 0.2px;
+}
+
+.locality-deals-count {
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2.5px 7px;
+  border-radius: 9999px;
+  backdrop-filter: blur(4px);
+}
+
+.locality-bottom-info {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.locality-name {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 17px;
+  font-weight: 800;
+  color: #ffffff;
+  margin: 0;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+.loc-pin-icon {
+  color: #ec268f;
+  flex-shrink: 0;
+}
+
+.locality-tagline {
+  font-size: 11px;
+  color: #cbd5e1;
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.locality-price-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 6px;
+  padding-top: 6px;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.locality-avg-rent {
+  color: #fbcfe8;
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+}
+
+.locality-explore-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: #ffffff;
+  background: #ec268f;
+  font-size: 10.5px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 9999px;
+  transition: all 0.2s ease;
+}
+
+.locality-visual-card:hover .locality-explore-btn {
+  background: #db2777;
+  transform: translateX(2px);
+}
+
+/* RESPONSIVE FOR TOP LOCALITIES */
+@media (max-width: 1140px) {
+  .localities-cards-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 840px) {
+  .localities-cards-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+  .localities-main-title {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 520px) {
+  .locality-visual-card {
+    height: 195px;
+  }
+  .locality-name {
+    font-size: 15px;
+  }
+  .locality-tagline {
+    display: none;
+  }
+  .locality-avg-rent {
+    font-size: 10.5px;
+  }
+  .locality-explore-btn span {
+    display: none;
+  }
+}

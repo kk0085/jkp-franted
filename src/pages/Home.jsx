@@ -6,6 +6,7 @@ import PropertySection from "../components/PropertySection";
 import PropertyCard from "../components/PropertyCard";
 import WhyChooseUs from "../components/WhyChooseUs";
 import HomePromoBanner from "../components/HomePromoBanner";
+import TopLocalitiesSection from "../components/TopLocalitiesSection";
 import SiteVisitPopup from "../components/SiteVisitPopup";
 import { useProperty } from "../context/PropertyContext";
 import { popularLocations } from "../data/popularLocationsData";
@@ -236,6 +237,12 @@ export default function Home() {
                 </div>
             </div>
         </section>
+
+            {/* TOP JAIPUR LOCALITIES VISUAL CARDS (EXPLORE BY AREA) */}
+            <TopLocalitiesSection
+                selectedLocality={selectedLocality}
+                onSelectLocality={handleLocalityClick}
+            />
 
             {/* FEATURED PROJECTS BY LOCALITY SHOWCASE SECTION */}
             <section className="container" style={{ margin: "28px auto 40px" }} id="locality-projects">
