@@ -1,4 +1,4 @@
-import { MapPin, ArrowRight, Sparkles, Building2 } from "lucide-react";
+import { MapPin, ArrowRight, Sparkles } from "lucide-react";
 
 export const jaipurLocalitiesList = [
     {
@@ -8,7 +8,7 @@ export const jaipurLocalitiesList = [
         accent: "#15803d",
         tagline: "Asia's Largest Colony • City Park & Markets",
         avgRent: "₹12,000 - ₹25,000 / mo",
-        count: "120+ Properties",
+        count: "120+ Deals",
         image: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=600&auto=format&fit=crop&q=80",
     },
     {
@@ -18,7 +18,7 @@ export const jaipurLocalitiesList = [
         accent: "#ec268f",
         tagline: "Modern High-Rise Gated Societies",
         avgRent: "₹14,000 - ₹35,000 / mo",
-        count: "95+ Properties",
+        count: "95+ Deals",
         image: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=600&auto=format&fit=crop&q=80",
     },
     {
@@ -28,7 +28,7 @@ export const jaipurLocalitiesList = [
         accent: "#ea580c",
         tagline: "Amrapali Circle • High-End Cafes & Villas",
         avgRent: "₹18,000 - ₹50,000 / mo",
-        count: "80+ Properties",
+        count: "80+ Deals",
         image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&auto=format&fit=crop&q=80",
     },
     {
@@ -38,7 +38,7 @@ export const jaipurLocalitiesList = [
         accent: "#1e3a8a",
         tagline: "Central Jaipur • WTP Mall & Green Living",
         avgRent: "₹16,000 - ₹40,000 / mo",
-        count: "75+ Properties",
+        count: "75+ Deals",
         image: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=600&auto=format&fit=crop&q=80",
     },
     {
@@ -48,7 +48,7 @@ export const jaipurLocalitiesList = [
         accent: "#0284c7",
         tagline: "Mahindra SEZ • Highway Gated Duplexes",
         avgRent: "₹10,000 - ₹25,000 / mo",
-        count: "65+ Properties",
+        count: "65+ Deals",
         image: "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?w=600&auto=format&fit=crop&q=80",
     },
     {
@@ -58,7 +58,7 @@ export const jaipurLocalitiesList = [
         accent: "#7c3aed",
         tagline: "Sitapura Tech Hub • Chokhi Dhani Area",
         avgRent: "₹12,000 - ₹30,000 / mo",
-        count: "55+ Properties",
+        count: "55+ Deals",
         image: "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?w=600&auto=format&fit=crop&q=80",
     },
     {
@@ -68,7 +68,7 @@ export const jaipurLocalitiesList = [
         accent: "#0d9488",
         tagline: "Adjacent to Mansarovar • Wide Peaceful Roads",
         avgRent: "₹10,000 - ₹22,000 / mo",
-        count: "45+ Properties",
+        count: "45+ Deals",
         image: "https://images.unsplash.com/photo-1613977257363-707ba9348227?w=600&auto=format&fit=crop&q=80",
     },
     {
@@ -78,7 +78,7 @@ export const jaipurLocalitiesList = [
         accent: "#b45309",
         tagline: "Heart of Jaipur • High Profile Living",
         avgRent: "₹25,000 - ₹75,000 / mo",
-        count: "40+ Properties",
+        count: "40+ Deals",
         image: "https://images.unsplash.com/photo-1512918728675-ed5a9ecdebfd?w=600&auto=format&fit=crop&q=80",
     },
 ];
