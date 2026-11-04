@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { MapPin, Share2, Check } from "lucide-react";
+import { MapPin } from "lucide-react";
 
 export default function PropertyCard({ property, onEnquiry }) {
     const [copied, setCopied] = useState(false);
@@ -41,7 +41,7 @@ export default function PropertyCard({ property, onEnquiry }) {
     return (
         <article className="property-card">
             <div className="property-card-inner">
-                {/* 1. FRONT FACE (0 DEGREE) - Clean view without share button */}
+                {/* 1. FRONT FACE (0 DEGREE) */}
                 <div className="property-card-front">
                     <div className="property-image-link">
                         <div className="property-image">
@@ -83,26 +83,13 @@ export default function PropertyCard({ property, onEnquiry }) {
                     </div>
                 </div>
 
-                {/* 2. BACK FACE (180 DEGREE FLIP) - Share button with icon + "Share" text underneath */}
+                {/* 2. BACK FACE (180 DEGREE FLIP) - Card ghumne ke baad niche "Share" text button */}
                 <div className="property-card-back">
                     <div className="card-back-header">
                         <div className="card-back-price">
                             Rs {Number(property.price).toLocaleString("en-IN")}
                             {property.category === "rent" && <small> / month</small>}
                         </div>
-
-                        <button
-                            type="button"
-                            className={`card-back-share-btn ${copied ? "copied" : ""}`}
-                            onClick={handleShare}
-                            title={copied ? "Copied!" : "Share Property"}
-                            aria-label="Share property"
-                        >
-                            <div className="card-back-share-icon">
-                                {copied ? <Check size={13} color="#15803d" /> : <Share2 size={13} />}
-                            </div>
-                            <span className="card-back-share-text">{copied ? "Copied" : "Share"}</span>
-                        </button>
                     </div>
 
                     <div className="card-back-body">
@@ -129,6 +116,17 @@ export default function PropertyCard({ property, onEnquiry }) {
                         <button className="card-back-enquiry" onClick={handleEnquiryClick}>
                             Enquiry
                         </button>
+
+                        {/* ONLY TEXT SHARE BUTTON */}
+                        <button
+                            type="button"
+                            className={`card-back-share ${copied ? "copied" : ""}`}
+                            onClick={handleShare}
+                            title="Share Property"
+                        >
+                            {copied ? "Copied!" : "Share"}
+                        </button>
+
                         <Link to={`/properties/${property.id}`} className="card-back-view">
                             View Details
                         </Link>

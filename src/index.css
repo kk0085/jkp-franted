@@ -8141,3 +8141,32 @@ img {
   text-transform: capitalize;
   transition: color 0.18s ease;
 }
+
+
+/* CARD BACK SHARE BUTTON (ONLY TEXT) */
+.card-back-share {
+  flex: 1;
+  background: #ffffff;
+  color: #475569;
+  border: 1.5px solid #cbd5e1;
+  padding: 6px 10px;
+  font-weight: 700;
+  font-size: 12px;
+  border-radius: 9999px;
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.card-back-share:hover {
+  background: #fdf2f8;
+  border-color: #ec268f;
+  color: #ec268f;
+}
+
+.card-back-share.copied {
+  background: #dcfce7;
+  border-color: #16a34a;
+  color: #15803d;
+}
