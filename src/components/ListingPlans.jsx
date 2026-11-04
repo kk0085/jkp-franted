@@ -181,8 +181,8 @@ export default function ListingPlans() {
                         <ShieldCheck size={22} />
                     </div>
                     <div>
-                        <strong>100% Direct Owners</strong>
-                        <p>Zero brokerage, genuine direct buyer inquiries</p>
+                        <strong>100% Genuine Clients</strong>
+                        <p>Leads oriented platform, direct verified buyer inquiries</p>
                     </div>
                 </div>
 
