@@ -6,7 +6,7 @@ import WhyChooseUs from "../components/WhyChooseUs";
 import SearchFilterRentals from "../components/SearchFilterRentals";
 import MobileStickySearchBar from "../components/MobileStickySearchBar";
 import { useProperty } from "../context/PropertyContext";
-import { Building2, Briefcase, Sparkles } from "lucide-react";
+import { Building2, Briefcase, Sparkles, X } from "lucide-react";
 
 export default function Commercial() {
     const [searchParams, setSearchParams] = useSearchParams();
@@ -100,6 +100,13 @@ export default function Commercial() {
 
     const commercialRentals = filtered.filter((p) => p.category === "rent");
     const commercialSales = filtered.filter((p) => p.category === "sale");
+
+    const isFilterActive = Boolean(
+        search.trim() ||
+        (activeTab === "sale" ? budgetLimitSale < 50000000 : budgetLimitRent < 200000) ||
+        sortBy !== "recommended" ||
+        activeTab !== "all"
+    );
     const furnishedOffices = filtered.filter(
         (p) =>
             (p.furnishing && p.furnishing.toLowerCase().includes("furnished")) ||
@@ -198,6 +205,7 @@ export default function Commercial() {
                         step={activeTab === "sale" ? 500000 : 2000}
                         rateLabel={activeTab === "sale" ? "Sale Price Limit" : "Rent Rate"}
                         placeholder="Search by title or location"
+                        matchCount={filtered.length}
                         onReset={() => {
                             setActiveTab("all");
                             setBudgetLimitRent(200000);

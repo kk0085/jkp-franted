@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef, useMemo } from "react";
-import { Search, Filter, X, SlidersHorizontal, ChevronDown, ChevronUp, MapPin } from "lucide-react";
+import { Search, Filter, X, SlidersHorizontal, ChevronDown, ChevronUp, MapPin, Check } from "lucide-react";
 import { popularLocations } from "../data/popularLocationsData";
 
 export default function SearchFilterRentals({
@@ -16,10 +16,36 @@ export default function SearchFilterRentals({
     rateLabel = "Rent Rate",
     placeholder = "Search by title or location",
     onReset,
+    matchCount,
 }) {
     const [mobileFilterOpen, setMobileFilterOpen] = useState(false);
     const [localQuery, setLocalQuery] = useState(search);
     const [showSuggestions, setShowSuggestions] = useState(false);
+
+    const hasActiveFilters = Boolean(
+        (localQuery && localQuery.trim()) ||
+        budgetLimit < maxVal ||
+        sortBy !== "recommended"
+    );
+
+    const handleApplyAndClose = () => {
+        if (setSearch) {
+            setSearch(localQuery.trim());
+        }
+        setShowSuggestions(false);
+        setMobileFilterOpen(false);
+        setTimeout(() => {
+            const target =
+                document.getElementById("for-rent") ||
+                document.getElementById("commercial-listings") ||
+                document.querySelector(".prop-cards-main-col") ||
+                document.querySelector(".rent-main-col") ||
+                document.querySelector(".property-grid");
+            if (target) {
+                target.scrollIntoView({ behavior: "smooth", block: "start" });
+            }
+        }, 80);
+    };
 
     const searchContainerRef = useRef(null);
 
@@ -107,6 +133,17 @@ export default function SearchFilterRentals({
                 >
                     <SlidersHorizontal size={13} />
                     <span>{mobileFilterOpen ? "Close Filters" : "Budget & Sort"}</span>
+                    {hasActiveFilters && (
+                        <span
+                            style={{
+                                width: 7,
+                                height: 7,
+                                borderRadius: "50%",
+                                background: "#ec268f",
+                                display: "inline-block",
+                            }}
+                        />
+                    )}
                     {mobileFilterOpen ? <ChevronUp size={13} /> : <ChevronDown size={13} />}
                 </button>
             </div>
@@ -254,9 +291,12 @@ export default function SearchFilterRentals({
                     <button
                         type="button"
                         className="mobile-filter-apply-btn"
-                        onClick={() => setMobileFilterOpen(false)}
+                        onClick={handleApplyAndClose}
                     >
-                        Apply & Close Filters
+                        <Check size={16} style={{ marginRight: "6px" }} />
+                        <span>
+                            Apply & Close Filters{typeof matchCount === "number" ? ` (${matchCount} Found)` : ""}
+                        </span>
                     </button>
                 </div>
             </div>

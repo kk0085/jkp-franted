@@ -76,6 +76,13 @@ export default function Rent() {
     const rentHouses = filtered.filter((p) => p.type === "house");
     const rentVillas = filtered.filter((p) => p.type === "villa");
 
+    const isFilterActive = Boolean(
+        search.trim() ||
+        budgetLimit < 200000 ||
+        sortBy !== "recommended" ||
+        activeTab !== "all"
+    );
+
     return (
         <div className="rent-page">
             {/* HERO RENT BANNER */}
@@ -158,6 +165,7 @@ export default function Rent() {
                         sortBy={sortBy}
                         setSortBy={setSortBy}
                         placeholder="Search by title or location"
+                        matchCount={filtered.length}
                         onReset={() => {
                             setActiveTab("all");
                             setSearch("");
@@ -180,8 +188,65 @@ export default function Rent() {
                             </span>
                         </div>
 
-                        {search.trim() ? (
+                        {isFilterActive ? (
                             <div>
+                                {/* ACTIVE FILTER PILLS */}
+                                <div className="active-filters-bar" style={{ display: "flex", flexWrap: "wrap", gap: "8px", marginBottom: "16px", alignItems: "center" }}>
+                                    <span style={{ fontSize: "12px", fontWeight: 700, color: "#64748b" }}>Active Filters:</span>
+                                    {search.trim() && (
+                                        <span className="filter-pill-tag">
+                                            "{search}"
+                                            <button type="button" onClick={() => {
+                                                setSearch("");
+                                                setSearchParams(activeTab !== "all" ? { type: activeTab } : {});
+                                            }}><X size={12} /></button>
+                                        </span>
+                                    )}
+                                    {budgetLimit < 200000 && (
+                                        <span className="filter-pill-tag">
+                                            Up to ₹{budgetLimit.toLocaleString("en-IN")}
+                                            <button type="button" onClick={() => setBudgetLimit(200000)}><X size={12} /></button>
+                                        </span>
+                                    )}
+                                    {sortBy !== "recommended" && (
+                                        <span className="filter-pill-tag">
+                                            {sortBy === "price-low" ? "Price: Low to High" : sortBy === "price-high" ? "Price: High to Low" : "Newest"}
+                                            <button type="button" onClick={() => setSortBy("recommended")}><X size={12} /></button>
+                                        </span>
+                                    )}
+                                    {activeTab !== "all" && (
+                                        <span className="filter-pill-tag">
+                                            {activeTab === "flat" ? "Flats" : activeTab === "house" ? "Houses" : "Villas"}
+                                            <button type="button" onClick={() => {
+                                                setActiveTab("all");
+                                                setSearchParams(search ? { search } : {});
+                                            }}><X size={12} /></button>
+                                        </span>
+                                    )}
+                                    <button
+                                        type="button"
+                                        onClick={() => {
+                                            setSearch("");
+                                            setBudgetLimit(200000);
+                                            setSortBy("recommended");
+                                            setActiveTab("all");
+                                            setSearchParams({});
+                                        }}
+                                        style={{
+                                            background: "none",
+                                            border: "none",
+                                            color: "#ec268f",
+                                            fontSize: "12px",
+                                            fontWeight: 700,
+                                            cursor: "pointer",
+                                            textDecoration: "underline",
+                                            marginLeft: "4px",
+                                        }}
+                                    >
+                                        Clear All
+                                    </button>
+                                </div>
+
                                 {filtered.length > 0 ? (
                                     <div className="property-grid cols-3">
                                         {filtered.map((property) => (
@@ -194,12 +259,35 @@ export default function Rent() {
                                     </div>
                                 ) : (
                                     <div className="no-results-box">
-                                        <h3>No properties found in "{search}"</h3>
-                                        <p>Try adjusting your search terms or moving the budget limit.</p>
+                                        <h3>No properties match your filter criteria</h3>
+                                        <p>Try adjusting your search terms or increasing the budget limit slider.</p>
+                                        <button
+                                            type="button"
+                                            onClick={() => {
+                                                setSearch("");
+                                                setBudgetLimit(200000);
+                                                setSortBy("recommended");
+                                                setActiveTab("all");
+                                                setSearchParams({});
+                                            }}
+                                            style={{
+                                                marginTop: "12px",
+                                                background: "#ec268f",
+                                                color: "#ffffff",
+                                                border: "none",
+                                                padding: "8px 20px",
+                                                borderRadius: "9999px",
+                                                fontWeight: 700,
+                                                fontSize: "13px",
+                                                cursor: "pointer",
+                                            }}
+                                        >
+                                            Reset All Filters
+                                        </button>
                                     </div>
                                 )}
                             </div>
-                        ) : activeTab === "all" ? (
+                        ) : (
                             <>
                                 <PropertySection
                                     title="Flat Homes"
@@ -232,40 +320,6 @@ export default function Rent() {
                                     />
                                 </div>
                             </>
-                        ) : (
-                            <div>
-                                <div className="property-section-header">
-                                    <div>
-                                        <h3 className="property-section-title">
-                                            {activeTab === "flat"
-                                                ? "Flat Homes"
-                                                : activeTab === "house"
-                                                    ? "Independent Houses"
-                                                    : "Luxury Villas"}
-                                        </h3>
-                                        <p className="property-section-subtitle">
-                                            Showing verified properties matching your selection
-                                        </p>
-                                    </div>
-                                </div>
-
-                                {filtered.length > 0 ? (
-                                    <div className="property-grid cols-3">
-                                        {filtered.map((property) => (
-                                            <PropertyCard
-                                                key={property.id}
-                                                property={property}
-                                                onEnquiry={openEnquiry}
-                                            />
-                                        ))}
-                                    </div>
-                                ) : (
-                                    <div className="no-results-box">
-                                        <h3>No properties match your filter</h3>
-                                        <p>Try adjusting your filters or moving the budget limit slider.</p>
-                                    </div>
-                                )}
-                            </div>
                         )}
                     </section>
                 </div>

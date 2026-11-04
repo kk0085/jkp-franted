@@ -4,7 +4,7 @@ import PropertyCard from "../components/PropertyCard";
 import SearchFilterRentals from "../components/SearchFilterRentals";
 import MobileStickySearchBar from "../components/MobileStickySearchBar";
 import { useProperty } from "../context/PropertyContext";
-import { MapPin } from "lucide-react";
+import { MapPin, X } from "lucide-react";
 
 export default function Properties() {
     const [searchParams, setSearchParams] = useSearchParams();
@@ -244,6 +244,7 @@ export default function Properties() {
                         step={category === "sale" || typeFilter === "commercial" ? 500000 : 2000}
                         rateLabel={category === "sale" || typeFilter === "commercial" ? "Price Limit" : "Rent Rate"}
                         placeholder={category === "sale" ? "Search property for sale..." : "Search by title or location"}
+                        matchCount={filtered.length}
                         onReset={() => {
                             setTypeFilter("all");
                             setCategory("all");
@@ -257,6 +258,75 @@ export default function Properties() {
 
                 {/* RIGHT COLUMN: PROPERTY CARDS GRID */}
                 <div className="rent-main-col prop-cards-main-col">
+                    {/* ACTIVE FILTER PILLS */}
+                    {(search.trim() || budgetLimit < (category === "sale" || typeFilter === "commercial" ? 50000000 : 200000) || sortBy !== "recommended" || typeFilter !== "all" || category !== "all") && (
+                        <div className="active-filters-bar" style={{ display: "flex", flexWrap: "wrap", gap: "8px", marginBottom: "16px", alignItems: "center" }}>
+                            <span style={{ fontSize: "12px", fontWeight: 700, color: "#64748b" }}>Active Filters:</span>
+                            {search.trim() && (
+                                <span className="filter-pill-tag">
+                                    "{search}"
+                                    <button type="button" onClick={() => {
+                                        setSearch("");
+                                        updateParams({ search: "" });
+                                    }}><X size={12} /></button>
+                                </span>
+                            )}
+                            {budgetLimit < (category === "sale" || typeFilter === "commercial" ? 50000000 : 200000) && (
+                                <span className="filter-pill-tag">
+                                    Up to ₹{budgetLimit.toLocaleString("en-IN")}
+                                    <button type="button" onClick={() => setBudgetLimit(category === "sale" || typeFilter === "commercial" ? 50000000 : 200000)}><X size={12} /></button>
+                                </span>
+                            )}
+                            {sortBy !== "recommended" && (
+                                <span className="filter-pill-tag">
+                                    {sortBy === "price-low" ? "Price: Low to High" : sortBy === "price-high" ? "Price: High to Low" : "Newest"}
+                                    <button type="button" onClick={() => setSortBy("recommended")}><X size={12} /></button>
+                                </span>
+                            )}
+                            {typeFilter !== "all" && (
+                                <span className="filter-pill-tag">
+                                    Type: {typeFilter}
+                                    <button type="button" onClick={() => {
+                                        setTypeFilter("all");
+                                        updateParams({ type: "all" });
+                                    }}><X size={12} /></button>
+                                </span>
+                            )}
+                            {category !== "all" && (
+                                <span className="filter-pill-tag">
+                                    Category: {category === "sale" ? "Buy" : category}
+                                    <button type="button" onClick={() => {
+                                        setCategory("all");
+                                        updateParams({ category: "all" });
+                                    }}><X size={12} /></button>
+                                </span>
+                            )}
+                            <button
+                                type="button"
+                                onClick={() => {
+                                    setTypeFilter("all");
+                                    setCategory("all");
+                                    setSearch("");
+                                    setBudgetLimit(category === "sale" || typeFilter === "commercial" ? 50000000 : 200000);
+                                    setSortBy("recommended");
+                                    updateParams({ type: "all", category: "all", search: "" });
+                                }}
+                                style={{
+                                    background: "none",
+                                    border: "none",
+                                    color: "#ec268f",
+                                    fontSize: "12px",
+                                    fontWeight: 700,
+                                    cursor: "pointer",
+                                    textDecoration: "underline",
+                                    marginLeft: "4px",
+                                }}
+                            >
+                                Clear All
+                            </button>
+                        </div>
+                    )}
+
                     {filtered.length > 0 ? (
                         <div className="property-grid cols-3">
                             {filtered.map((property) => (

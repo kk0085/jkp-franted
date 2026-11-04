@@ -6883,3 +6883,38 @@ img {
     max-width: calc(100% - 24px);
   }
 }
+
+/* ACTIVE FILTER PILLS (Rent, Commercial, Properties) */
+.filter-pill-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #fdf2f8;
+  color: #be185d;
+  border: 1px solid #fbcfe8;
+  padding: 4px 10px;
+  border-radius: 9999px;
+  font-size: 12px;
+  font-weight: 600;
+  box-shadow: 0 1px 3px rgba(190, 24, 93, 0.08);
+}
+
+.filter-pill-tag button {
+  background: transparent;
+  border: none;
+  color: #be185d;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border-radius: 50%;
+  width: 16px;
+  height: 16px;
+  transition: all 0.12s ease;
+}
+
+.filter-pill-tag button:hover {
+  background: #fce7f3;
+  color: #9d174d;
+}
