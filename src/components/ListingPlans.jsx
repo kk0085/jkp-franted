@@ -135,11 +135,20 @@ export default function ListingPlans() {
                                 ))}
                             </ul>
 
+                            {/* 360 DEGREE ROTATING ACTION BUTTON (TEXT NEVER ULTA) */}
                             <div className="plan-card-action">
                                 {plan.ctaType === "link" ? (
                                     <Link to="/post-property" className="plan-card-btn plan-btn-basic">
-                                        <span>{plan.ctaText}</span>
-                                        <ArrowRight size={15} />
+                                        <div className={`plan-btn-3d-inner anim-delay-${index}`}>
+                                            <div className="plan-btn-side plan-btn-front">
+                                                <span>{plan.ctaText}</span>
+                                                <ArrowRight size={15} />
+                                            </div>
+                                            <div className="plan-btn-side plan-btn-back">
+                                                <span>{plan.ctaText}</span>
+                                                <ArrowRight size={15} />
+                                            </div>
+                                        </div>
                                     </Link>
                                 ) : (
                                     <button
@@ -147,8 +156,16 @@ export default function ListingPlans() {
                                         onClick={() => setActivePlanModal(plan)}
                                         className={`plan-card-btn ${index === 1 ? "plan-btn-credits" : "plan-btn-sponsored"}`}
                                     >
-                                        <span>{plan.ctaText}</span>
-                                        <Zap size={15} />
+                                        <div className={`plan-btn-3d-inner anim-delay-${index}`}>
+                                            <div className="plan-btn-side plan-btn-front">
+                                                <span>{plan.ctaText}</span>
+                                                <Zap size={15} />
+                                            </div>
+                                            <div className="plan-btn-side plan-btn-back">
+                                                <span>{plan.ctaText}</span>
+                                                <Zap size={15} />
+                                            </div>
+                                        </div>
                                     </button>
                                 )}
                             </div>
