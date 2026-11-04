@@ -113,7 +113,7 @@ export default function SearchFilterRentals({
                     aria-label="Toggle filters"
                 >
                     <SlidersHorizontal size={13} />
-                    <span>{mobileFilterOpen ? "Close Filters" : "Budget & Sort"}</span>
+                    <span>Budget & Sort</span>
                     {hasActiveFilters && (
                         <span
                             style={{
