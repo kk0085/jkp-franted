@@ -6712,3 +6712,174 @@ img {
     gap: 10px;
   }
 }
+
+/* ==========================================================================
+   CHAAR CHAAND FEATURES: HERO TRUST TICKER & LIVE ACTIVITY TOAST
+   ========================================================================== */
+
+/* 1. HERO TRUST TICKER BAR */
+.hero-trust-ticker-wrap {
+  background: #ffffff;
+  border-top: 1px solid #f1f5f9;
+  border-bottom: 1px solid #f1f5f9;
+  padding: 10px 0;
+  margin-top: 6px;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.02);
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.hero-trust-ticker-wrap::-webkit-scrollbar {
+  display: none;
+}
+
+.hero-trust-ticker-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  white-space: nowrap;
+  padding: 0 12px;
+}
+
+.trust-ticker-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #334155;
+}
+
+.ticker-divider {
+  color: #cbd5e1;
+  font-size: 12px;
+}
+
+/* 2. LIVE ACTIVITY TOAST NOTIFICATION */
+.live-activity-toast {
+  position: fixed;
+  bottom: 84px;
+  right: 24px;
+  z-index: 995;
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(12px);
+  border: 1.5px solid #fbcfe8;
+  border-radius: 16px;
+  padding: 12px 14px 12px 12px;
+  box-shadow: 0 16px 36px rgba(15, 23, 42, 0.16);
+  max-width: 320px;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  animation: slideInToast 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes slideInToast {
+  from {
+    transform: translateY(30px) scale(0.95);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+}
+
+.activity-icon-wrap {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  display: grid;
+  place-items: center;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.live-pulse-dot {
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: 1.5px solid #ffffff;
+  animation: pulse 1.2s infinite ease-in-out;
+}
+
+.activity-details {
+  flex: 1;
+  min-width: 0;
+}
+
+.activity-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  margin-bottom: 2px;
+}
+
+.activity-tag {
+  font-size: 9.5px;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: #ec268f;
+  background: #fff0f7;
+  padding: 1.5px 6px;
+  border-radius: 4px;
+  letter-spacing: 0.2px;
+}
+
+.activity-time {
+  font-size: 10px;
+  color: #94a3b8;
+  font-weight: 500;
+}
+
+.activity-title {
+  font-size: 12px;
+  font-weight: 800;
+  color: #0f172a;
+  margin: 0 0 2px;
+  line-height: 1.3;
+}
+
+.activity-desc {
+  font-size: 11px;
+  color: #475569;
+  margin: 0;
+  line-height: 1.35;
+}
+
+.activity-close-btn {
+  background: transparent;
+  border: none;
+  color: #94a3b8;
+  cursor: pointer;
+  padding: 2px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  transition: all 0.15s ease;
+  margin-top: -2px;
+}
+
+.activity-close-btn:hover {
+  color: #0f172a;
+  background: #f1f5f9;
+}
+
+@media (max-width: 768px) {
+  .hero-trust-ticker-inner {
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 640px) {
+  .live-activity-toast {
+    right: 12px;
+    bottom: 130px;
+    max-width: calc(100% - 24px);
+  }
+}

@@ -7,6 +7,8 @@ import PropertyCard from "../components/PropertyCard";
 import WhyChooseUs from "../components/WhyChooseUs";
 import HomePromoBanner from "../components/HomePromoBanner";
 import CustomerReviewsSection from "../components/CustomerReviewsSection";
+import HeroTrustTicker from "../components/HeroTrustTicker";
+import LiveActivityToast from "../components/LiveActivityToast";
 import SiteVisitPopup from "../components/SiteVisitPopup";
 import { useProperty } from "../context/PropertyContext";
 import { popularLocations } from "../data/popularLocationsData";
@@ -127,6 +129,8 @@ export default function Home() {
             // Category filter
             if (selectedCategory === "flat") return p.type === "flat" && p.category === "rent";
             if (selectedCategory === "house") return (p.type === "house" || p.type === "villa") && p.category === "rent";
+            if (selectedCategory === "under15k") return p.category === "rent" && Number(p.price) <= 15000;
+            if (selectedCategory === "furnished") return p.furnishing === "Furnished";
             if (selectedCategory === "sale") return p.category === "sale";
             if (selectedCategory === "commercial") return p.type === "commercial";
 
@@ -238,6 +242,9 @@ export default function Home() {
             </div>
         </section>
 
+            {/* HERO TRUST TICKER BAR */}
+            <HeroTrustTicker />
+
             {/* FEATURED PROJECTS BY LOCALITY SHOWCASE SECTION */}
             <section className="container" style={{ margin: "28px auto 40px" }} id="locality-projects">
                 <div className="home-section-header">
@@ -279,6 +286,20 @@ export default function Home() {
                             onClick={() => setSelectedCategory("house")}
                         >
                             Houses & Villas
+                        </button>
+                        <button
+                            type="button"
+                            className={`home-cat-tab-btn ${selectedCategory === "under15k" ? "active" : ""}`}
+                            onClick={() => setSelectedCategory("under15k")}
+                        >
+                            🔥 Under ₹15k
+                        </button>
+                        <button
+                            type="button"
+                            className={`home-cat-tab-btn ${selectedCategory === "furnished" ? "active" : ""}`}
+                            onClick={() => setSelectedCategory("furnished")}
+                        >
+                            🛋️ Furnished
                         </button>
                         <button
                             type="button"
@@ -411,6 +432,9 @@ export default function Home() {
                 onClose={() => setIsSiteVisitOpen(false)}
                 onManualOpen={() => setIsSiteVisitOpen(true)}
             />
+
+            {/* LIVE REAL ESTATE SOCIAL PROOF ACTIVITY TOAST */}
+            <LiveActivityToast />
         </div>
     );
 }
