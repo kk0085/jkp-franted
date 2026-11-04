@@ -68,7 +68,7 @@ export default function PostProperty() {
                             </div>
                             <h1>Post Your Property on Jaipur Ki Property</h1>
                             <p>
-                                Connect directly with thousands of genuine tenants in Jaipur. Zero broker interference, zero commission.
+                                Connect directly with thousands of genuine buyers and tenants across Jaipur.
                             </p>
                         </div>
 
