@@ -121,7 +121,7 @@ export default function SiteVisitPopup() {
                                         Schedule A <span className="highlight-text">Property Visit</span>
                                     </h3>
                                     <p className="site-visit-desc">
-                                        Fill in your details below to schedule a verified property visit in Jaipur. 100% free service with zero brokerage.
+                                        Fill in your details below to schedule a verified property visit in Jaipur. 100% free service with assisted guidance.
                                     </p>
                                 </div>
 
@@ -248,7 +248,7 @@ export default function SiteVisitPopup() {
                                     <span className="trust-dot">•</span>
                                     <div className="trust-note-item">
                                         <Sparkles size={14} color="#ec268f" />
-                                        <span>Zero Brokerage</span>
+                                        <span>Assisted Visits</span>
                                     </div>
                                     <span className="trust-dot">•</span>
                                     <div className="trust-note-item">

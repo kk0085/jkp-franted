@@ -18,7 +18,7 @@ const features = [
         icon: Phone,
         title: "Direct Owner Contact",
         description:
-            "Connect directly with property owners via WhatsApp or call. No broker commission, no extra charges.",
+            "Connect directly with property owners via WhatsApp or call with complete transparency and verified details.",
         iconBg: "#ffe4e6",
         iconColor: "#e11d48",
     },
@@ -49,7 +49,7 @@ export default function WhyChooseUs() {
                 </h2>
                 <p>
                     Jaipur's most trusted rental platform helping thousands of families and
-                    verified properties with direct owner contact - no brokers, no hidden charges.
+                    verified properties with direct owner contact - 100% genuine clients, no hidden charges.
                 </p>
             </div>
 

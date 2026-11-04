@@ -122,7 +122,7 @@ export default function Rent() {
                     <h1>Find Your Best Home & Flat For Rent</h1>
                     <p>
                         Explore verified residential flats, duplexes, and luxury villas across
-                        Jaipur with direct owner contact and 0% brokerage.
+                        Jaipur with direct owner contact and verified deals.
                     </p>
 
                     {/* CATEGORY FILTER TABS */}

@@ -142,7 +142,7 @@ export default function PlanActivationModal({ isOpen, onClose, plan }) {
                         <div className="plan-modal-footer-trust">
                             <span><ShieldCheck size={13} color="#16a34a" /> 100% Verified Owner Service</span>
                             <span>•</span>
-                            <span><Sparkles size={13} color="#ec268f" /> 0% Brokerage</span>
+                            <span><Sparkles size={13} color="#ec268f" /> 100% Genuine Leads</span>
                         </div>
                     </form>
                 )}

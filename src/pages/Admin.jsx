@@ -367,7 +367,7 @@ export default function Admin() {
             {
                 image: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1600&auto=format&fit=crop&q=80",
                 title: "New Featured Listing in Jaipur",
-                description: "Verified direct from owner with zero brokerage and best amenities",
+                description: "Verified direct from owner with genuine leads and best amenities",
             },
         ]);
     };

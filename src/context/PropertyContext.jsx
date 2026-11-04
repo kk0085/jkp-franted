@@ -115,12 +115,12 @@ export function PropertyProvider({ children }) {
 
     const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
 
-    // Auto open login modal when website opens if user is not logged in (after 15 seconds)
+    // Auto open login modal when website opens if user is not logged in (after 8 seconds)
     useEffect(() => {
         if (!user) {
             const timer = setTimeout(() => {
                 setIsLoginModalOpen(true);
-            }, 15000); // 15 seconds delay
+            }, 8000); // 8 seconds delay
             return () => clearTimeout(timer);
         }
     }, [user]);

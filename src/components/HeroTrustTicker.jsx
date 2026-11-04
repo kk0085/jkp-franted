@@ -19,7 +19,7 @@ export default function HeroTrustTicker() {
 
                     <div className="trust-ticker-item">
                         <Zap size={16} color="#ea580c" />
-                        <span>0% Brokerage Direct Owner Deals</span>
+                        <span>100% Genuine Direct Deals</span>
                     </div>
                     <span className="ticker-divider">•</span>
 

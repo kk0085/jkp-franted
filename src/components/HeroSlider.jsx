@@ -29,7 +29,7 @@ const slides = [
             "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=1600&auto=format&fit=crop&q=80",
         title: "Verified Rental Deals Direct From Owners",
         description:
-            "100% verified property listings with zero brokerage and direct owner contact",
+            "100% verified property listings with direct connect and trusted deals",
     },
     {
         image:

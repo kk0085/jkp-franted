@@ -192,7 +192,7 @@ export const propertiesData = [
         furnishing: "Semi-Furnished",
         image: "https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=800&auto=format&fit=crop&q=80",
         description: "Independent private ground floor house in Sanganer with dedicated water storage, personal car space, and terrace access. Quick access to Airport Road.",
-        features: ["2 BHK House", "2 Bathrooms", "1250 sq.ft.", "Terrace", "Near Airport Road", "No Brokerage"],
+        features: ["2 BHK House", "2 Bathrooms", "1250 sq.ft.", "Terrace", "Near Airport Road", "Verified Deal"],
         ownerPhone: "+917023077367",
         verified: true,
         category: "rent",

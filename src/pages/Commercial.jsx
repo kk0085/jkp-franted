@@ -148,7 +148,7 @@ export default function Commercial() {
                     <h1>Find Verified Commercial Office & Spaces</h1>
                     <p>
                         Explore verified corporate office spaces, IT coworking setups, retail shops,
-                        and commercial floors across top business hubs in Jaipur with direct owner contact and 0% brokerage.
+                        and commercial floors across top business hubs in Jaipur with direct owner contact and verified deals.
                     </p>
 
                     {/* COMMERCIAL CATEGORY FILTER TABS */}
@@ -395,7 +395,7 @@ export default function Commercial() {
                             <>
                                 <PropertySection
                                     title="Commercial Offices for Rent"
-                                    subtitle="Ready-to-move corporate and IT spaces with zero brokerage."
+                                    subtitle="Ready-to-move corporate and IT spaces with verified deals."
                                     properties={commercialRentals.slice(0, 3)}
                                     moreLink="/commercial?category=rent"
                                     onEnquiry={openEnquiry}

@@ -113,7 +113,7 @@ export default function ScheduleCabModal() {
                         <div className="cab-driver-promise-box">
                             <Car size={18} color="#ec268f" style={{ flexShrink: 0 }} />
                             <p>
-                                Sanitized AC Cab & Verified Property Manager will pick you up. <strong>0% Brokerage • 100% Free Service.</strong>
+                                Sanitized AC Cab & Verified Property Manager will pick you up. <strong>Verified Visit • 100% Free Service.</strong>
                             </p>
                         </div>
 
@@ -290,7 +290,7 @@ export default function ScheduleCabModal() {
                             </span>
                             <span className="cab-trust-divider">•</span>
                             <span className="cab-trust-badge">
-                                <Check size={13} color="#1e3a8a" /> 0% Brokerage
+                                <Check size={13} color="#1e3a8a" /> Verified Visits
                             </span>
                         </div>
                     </form>
