@@ -7,7 +7,7 @@ import PropertyCard from "../components/PropertyCard";
 import WhyChooseUs from "../components/WhyChooseUs";
 import HomePromoBanner from "../components/HomePromoBanner";
 import HeroTrustTicker from "../components/HeroTrustTicker";
-import LiveActivityToast from "../components/LiveActivityToast";
+
 import { useProperty } from "../context/PropertyContext";
 import { popularLocations } from "../data/popularLocationsData";
 import { MapPin, Search, X, Building2, Sparkles, SlidersHorizontal, Home as HomeIcon, ArrowRight } from "lucide-react";
@@ -423,8 +423,7 @@ export default function Home() {
 
 
 
-            {/* LIVE REAL ESTATE SOCIAL PROOF ACTIVITY TOAST */}
-            <LiveActivityToast />
+
         </div>
     );
 }
