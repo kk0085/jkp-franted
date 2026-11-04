@@ -6,7 +6,6 @@ import PropertySection from "../components/PropertySection";
 import PropertyCard from "../components/PropertyCard";
 import WhyChooseUs from "../components/WhyChooseUs";
 import HomePromoBanner from "../components/HomePromoBanner";
-import EmiCalculatorSection from "../components/EmiCalculatorSection";
 import SiteVisitPopup from "../components/SiteVisitPopup";
 import { useProperty } from "../context/PropertyContext";
 import { popularLocations } from "../data/popularLocationsData";
@@ -396,9 +395,6 @@ export default function Home() {
                     </div>
                 </div>
             </section>
-
-            {/* REAL ESTATE HOME LOAN EMI CALCULATOR */}
-            <EmiCalculatorSection />
 
             {/* WHY CHOOSE US */}
             <div className="container" style={{ marginTop: "36px" }}>

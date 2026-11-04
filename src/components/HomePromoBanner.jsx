@@ -111,3 +111,4 @@ export default function HomePromoBanner({ onOpenSiteVisit }) {
         </section>
     );
 }
+

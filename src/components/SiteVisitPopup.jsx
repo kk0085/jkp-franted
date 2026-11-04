@@ -228,3 +228,4 @@ export default function SiteVisitPopup({ isOpen, onClose, onManualOpen }) {
         </>
     );
 }
+
