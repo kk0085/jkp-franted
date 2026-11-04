@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Sparkles, Building2, ShieldCheck, Zap, Phone, PlusCircle, ArrowRight, Award, Star, CheckCircle2 } from "lucide-react";
+import { Sparkles, Building2, ShieldCheck, Zap, Phone, PlusCircle, ArrowRight, Award, Users, BadgePercent, CheckCircle2 } from "lucide-react";
 import { useProperty } from "../context/PropertyContext";
 
 export default function HomePromoBanner({ onOpenSiteVisit }) {
@@ -76,39 +76,63 @@ export default function HomePromoBanner({ onOpenSiteVisit }) {
                             </div>
                         </div>
 
-                        {/* RIGHT: PREMIUM GLASS STATS & TRUST SHOWCASE */}
-                        <div className="promo-banner-stats-box">
-                            <div className="stats-box-header">
-                                <span className="stats-city-tag">
-                                    <Star size={12} fill="#ec268f" color="#ec268f" />
-                                    <span>Jaipur Verified Platform</span>
-                                </span>
-                                <h4 className="stats-box-title">Why 10,000+ Trust Us</h4>
-                            </div>
-
-                            <div className="stats-box-grid">
-                                <div className="stat-box-item">
-                                    <span className="stat-number">10k+</span>
-                                    <span className="stat-label">Happy Families in Jaipur</span>
-                                    <span className="stat-subtag">★ 4.9/5 Rating</span>
+                        {/* RIGHT: 3 DISTINCT PROPER STAT CARDS (10k+, 0%, 100%) */}
+                        <div className="promo-stats-showcase">
+                            {/* 1. 10k+ HAPPY FAMILIES */}
+                            <div className="promo-stat-card stat-card-pink">
+                                <div className="stat-card-icon icon-pink">
+                                    <Users size={22} />
                                 </div>
-
-                                <div className="stat-box-item">
-                                    <span className="stat-number">0%</span>
-                                    <span className="stat-label">Brokerage on Owner Deals</span>
-                                    <span className="stat-subtag">Direct Connect</span>
+                                <div className="stat-card-num-box">
+                                    <span className="stat-card-number num-pink">10k+</span>
                                 </div>
-
-                                <div className="stat-box-item stat-box-full">
-                                    <span className="stat-number">100%</span>
-                                    <span className="stat-label">Verified Paperwork & JDA/RERA Assistance</span>
-                                    <span className="stat-subtag">Legal Checked</span>
+                                <div className="stat-card-content">
+                                    <div className="stat-card-title-row">
+                                        <h4 className="stat-card-heading">Happy Families</h4>
+                                        <span className="stat-chip chip-pink">★ 4.9/5</span>
+                                    </div>
+                                    <p className="stat-card-sub">Trusted buyers & tenants in Jaipur</p>
                                 </div>
                             </div>
 
-                            <div className="stats-guarantee-note">
+                            {/* 2. 0% BROKERAGE */}
+                            <div className="promo-stat-card stat-card-green">
+                                <div className="stat-card-icon icon-green">
+                                    <BadgePercent size={22} />
+                                </div>
+                                <div className="stat-card-num-box">
+                                    <span className="stat-card-number num-green">0%</span>
+                                </div>
+                                <div className="stat-card-content">
+                                    <div className="stat-card-title-row">
+                                        <h4 className="stat-card-heading">Brokerage on Deals</h4>
+                                        <span className="stat-chip chip-green">Zero Fee</span>
+                                    </div>
+                                    <p className="stat-card-sub">Direct owner connect, save brokerage</p>
+                                </div>
+                            </div>
+
+                            {/* 3. 100% VERIFIED PAPERWORK */}
+                            <div className="promo-stat-card stat-card-blue">
+                                <div className="stat-card-icon icon-blue">
+                                    <ShieldCheck size={22} />
+                                </div>
+                                <div className="stat-card-num-box">
+                                    <span className="stat-card-number num-blue">100%</span>
+                                </div>
+                                <div className="stat-card-content">
+                                    <div className="stat-card-title-row">
+                                        <h4 className="stat-card-heading">Verified Paperwork</h4>
+                                        <span className="stat-chip chip-blue">RERA & JDA</span>
+                                    </div>
+                                    <p className="stat-card-sub">Assisted legal verification check</p>
+                                </div>
+                            </div>
+
+                            {/* TRUST FOOTER NOTE */}
+                            <div className="promo-stats-bottom-note">
                                 <CheckCircle2 size={15} color="#22c55e" />
-                                <span>Assisted Property Visits across 15+ Jaipur Zones</span>
+                                <span>Assisted Property Visits across 15+ Jaipur Localities</span>
                             </div>
                         </div>
                     </div>
