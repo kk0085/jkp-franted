@@ -69,7 +69,7 @@ export default function SiteVisitPopup({ isOpen, onClose, onManualOpen }) {
 
     return (
         <>
-            {/* FLOATING TRIGGER PILL: JAIPUR KI PROPERTY + VISIT */}
+            {/* FLOATING TRIGGER PILL: JAIPUR KI PROPERTY + 360° AUTO-ROTATING 3D VISIT BADGE */}
             {!visible && (
                 <button
                     type="button"
@@ -82,7 +82,12 @@ export default function SiteVisitPopup({ isOpen, onClose, onManualOpen }) {
                 >
                     <Building2 size={16} className="pill-car-icon" />
                     <span>Jaipur Ki Property</span>
-                    <span className="pill-badge">VISIT</span>
+                    <span className="pill-badge-3d-wrap" aria-hidden="true">
+                        <span className="pill-badge-3d-inner">
+                            <span className="pill-badge-side pill-badge-front">VISIT</span>
+                            <span className="pill-badge-side pill-badge-back">VISIT</span>
+                        </span>
+                    </span>
                 </button>
             )}
 
