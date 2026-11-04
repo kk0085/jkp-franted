@@ -150,3 +150,4 @@ export default function PlanActivationModal({ isOpen, onClose, plan }) {
         </div>
     );
 }
+

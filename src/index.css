@@ -860,65 +860,7 @@ img {
   height: 8px;
 }
 
-/* PLANS */
-
-.plans {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
-  padding: 22px 0 24px;
-}
-
-.plan-card {
-  position: relative;
-  padding: 20px 22px 20px 26px;
-  border-radius: 16px 36px 36px 16px;
-  background: #f8fafc;
-  border: 1px solid #e5e7eb;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.03);
-  overflow: hidden;
-  transition: transform 0.2s, box-shadow 0.2s;
-}
-
-.plan-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
-}
-
-.plan-card::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  width: 6px;
-}
-
-.plan-1::before {
-  background: #16a34a;
-}
-
-.plan-2::before {
-  background: #ea580c;
-}
-
-.plan-3::before {
-  background: #1e3a8a;
-}
-
-.plan-card h3 {
-  font-size: 13.5px;
-  font-weight: 800;
-  color: #111827;
-  margin-bottom: 8px;
-  letter-spacing: 0.3px;
-}
-
-.plan-card p {
-  font-size: 11.5px;
-  color: #4b5563;
-  line-height: 1.55;
-}
+/* PLANS - managed in OWNER LISTING PLANS section below */
 
 /* FOR RENT CONTAINER */
 
@@ -1369,6 +1311,7 @@ img {
   font-weight: 800;
   font-size: 14.5px;
   color: #111827;
+  white-space: nowrap !important;
 }
 
 .per-month {
@@ -3351,6 +3294,8 @@ img {
   display: inline-flex;
   align-items: center;
   gap: 4px;
+  white-space: nowrap !important;
+  flex-shrink: 0 !important;
 }
 
 .rupee-glyph {
@@ -3369,6 +3314,8 @@ img {
   font-size: 15px;
   font-weight: 800;
   color: #ec268f;
+  white-space: nowrap !important;
+  flex-shrink: 0 !important;
 }
 
 .filter-slider-container {
@@ -7624,18 +7571,18 @@ img {
 .plans {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-  padding: 0;
+  gap: 22px;
+  padding: 12px 0 0;
 }
 
 .plan-card {
   position: relative;
-  padding: 22px 22px 20px 24px;
-  border-radius: 16px 36px 36px 16px;
+  padding: 26px 26px 22px 28px;
+  border-radius: 18px;
   background: #ffffff;
   border: 1.5px solid #e2e8f0;
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.03);
-  overflow: hidden;
+  overflow: visible !important;
   display: flex;
   flex-direction: column;
   transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
@@ -7643,7 +7590,7 @@ img {
 
 .plan-card:hover {
   transform: translateY(-3px);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.07);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
 }
 
 .plan-card::before {
@@ -7653,6 +7600,7 @@ img {
   top: 0;
   bottom: 0;
   width: 6px;
+  border-radius: 18px 0 0 18px;
 }
 
 .plan-1::before {
@@ -7677,57 +7625,70 @@ img {
   box-shadow: 0 8px 24px rgba(30, 58, 138, 0.08);
 }
 
+/* FLOATING TOP-LEFT BADGE: COMPLETELY SEPARATE FROM PRICE ON RIGHT */
 .plan-popular-pill {
   position: absolute;
-  top: 14px;
-  right: 18px;
+  top: -11px;
+  left: 24px;
+  right: auto;
   display: inline-flex;
   align-items: center;
-  gap: 4px;
-  font-size: 9.5px;
+  gap: 5px;
+  font-size: 10px;
   font-weight: 800;
-  padding: 3px 9px;
+  padding: 3px 12px;
   border-radius: 999px;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.6px;
+  z-index: 10;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 
 .pill-popular {
   background: #ea580c;
   color: #ffffff;
-  box-shadow: 0 2px 6px rgba(234, 88, 12, 0.35);
 }
 
 .pill-sponsored {
   background: #1e3a8a;
   color: #ffffff;
-  box-shadow: 0 2px 6px rgba(30, 58, 138, 0.35);
 }
 
 .plan-card-top {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 8px;
-  padding-right: 2px;
+  gap: 12px;
+  margin-bottom: 10px;
+  width: 100%;
 }
 
 .plan-card-title {
-  font-size: 13.5px;
+  font-size: 14px;
   font-weight: 800;
   color: #111827;
   margin: 0;
-  letter-spacing: 0.3px;
+  letter-spacing: 0.2px;
+  line-height: 1.35;
+  flex: 1;
+  min-width: 0;
 }
 
 .plan-price-pill {
   background: #fdf2f8;
   color: #ec268f;
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 800;
-  padding: 2px 10px;
+  padding: 4px 12px;
   border-radius: 999px;
-  border: 1px solid #fbcfe8;
+  border: 1.5px solid #fbcfe8;
+  white-space: nowrap !important;
+  flex-shrink: 0 !important;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  box-shadow: 0 1px 3px rgba(236, 38, 143, 0.08);
 }
 
 .plan-card-desc {
