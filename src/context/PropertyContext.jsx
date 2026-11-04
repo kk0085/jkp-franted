@@ -135,6 +135,49 @@ export function PropertyProvider({ children }) {
 
     const [enquiryProperty, setEnquiryProperty] = useState(null);
 
+    // Shortlisted / Saved Properties Feature
+    const [savedPropertyIds, setSavedPropertyIds] = useState(() => {
+        try {
+            const saved = localStorage.getItem("jkp_saved_property_ids");
+            return saved ? JSON.parse(saved) : [];
+        } catch {
+            return [];
+        }
+    });
+
+    const [isSavedDrawerOpen, setIsSavedDrawerOpen] = useState(false);
+
+    const toggleSaveProperty = (propertyId) => {
+        setSavedPropertyIds((prev) => {
+            const numId = Number(propertyId);
+            const exists = prev.some((id) => Number(id) === numId);
+            const next = exists ? prev.filter((id) => Number(id) !== numId) : [...prev, numId];
+            try {
+                localStorage.setItem("jkp_saved_property_ids", JSON.stringify(next));
+            } catch {}
+            return next;
+        });
+    };
+
+    const isPropertySaved = (propertyId) => {
+        const numId = Number(propertyId);
+        return savedPropertyIds.some((id) => Number(id) === numId);
+    };
+
+    const clearSavedProperties = () => {
+        setSavedPropertyIds([]);
+        try {
+            localStorage.removeItem("jkp_saved_property_ids");
+        } catch {}
+    };
+
+    const openSavedDrawer = () => setIsSavedDrawerOpen(true);
+    const closeSavedDrawer = () => setIsSavedDrawerOpen(false);
+
+    const savedProperties = properties.filter((p) =>
+        savedPropertyIds.some((id) => Number(id) === Number(p.id))
+    );
+
     const openEnquiry = (property) => {
         setEnquiryProperty(property);
     };
@@ -356,6 +399,14 @@ export function PropertyProvider({ children }) {
                 enquiryProperty,
                 openEnquiry,
                 closeEnquiry,
+                savedPropertyIds,
+                savedProperties,
+                toggleSaveProperty,
+                isPropertySaved,
+                clearSavedProperties,
+                isSavedDrawerOpen,
+                openSavedDrawer,
+                closeSavedDrawer,
             }}
         >
             {children}

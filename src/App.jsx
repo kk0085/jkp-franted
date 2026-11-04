@@ -14,6 +14,7 @@ import PostProperty from "./pages/PostProperty";
 import Profile from "./pages/Profile";
 import Admin from "./pages/Admin";
 import EnquiryModal from "./components/EnquiryModal";
+import SavedPropertiesDrawer from "./components/SavedPropertiesDrawer";
 import EmailOtpLoginModal from "./components/EmailOtpLoginModal";
 import { PropertyProvider, useProperty } from "./context/PropertyContext";
 
@@ -63,6 +64,9 @@ function AppContent() {
 
       {/* FLOATING WHATSAPP BUTTON (SIDE MEIN) - HIDDEN ON ADMIN */}
       {!isAdminRoute && <FloatingWhatsApp />}
+
+      {/* SHORTLISTED / SAVED PROPERTIES SLIDE-OVER DRAWER */}
+      {!isAdminRoute && <SavedPropertiesDrawer />}
 
       {/* AUTO OPEN GMAIL OTP LOGIN POPUP - HIDDEN ON ADMIN */}
       {!isAdminRoute && <EmailOtpLoginModal />}

@@ -1,9 +1,20 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { MapPin, Share2, Check } from "lucide-react";
+import { MapPin, Share2, Check, Heart } from "lucide-react";
+import { useProperty } from "../context/PropertyContext";
 
 export default function PropertyCard({ property, onEnquiry }) {
     const [copied, setCopied] = useState(false);
+    const { isPropertySaved, toggleSaveProperty } = useProperty();
+    const isSaved = isPropertySaved ? isPropertySaved(property.id) : false;
+
+    const handleHeartClick = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        if (toggleSaveProperty) {
+            toggleSaveProperty(property.id);
+        }
+    };
 
     const handleShare = async (e) => {
         e.preventDefault();
@@ -50,6 +61,22 @@ export default function PropertyCard({ property, onEnquiry }) {
                             <span className="property-badge">
                                 {property.badge}
                             </span>
+
+                            {/* SHORTLIST HEART BUTTON */}
+                            <button
+                                type="button"
+                                className={`card-heart-btn ${isSaved ? "saved" : ""}`}
+                                onClick={handleHeartClick}
+                                aria-label={isSaved ? "Remove from shortlist" : "Save property"}
+                                title={isSaved ? "Saved in Shortlist!" : "Save Property"}
+                            >
+                                <Heart
+                                    size={16}
+                                    fill={isSaved ? "#ec268f" : "rgba(15, 23, 42, 0.45)"}
+                                    color={isSaved ? "#ec268f" : "#ffffff"}
+                                    strokeWidth={isSaved ? 0 : 2.2}
+                                />
+                            </button>
                         </div>
                     </div>
 

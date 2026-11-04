@@ -1,12 +1,12 @@
 import { useState, useRef, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { LogOut, User, X, ChevronDown, Menu, PlusCircle, ShieldCheck } from "lucide-react";
+import { LogOut, User, X, ChevronDown, Menu, PlusCircle, ShieldCheck, Heart } from "lucide-react";
 import { useProperty } from "../context/PropertyContext";
 
 export default function Navbar() {
     const location = useLocation();
     const navigate = useNavigate();
-    const { user, logout, openLoginModal, siteSettings } = useProperty();
+    const { user, logout, openLoginModal, siteSettings, savedPropertyIds, openSavedDrawer } = useProperty();
     const [activeDropdown, setActiveDropdown] = useState(null);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [mobileExpanded, setMobileExpanded] = useState(null);
@@ -305,6 +305,24 @@ export default function Navbar() {
 
                 {/* 3. RIGHT SECTION: POST PROPERTY + GMAIL AVATAR LOGO */}
                 <div className="nav-right">
+                    {/* SHORTLISTED PROPERTIES BUTTON */}
+                    <button
+                        type="button"
+                        className="nav-shortlist-btn"
+                        onClick={openSavedDrawer}
+                        title="View Shortlisted Properties"
+                    >
+                        <Heart
+                            size={16}
+                            fill={savedPropertyIds && savedPropertyIds.length > 0 ? "#ec268f" : "none"}
+                            color="#ec268f"
+                        />
+                        <span className="nav-shortlist-text">Saved</span>
+                        {savedPropertyIds && savedPropertyIds.length > 0 && (
+                            <span className="nav-shortlist-badge">{savedPropertyIds.length}</span>
+                        )}
+                    </button>
+
                     {/* POST PROPERTY FREE BUTTON */}
                     <Link className="post-btn" to="/post-property">
                         <PlusCircle size={15} />
@@ -573,6 +591,22 @@ export default function Navbar() {
                         </div>
 
                         <div className="mobile-drawer-footer" style={{ marginTop: "16px", display: "flex", flexDirection: "column", gap: "10px" }}>
+                            <button
+                                type="button"
+                                className="mobile-drawer-saved-btn"
+                                onClick={() => {
+                                    setIsMobileMenuOpen(false);
+                                    openSavedDrawer();
+                                }}
+                            >
+                                <Heart
+                                    size={16}
+                                    fill={savedPropertyIds && savedPropertyIds.length > 0 ? "#ec268f" : "none"}
+                                    color="#ec268f"
+                                />
+                                <span>Shortlisted Homes ({savedPropertyIds ? savedPropertyIds.length : 0})</span>
+                            </button>
+
                             <Link
                                 className="mobile-drawer-post-btn"
                                 to="/post-property"

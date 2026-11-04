@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
-import { MapPin, Phone, MessageCircle, ShieldCheck, Check, ArrowLeft } from "lucide-react";
+import { MapPin, Phone, MessageCircle, ShieldCheck, Check, ArrowLeft, Heart } from "lucide-react";
 import { useProperty } from "../context/PropertyContext";
 import { propertiesData } from "../data/propertiesData";
 import PropertyCard from "../components/PropertyCard";
@@ -8,7 +8,8 @@ import EnquiryModal from "../components/EnquiryModal";
 
 export default function PropertyDetails() {
     const { id } = useParams();
-    const { properties, siteSettings } = useProperty();
+    const { properties, siteSettings, isPropertySaved, toggleSaveProperty } = useProperty();
+    const isSaved = isPropertySaved ? isPropertySaved(property?.id) : false;
     const [isEnquiryOpen, setIsEnquiryOpen] = useState(false);
 
     // Scroll to the very top as soon as details page opens or ID changes
@@ -114,6 +115,29 @@ export default function PropertyDetails() {
                             onClick={() => setIsEnquiryOpen(true)}
                         >
                             Quick Enquiry
+                        </button>
+
+                        <button
+                            type="button"
+                            className={`details-shortlist-btn ${isSaved ? "saved" : ""}`}
+                            onClick={() => toggleSaveProperty(property.id)}
+                            style={{
+                                display: "inline-flex",
+                                alignItems: "center",
+                                gap: "6px",
+                                padding: "10px 16px",
+                                borderRadius: "8px",
+                                border: isSaved ? "1px solid #fecdd3" : "1px solid #cbd5e1",
+                                background: isSaved ? "#fff1f2" : "#ffffff",
+                                color: isSaved ? "#ec268f" : "#334155",
+                                fontWeight: 700,
+                                fontSize: "13.5px",
+                                cursor: "pointer",
+                                transition: "all 0.15s ease",
+                            }}
+                        >
+                            <Heart size={16} fill={isSaved ? "#ec268f" : "none"} color="#ec268f" />
+                            <span>{isSaved ? "Shortlisted" : "Shortlist"}</span>
                         </button>
                     </div>
                 </div>
