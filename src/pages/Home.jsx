@@ -5,6 +5,9 @@ import ListingPlans from "../components/ListingPlans";
 import PropertySection from "../components/PropertySection";
 import PropertyCard from "../components/PropertyCard";
 import WhyChooseUs from "../components/WhyChooseUs";
+import HomePromoBanner from "../components/HomePromoBanner";
+import EmiCalculatorSection from "../components/EmiCalculatorSection";
+import SiteVisitPopup from "../components/SiteVisitPopup";
 import { useProperty } from "../context/PropertyContext";
 import { popularLocations } from "../data/popularLocationsData";
 import { MapPin, Search, X, Building2, Sparkles, SlidersHorizontal, Home as HomeIcon, ArrowRight } from "lucide-react";
@@ -20,6 +23,7 @@ export default function Home() {
     const [selectedCategory, setSelectedCategory] = useState("all");
     const [showSuggestions, setShowSuggestions] = useState(false);
     const [isScrolled, setIsScrolled] = useState(false);
+    const [isSiteVisitOpen, setIsSiteVisitOpen] = useState(false);
 
     const searchContainerRef = useRef(null);
 
@@ -339,6 +343,9 @@ export default function Home() {
                 )}
             </section>
 
+            {/* PROMOTIONAL REAL ESTATE BANNER (BOOK SITE VISIT & POST PROPERTY) */}
+            <HomePromoBanner onOpenSiteVisit={() => setIsSiteVisitOpen(true)} />
+
             {/* LISTING PLANS */}
             <div id="plans">
                 <ListingPlans />
@@ -390,10 +397,20 @@ export default function Home() {
                 </div>
             </section>
 
+            {/* REAL ESTATE HOME LOAN EMI CALCULATOR */}
+            <EmiCalculatorSection />
+
             {/* WHY CHOOSE US */}
             <div className="container" style={{ marginTop: "36px" }}>
                 <WhyChooseUs />
             </div>
+
+            {/* REAL ESTATE FREE SITE VISIT & LEAD POPUP */}
+            <SiteVisitPopup
+                isOpen={isSiteVisitOpen}
+                onClose={() => setIsSiteVisitOpen(false)}
+                onManualOpen={() => setIsSiteVisitOpen(true)}
+            />
         </div>
     );
 }

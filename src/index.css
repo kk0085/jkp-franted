@@ -5556,3 +5556,872 @@ img {
   top: 0 !important;
   z-index: 20 !important;
 }
+
+/* ==========================================================================
+   NEW REAL ESTATE FEATURES: PROMO BANNER, EMI CALCULATOR & SITE VISIT POPUP
+   ========================================================================== */
+
+/* 1. HOME PROMOTIONAL REAL ESTATE BANNER */
+.home-promo-banner-section {
+  margin: 36px 0 44px;
+  width: 100%;
+}
+
+.home-promo-banner-card {
+  position: relative;
+  background: linear-gradient(135deg, #090d16 0%, #1e112a 45%, #3b0728 100%);
+  border-radius: 22px;
+  padding: 38px 42px;
+  overflow: hidden;
+  box-shadow: 0 16px 36px rgba(15, 23, 42, 0.16);
+  border: 1px solid rgba(236, 38, 143, 0.22);
+}
+
+.promo-glow-orb {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  filter: blur(70px);
+  opacity: 0.35;
+}
+
+.promo-glow-1 {
+  width: 240px;
+  height: 240px;
+  background: #ec268f;
+  top: -60px;
+  right: 10%;
+}
+
+.promo-glow-2 {
+  width: 200px;
+  height: 200px;
+  background: #ea580c;
+  bottom: -50px;
+  left: 5%;
+}
+
+.promo-banner-content {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: 1.35fr 0.95fr;
+  gap: 36px;
+  align-items: center;
+}
+
+.promo-top-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(236, 38, 143, 0.15);
+  border: 1px solid rgba(236, 38, 143, 0.4);
+  color: #f472b6;
+  font-size: 11.5px;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 9999px;
+  margin-bottom: 14px;
+  letter-spacing: 0.2px;
+}
+
+.promo-sparkle-icon {
+  animation: pulse 2s infinite ease-in-out;
+}
+
+.promo-banner-title {
+  color: #ffffff;
+  font-size: 27px;
+  font-weight: 800;
+  line-height: 1.28;
+  margin-bottom: 12px;
+}
+
+.promo-banner-title .highlight-text {
+  background: linear-gradient(90deg, #f472b6, #fb7185, #fdba74);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.promo-banner-desc {
+  color: #cbd5e1;
+  font-size: 13.5px;
+  line-height: 1.55;
+  margin-bottom: 20px;
+  max-width: 620px;
+}
+
+.promo-features-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 24px;
+}
+
+.promo-feature-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 5px 12px;
+  border-radius: 8px;
+  color: #f1f5f9;
+  font-size: 12px;
+  font-weight: 600;
+  backdrop-filter: blur(4px);
+}
+
+.promo-banner-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+}
+
+.promo-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #ec268f;
+  color: #ffffff;
+  font-size: 13.5px;
+  font-weight: 700;
+  padding: 10px 20px;
+  border-radius: 9999px;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(236, 38, 143, 0.4);
+  transition: all 0.2s ease;
+}
+
+.promo-btn-primary:hover {
+  background: #db2777;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(236, 38, 143, 0.55);
+}
+
+.promo-btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  font-size: 13px;
+  font-weight: 600;
+  padding: 9px 18px;
+  border-radius: 9999px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.promo-btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.18);
+  border-color: #ffffff;
+}
+
+.promo-btn-call {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #fbcfe8;
+  font-size: 12.5px;
+  font-weight: 600;
+  text-decoration: none;
+  padding: 8px 12px;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+
+.promo-btn-call:hover {
+  color: #ffffff;
+  background: rgba(236, 38, 143, 0.15);
+}
+
+.promo-banner-stats-box {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 16px;
+  padding: 24px;
+  backdrop-filter: blur(10px);
+}
+
+.stats-box-header {
+  margin-bottom: 18px;
+}
+
+.stats-city-tag {
+  color: #f472b6;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.stats-box-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+  margin-bottom: 18px;
+}
+
+.stat-box-item {
+  background: rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 14px 12px;
+  text-align: center;
+}
+
+.stat-number {
+  font-size: 24px;
+  font-weight: 800;
+  color: #ffffff;
+  margin-bottom: 2px;
+}
+
+.stat-label {
+  font-size: 11.5px;
+  color: #94a3b8;
+  font-weight: 500;
+}
+
+.stats-guarantee-note {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  color: #86efac;
+  font-size: 11px;
+  font-weight: 600;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding-top: 14px;
+}
+
+/* 2. REAL ESTATE HOME LOAN EMI CALCULATOR */
+.emi-calculator-section {
+  margin: 44px 0 40px;
+  width: 100%;
+}
+
+.emi-section-card {
+  background: #ffffff;
+  border-radius: 20px;
+  border: 1.5px solid #f1f5f9;
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.05);
+  padding: 36px 38px;
+}
+
+.emi-header {
+  text-align: center;
+  max-width: 680px;
+  margin: 0 auto 34px;
+}
+
+.emi-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #fff0f7;
+  color: #ec268f;
+  border: 1px solid #fbcfe8;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 9999px;
+  margin-bottom: 10px;
+}
+
+.emi-title {
+  font-size: 26px;
+  font-weight: 800;
+  color: #0f172a;
+  margin-bottom: 8px;
+}
+
+.emi-title .highlight-text {
+  color: #ec268f;
+}
+
+.emi-subtitle {
+  color: #64748b;
+  font-size: 13.5px;
+  line-height: 1.5;
+}
+
+.emi-layout {
+  display: grid;
+  grid-template-columns: 1.2fr 0.9fr;
+  gap: 36px;
+  align-items: stretch;
+}
+
+.emi-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  justify-content: center;
+}
+
+.emi-control-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.emi-control-label-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.emi-control-label-row label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13.5px;
+  font-weight: 700;
+  color: #1e293b;
+}
+
+.emi-val-pill {
+  background: #fff0f7;
+  color: #ec268f;
+  font-size: 13px;
+  font-weight: 800;
+  padding: 3px 10px;
+  border-radius: 8px;
+  border: 1px solid #fbcfe8;
+}
+
+.emi-slider {
+  width: 100%;
+  accent-color: #ec268f;
+  cursor: pointer;
+  height: 6px;
+  border-radius: 9999px;
+}
+
+.emi-presets-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 2px;
+}
+
+.emi-preset-chip {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  color: #475569;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 9px;
+  border-radius: 9999px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.emi-preset-chip:hover {
+  border-color: #cbd5e1;
+  background: #f1f5f9;
+}
+
+.emi-preset-chip.active {
+  background: #ec268f;
+  border-color: #ec268f;
+  color: #ffffff;
+}
+
+.emi-results-card {
+  background: linear-gradient(155deg, #ffffff 0%, #fff1f2 40%, #fdf2f8 100%);
+  border: 1.5px solid #fbcfe8;
+  border-radius: 18px;
+  padding: 26px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 8px 24px rgba(236, 38, 143, 0.08);
+}
+
+.emi-result-top {
+  text-align: center;
+  padding-bottom: 18px;
+  border-bottom: 1px solid #fce7f3;
+}
+
+.emi-result-caption {
+  font-size: 12.5px;
+  font-weight: 700;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.emi-result-amount {
+  font-size: 32px;
+  font-weight: 800;
+  color: #ec268f;
+  margin-top: 4px;
+}
+
+.emi-result-amount small {
+  font-size: 14px;
+  font-weight: 600;
+  color: #64748b;
+  margin-left: 4px;
+}
+
+.emi-breakdown-bar-wrap {
+  margin: 18px 0;
+}
+
+.emi-bar-container {
+  display: flex;
+  height: 12px;
+  border-radius: 9999px;
+  overflow: hidden;
+  background: #e2e8f0;
+}
+
+.emi-bar-principal {
+  background: #10b981;
+  transition: width 0.3s ease;
+}
+
+.emi-bar-interest {
+  background: #ec268f;
+  transition: width 0.3s ease;
+}
+
+.emi-bar-legend {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 8px;
+  font-size: 11.5px;
+  font-weight: 600;
+  color: #475569;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.legend-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+}
+
+.dot-principal {
+  background: #10b981;
+}
+
+.dot-interest {
+  background: #ec268f;
+}
+
+.emi-summary-list {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  margin: 8px 0 16px;
+}
+
+.emi-summary-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12.5px;
+  color: #475569;
+}
+
+.emi-summary-row .row-val {
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.emi-summary-row .highlight-interest {
+  color: #ec268f;
+}
+
+.emi-summary-row.total-row {
+  padding-top: 9px;
+  border-top: 1px solid #fce7f3;
+  font-size: 13.5px;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.emi-summary-row.total-row .total-val {
+  font-size: 15px;
+  font-weight: 800;
+  color: #0f172a;
+}
+
+.emi-action-box {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.emi-apply-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  background: #ec268f;
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 700;
+  padding: 11px 18px;
+  border-radius: 9999px;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(236, 38, 143, 0.35);
+  transition: all 0.2s ease;
+}
+
+.emi-apply-btn:hover {
+  background: #db2777;
+  transform: translateY(-1px);
+}
+
+.bank-partner-tags {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #64748b;
+  text-align: center;
+}
+
+/* 3. SITE VISIT FLOATING PILL & POPUP MODAL */
+.site-visit-floating-pill {
+  position: fixed;
+  bottom: 24px;
+  left: 24px;
+  z-index: 990;
+  background: #ffffff;
+  color: #0f172a;
+  border: 1.5px solid #fbcfe8;
+  box-shadow: 0 8px 24px rgba(236, 38, 143, 0.22);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px 8px 10px;
+  border-radius: 9999px;
+  cursor: pointer;
+  font-size: 12.5px;
+  font-weight: 700;
+  transition: all 0.25s ease;
+  animation: floatPill 3s infinite ease-in-out;
+}
+
+.site-visit-floating-pill:hover {
+  transform: translateY(-3px) scale(1.02);
+  border-color: #ec268f;
+  box-shadow: 0 12px 28px rgba(236, 38, 143, 0.35);
+}
+
+.pill-car-icon {
+  color: #ec268f;
+}
+
+.pill-badge {
+  background: #ec268f;
+  color: #ffffff;
+  font-size: 9.5px;
+  font-weight: 800;
+  padding: 2px 6px;
+  border-radius: 9999px;
+  letter-spacing: 0.3px;
+}
+
+@keyframes floatPill {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+/* SITE VISIT MODAL */
+.site-visit-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.72);
+  backdrop-filter: blur(6px);
+  z-index: 99999;
+  display: grid;
+  place-items: center;
+  padding: 16px;
+  animation: fadeIn 0.2s ease;
+}
+
+.site-visit-modal-box {
+  background: #ffffff;
+  border-radius: 20px;
+  width: min(500px, 100%);
+  padding: 28px 28px 24px;
+  position: relative;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.28);
+  max-height: 92vh;
+  overflow-y: auto;
+  border: 1px solid #fbcfe8;
+}
+
+.site-visit-close-btn {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: none;
+  background: #f1f5f9;
+  color: #64748b;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.site-visit-close-btn:hover {
+  background: #e2e8f0;
+  color: #0f172a;
+}
+
+.site-visit-header {
+  margin-bottom: 20px;
+  padding-right: 28px;
+}
+
+.site-visit-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: #fff0f7;
+  color: #ec268f;
+  border: 1px solid #fbcfe8;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 9999px;
+  margin-bottom: 8px;
+}
+
+.site-visit-title {
+  font-size: 20px;
+  font-weight: 800;
+  color: #0f172a;
+  line-height: 1.3;
+  margin-bottom: 6px;
+}
+
+.site-visit-title .highlight-text {
+  color: #ec268f;
+}
+
+.site-visit-desc {
+  font-size: 12.5px;
+  color: #64748b;
+  line-height: 1.45;
+}
+
+.site-visit-form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.site-visit-input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.site-visit-input-group label {
+  font-size: 12px;
+  font-weight: 700;
+  color: #334155;
+}
+
+.site-visit-input-group input,
+.site-visit-input-group select {
+  width: 100%;
+  padding: 9px 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 10px;
+  font-size: 13px;
+  background: #ffffff;
+  color: #0f172a;
+  outline: none;
+  transition: border-color 0.15s;
+}
+
+.site-visit-input-group input:focus,
+.site-visit-input-group select:focus {
+  border-color: #ec268f;
+  box-shadow: 0 0 0 3px rgba(236, 38, 143, 0.12);
+}
+
+.phone-input-wrap {
+  display: flex;
+  align-items: center;
+  border: 1px solid #cbd5e1;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #ffffff;
+}
+
+.phone-input-wrap:focus-within {
+  border-color: #ec268f;
+  box-shadow: 0 0 0 3px rgba(236, 38, 143, 0.12);
+}
+
+.phone-prefix {
+  padding: 0 10px;
+  background: #f8fafc;
+  color: #64748b;
+  font-weight: 700;
+  font-size: 12.5px;
+  border-right: 1px solid #e2e8f0;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.phone-input-wrap input {
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+.site-visit-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.site-visit-submit-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: #ec268f;
+  color: #ffffff;
+  font-size: 13.5px;
+  font-weight: 700;
+  padding: 11px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  margin-top: 6px;
+  box-shadow: 0 4px 14px rgba(236, 38, 143, 0.35);
+  transition: all 0.2s ease;
+}
+
+.site-visit-submit-btn:hover {
+  background: #db2777;
+}
+
+.site-visit-footer-note {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 14px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #15803d;
+}
+
+.site-visit-success-state {
+  text-align: center;
+  padding: 20px 10px;
+}
+
+.success-icon-wrap {
+  margin: 0 auto 14px;
+  width: 64px;
+  height: 64px;
+  background: #f0fdf4;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+}
+
+.site-visit-success-state h3 {
+  font-size: 20px;
+  font-weight: 800;
+  color: #0f172a;
+  margin-bottom: 8px;
+}
+
+.site-visit-success-state p {
+  font-size: 13px;
+  color: #475569;
+  line-height: 1.5;
+  margin-bottom: 20px;
+}
+
+.success-done-btn {
+  background: #0f172a;
+  color: #ffffff;
+  padding: 9px 20px;
+  font-size: 13px;
+  font-weight: 600;
+  border-radius: 9999px;
+  border: none;
+  cursor: pointer;
+}
+
+/* RESPONSIVE MEDIA QUERIES FOR BANNER & EMI CALCULATOR */
+@media (max-width: 960px) {
+  .promo-banner-content {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  .emi-layout {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+}
+
+@media (max-width: 640px) {
+  .home-promo-banner-card {
+    padding: 24px 18px;
+    border-radius: 16px;
+  }
+  .promo-banner-title {
+    font-size: 21px;
+  }
+  .promo-banner-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .promo-btn-primary,
+  .promo-btn-secondary,
+  .promo-btn-call {
+    justify-content: center;
+  }
+  .emi-section-card {
+    padding: 22px 16px;
+    border-radius: 16px;
+  }
+  .emi-title {
+    font-size: 21px;
+  }
+  .site-visit-grid-2 {
+    grid-template-columns: 1fr;
+  }
+  .site-visit-floating-pill {
+    bottom: 78px;
+    left: 14px;
+    padding: 7px 12px 7px 8px;
+    font-size: 11.5px;
+  }
+}
