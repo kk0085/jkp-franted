@@ -8170,3 +8170,80 @@ img {
   border-color: #16a34a;
   color: #15803d;
 }
+
+
+/* ==========================================================================
+   CARD BACK 3D ROTATING SHARE BUTTON & BEACON
+   ========================================================================== */
+
+.card-back-share-wrap {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 10;
+  perspective: 600px;
+}
+
+.share-btn-3d {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 1.5px solid #fbcfe8;
+  color: #ec268f;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(236, 38, 143, 0.16);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  margin-bottom: 5px; /* Exact gap requested between button and text */
+}
+
+.share-btn-3d:hover {
+  background: #ec268f;
+  color: #ffffff;
+  border-color: #ec268f;
+  transform: scale(1.08);
+  box-shadow: 0 4px 14px rgba(236, 38, 143, 0.3);
+}
+
+.share-btn-3d.copied {
+  background: #16a34a;
+  color: #ffffff;
+  border-color: #16a34a;
+}
+
+.share-3d-text-label {
+  display: inline-block;
+  font-size: 8.5px;
+  font-weight: 800;
+  color: #ec268f;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  line-height: 1;
+  padding: 2.5px 7px;
+  background: #fdf2f8;
+  border: 1px solid #fbcfe8;
+  border-radius: 999px;
+  pointer-events: none !important; /* Non-clickable as requested */
+  user-select: none;
+  transform-style: preserve-3d;
+  animation: shareTextSpin3D 2.8s ease-in-out infinite;
+  box-shadow: 0 1px 4px rgba(236, 38, 143, 0.1);
+  white-space: nowrap;
+}
+
+@keyframes shareTextSpin3D {
+  0% {
+    transform: perspective(300px) rotateY(0deg);
+  }
+  65% {
+    transform: perspective(300px) rotateY(360deg);
+  }
+  100% {
+    transform: perspective(300px) rotateY(360deg);
+  }
+}
