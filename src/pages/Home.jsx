@@ -8,13 +8,12 @@ import WhyChooseUs from "../components/WhyChooseUs";
 import HomePromoBanner from "../components/HomePromoBanner";
 import HeroTrustTicker from "../components/HeroTrustTicker";
 import LiveActivityToast from "../components/LiveActivityToast";
-import SiteVisitPopup from "../components/SiteVisitPopup";
 import { useProperty } from "../context/PropertyContext";
 import { popularLocations } from "../data/popularLocationsData";
 import { MapPin, Search, X, Building2, Sparkles, SlidersHorizontal, Home as HomeIcon, ArrowRight } from "lucide-react";
 
 export default function Home() {
-    const { properties, openEnquiry } = useProperty();
+    const { properties, openEnquiry, openSiteVisit } = useProperty();
     const location = useLocation();
     const [searchParams, setSearchParams] = useSearchParams();
     const urlSearchQuery = searchParams.get("search") || "";
@@ -24,7 +23,6 @@ export default function Home() {
     const [selectedCategory, setSelectedCategory] = useState("all");
     const [showSuggestions, setShowSuggestions] = useState(false);
     const [isScrolled, setIsScrolled] = useState(false);
-    const [isSiteVisitOpen, setIsSiteVisitOpen] = useState(false);
 
     const searchContainerRef = useRef(null);
 
@@ -364,7 +362,7 @@ export default function Home() {
             </section>
 
             {/* PROMOTIONAL REAL ESTATE BANNER (BOOK SITE VISIT & POST PROPERTY) */}
-            <HomePromoBanner onOpenSiteVisit={() => setIsSiteVisitOpen(true)} />
+            <HomePromoBanner onOpenSiteVisit={openSiteVisit} />
 
             {/* LISTING PLANS */}
             <div id="plans">
@@ -423,12 +421,7 @@ export default function Home() {
                 <WhyChooseUs />
             </div>
 
-            {/* REAL ESTATE FREE SITE VISIT & LEAD POPUP */}
-            <SiteVisitPopup
-                isOpen={isSiteVisitOpen}
-                onClose={() => setIsSiteVisitOpen(false)}
-                onManualOpen={() => setIsSiteVisitOpen(true)}
-            />
+
 
             {/* LIVE REAL ESTATE SOCIAL PROOF ACTIVITY TOAST */}
             <LiveActivityToast />

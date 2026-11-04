@@ -148,6 +148,11 @@ export function PropertyProvider({ children }) {
     const openScheduleCab = (property) => setCabProperty(property);
     const closeScheduleCab = () => setCabProperty(null);
 
+    // Site Visit Booking Modal (Name, 10-digit Mobile, Visit Location)
+    const [isSiteVisitOpen, setIsSiteVisitOpen] = useState(false);
+    const openSiteVisit = () => setIsSiteVisitOpen(true);
+    const closeSiteVisit = () => setIsSiteVisitOpen(false);
+
     const addProperty = (newProp) => {
         const fullProperty = {
             id: Date.now(),
@@ -364,6 +369,9 @@ export function PropertyProvider({ children }) {
                 cabProperty,
                 openScheduleCab,
                 closeScheduleCab,
+                isSiteVisitOpen,
+                openSiteVisit,
+                closeSiteVisit,
             }}
         >
             {children}

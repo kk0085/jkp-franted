@@ -15,6 +15,7 @@ import Profile from "./pages/Profile";
 import Admin from "./pages/Admin";
 import EnquiryModal from "./components/EnquiryModal";
 import ScheduleCabModal from "./components/ScheduleCabModal";
+import SiteVisitPopup from "./components/SiteVisitPopup";
 import EmailOtpLoginModal from "./components/EmailOtpLoginModal";
 import { PropertyProvider, useProperty } from "./context/PropertyContext";
 
@@ -67,6 +68,9 @@ function AppContent() {
 
       {/* FREE CAB SITE VISIT BOOKING MODAL */}
       <ScheduleCabModal />
+
+      {/* GLOBAL JAIPUR KI PROPERTY [VISIT] FLOATING PILL & MODAL */}
+      {!isAdminRoute && <SiteVisitPopup />}
 
       {/* AUTO OPEN GMAIL OTP LOGIN POPUP - HIDDEN ON ADMIN */}
       {!isAdminRoute && <EmailOtpLoginModal />}
