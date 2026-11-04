@@ -1,4 +1,4 @@
-import { ShieldCheck, Car, Zap, Award, Star } from "lucide-react";
+import { ShieldCheck, Building2, Zap, Award, Star } from "lucide-react";
 
 export default function HeroTrustTicker() {
     return (
@@ -12,8 +12,8 @@ export default function HeroTrustTicker() {
                     <span className="ticker-divider">•</span>
 
                     <div className="trust-ticker-item">
-                        <Car size={16} color="#ec268f" />
-                        <span>Free Cab For Site Visits</span>
+                        <Building2 size={16} color="#ec268f" />
+                        <span>Direct Property Visits</span>
                     </div>
                     <span className="ticker-divider">•</span>
 
@@ -30,8 +30,8 @@ export default function HeroTrustTicker() {
                     <span className="ticker-divider">•</span>
 
                     <div className="trust-ticker-item">
-                        <Award size={16} color="#1e3a8a" />
-                        <span>Jaipur's #1 Property Network</span>
+                        <Award size={16} color="#ec268f" />
+                        <span>Jaipur's No.1 Direct Portal</span>
                     </div>
                 </div>
             </div>

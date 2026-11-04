@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { X, Car, CheckCircle2, ShieldCheck } from "lucide-react";
+import { X, Building2, CheckCircle2, ShieldCheck, Calendar } from "lucide-react";
 import { useProperty } from "../context/PropertyContext";
 
 export default function SiteVisitPopup({ isOpen, onClose, onManualOpen }) {
@@ -51,16 +51,16 @@ export default function SiteVisitPopup({ isOpen, onClose, onManualOpen }) {
             addBuyerLead({
                 name: name.trim() || "Website Visitor",
                 phone: `+91 ${cleanPhone}`,
-                propertyTitle: `Free Site Visit Request (${propertyType} in ${locality})`,
+                propertyTitle: `Property Visit Request (${propertyType} in ${locality})`,
                 propertyPrice: `Budget: ${budget}`,
-                message: `Customer requested Free Site Visit in ${locality}. Type: ${propertyType}, Budget: ${budget}.`,
+                message: `Customer requested Property Visit in ${locality}. Type: ${propertyType}, Budget: ${budget}.`,
             });
         }
 
         setSubmitted(true);
 
         const waText = encodeURIComponent(
-            `Hello Jaipur Ki Property! I want to schedule a Free Site Visit for ${propertyType} in ${locality} (Budget: ${budget}). My Name: ${name || "Visitor"}, Phone: +91 ${cleanPhone}.`
+            `Hello Jaipur Ki Property! I want to schedule a Property Visit for ${propertyType} in ${locality} (Budget: ${budget}). My Name: ${name || "Visitor"}, Phone: +91 ${cleanPhone}.`
         );
         setTimeout(() => {
             window.open(`https://wa.me/${waNumber}?text=${waText}`, "_blank");
@@ -69,7 +69,7 @@ export default function SiteVisitPopup({ isOpen, onClose, onManualOpen }) {
 
     return (
         <>
-            {/* FLOATING TRIGGER PILL (VISIBLE WHEN POPUP IS CLOSED) */}
+            {/* FLOATING TRIGGER PILL: JAIPUR KI PROPERTY + VISIT */}
             {!visible && (
                 <button
                     type="button"
@@ -78,11 +78,11 @@ export default function SiteVisitPopup({ isOpen, onClose, onManualOpen }) {
                         setVisible(true);
                         if (onManualOpen) onManualOpen();
                     }}
-                    title="Book a Free Site Visit in Jaipur"
+                    title="Jaipur Ki Property - Book Visit"
                 >
-                    <Car size={16} className="pill-car-icon" />
-                    <span>Free Site Visit</span>
-                    <span className="pill-badge">FREE CAB</span>
+                    <Building2 size={16} className="pill-car-icon" />
+                    <span>Jaipur Ki Property</span>
+                    <span className="pill-badge">VISIT</span>
                 </button>
             )}
 
@@ -103,14 +103,14 @@ export default function SiteVisitPopup({ isOpen, onClose, onManualOpen }) {
                             <>
                                 <div className="site-visit-header">
                                     <div className="site-visit-badge">
-                                        <Car size={14} color="#ec268f" />
-                                        <span>Free Cab Included • Zero Brokerage</span>
+                                        <Building2 size={14} color="#ec268f" />
+                                        <span>Jaipur Verified Properties • Zero Brokerage</span>
                                     </div>
                                     <h3 className="site-visit-title">
-                                        Book a <span className="highlight-text">Free Site Visit</span> in Jaipur
+                                        Book a <span className="highlight-text">Property Visit</span> in Jaipur
                                     </h3>
                                     <p className="site-visit-desc">
-                                        Tour verified flats, luxury villas & plots with our local property experts. Free cab pick & drop + RERA legal verification.
+                                        Tour verified flats, luxury villas & plots with our local property experts. Verified paperwork & RERA legal guidance.
                                     </p>
                                 </div>
 
@@ -192,8 +192,8 @@ export default function SiteVisitPopup({ isOpen, onClose, onManualOpen }) {
                                     </div>
 
                                     <button type="submit" className="site-visit-submit-btn">
-                                        <Car size={16} />
-                                        <span>Confirm Free Site Visit Now</span>
+                                        <Calendar size={16} />
+                                        <span>Confirm Property Visit Now</span>
                                     </button>
                                 </form>
 
@@ -207,9 +207,9 @@ export default function SiteVisitPopup({ isOpen, onClose, onManualOpen }) {
                                 <div className="success-icon-wrap">
                                     <CheckCircle2 size={48} color="#15803d" />
                                 </div>
-                                <h3>Site Visit Request Received!</h3>
+                                <h3>Property Visit Request Received!</h3>
                                 <p>
-                                    Thank you <strong>{name || "Customer"}</strong>! Our Jaipur Property Advisor will call you within 15 minutes on <strong>+91 {phone}</strong> to confirm your cab pickup time and project details.
+                                    Thank you <strong>{name || "Customer"}</strong>! Our Jaipur Property Advisor will call you within 15 minutes on <strong>+91 {phone}</strong> to confirm your visit time and project details.
                                 </p>
                                 <div className="success-actions">
                                     <button
@@ -228,4 +228,3 @@ export default function SiteVisitPopup({ isOpen, onClose, onManualOpen }) {
         </>
     );
 }
-
