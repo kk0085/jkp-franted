@@ -1431,6 +1431,66 @@ img {
   background: var(--primary);
 }
 
+/* FRONT FACE SHARE BUTTON (MOBILE & TOUCH OPTIMIZED) */
+.card-front-share-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  padding: 0 11px;
+  height: 31px;
+  border-radius: 9999px;
+  border: 1.5px solid #d1d5db;
+  background: #ffffff;
+  color: #374151;
+  font-size: 11.5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  white-space: nowrap;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.card-front-share-btn:hover,
+.card-front-share-btn:active {
+  border-color: #ec268f;
+  color: #ec268f;
+  background: #fdf2f8;
+}
+
+.card-front-share-btn.copied {
+  border-color: #10b981 !important;
+  background: #ecfdf5 !important;
+  color: #065f46 !important;
+}
+
+@media (max-width: 360px) {
+  .property-actions-left {
+    gap: 4px !important;
+  }
+  .enquiry-btn {
+    padding: 0 10px !important;
+    font-size: 11px !important;
+  }
+  .card-front-share-btn {
+    padding: 0 8px !important;
+    font-size: 11px !important;
+    gap: 4px !important;
+  }
+  .card-corner-view-btn {
+    padding: 0 10px !important;
+    font-size: 11px !important;
+  }
+}
+
+/* On desktop with mouse hover: card flips to 180deg back face where 3D rotating Share badge is */
+@media (min-width: 1025px) and (hover: hover) and (pointer: fine) {
+  .card-front-share-btn {
+    display: none !important;
+  }
+}
+
 /* WHY CHOOSE US */
 
 .why-section {
@@ -3018,6 +3078,15 @@ img {
     border-radius: 9999px !important;
   }
 
+  .card-front-share-btn {
+    display: inline-flex !important;
+    height: 33px !important;
+    padding: 0 12px !important;
+    font-size: 12px !important;
+    font-weight: 600 !important;
+    border-radius: 9999px !important;
+  }
+
   .card-corner-view-btn {
     opacity: 1 !important;
     visibility: visible !important;
@@ -4257,6 +4326,15 @@ img {
   .share-btn {
     width: 33px !important;
     height: 33px !important;
+    border-radius: 9999px !important;
+  }
+
+  .card-front-share-btn {
+    display: inline-flex !important;
+    height: 33px !important;
+    padding: 0 12px !important;
+    font-size: 12px !important;
+    font-weight: 600 !important;
     border-radius: 9999px !important;
   }
 

@@ -9,15 +9,19 @@ export default function PropertyCard({ property, onEnquiry }) {
         e.preventDefault();
         e.stopPropagation();
         const url = `${window.location.origin}/properties/${property.id}`;
+        const priceLabel = property.category === "rent" ? `Rs ${property.price}/month` : `Rs ${property.price}`;
         if (navigator.share) {
             try {
                 await navigator.share({
                     title: property.title,
-                    text: `${property.title} in ${property.location} (Rs ${property.price}/month) - Jaipur Ki Property`,
+                    text: `${property.title} in ${property.location} (${priceLabel}) - Jaipur Ki Property`,
                     url,
                 });
                 return;
-            } catch {
+            } catch (err) {
+                if (err && err.name === "AbortError") {
+                    return;
+                }
                 // fall through to clipboard copy
             }
         }
@@ -72,6 +76,16 @@ export default function PropertyCard({ property, onEnquiry }) {
                             <div className="property-actions-left">
                                 <button className="enquiry-btn" onClick={handleEnquiryClick}>
                                     Enquiry
+                                </button>
+                                <button
+                                    type="button"
+                                    className={`card-front-share-btn ${copied ? "copied" : ""}`}
+                                    onClick={handleShare}
+                                    title={copied ? "Copied!" : "Share Property"}
+                                    aria-label="Share property"
+                                >
+                                    {copied ? <Check size={13} color="#15803d" /> : <Share2 size={13} />}
+                                    <span>{copied ? "Copied!" : "Share"}</span>
                                 </button>
                             </div>
 
