@@ -5490,239 +5490,352 @@ img {
 
 /* 1. HOME PROMOTIONAL REAL ESTATE BANNER */
 .home-promo-banner-section {
-  margin: 36px 0 44px;
+  margin: 44px 0 52px;
   width: 100%;
 }
 
 .home-promo-banner-card {
   position: relative;
-  background: linear-gradient(135deg, #090d16 0%, #1e112a 45%, #3b0728 100%);
-  border-radius: 22px;
-  padding: 38px 42px;
+  background: linear-gradient(135deg, #090d16 0%, #170d28 45%, #2c0825 100%);
+  border-radius: 26px;
+  padding: 44px 48px;
   overflow: hidden;
-  box-shadow: 0 16px 36px rgba(15, 23, 42, 0.16);
-  border: 1px solid rgba(236, 38, 143, 0.22);
+  box-shadow: 0 24px 60px -12px rgba(15, 23, 42, 0.45), 0 0 40px -10px rgba(236, 38, 143, 0.22);
+  border: 1.5px solid rgba(244, 114, 182, 0.28);
 }
 
 .promo-glow-orb {
   position: absolute;
   border-radius: 50%;
   pointer-events: none;
-  filter: blur(70px);
-  opacity: 0.35;
+  filter: blur(80px);
+  opacity: 0.38;
 }
 
 .promo-glow-1 {
-  width: 240px;
-  height: 240px;
+  width: 280px;
+  height: 280px;
   background: #ec268f;
-  top: -60px;
-  right: 10%;
+  top: -80px;
+  right: 15%;
 }
 
 .promo-glow-2 {
-  width: 200px;
-  height: 200px;
-  background: #ea580c;
-  bottom: -50px;
-  left: 5%;
+  width: 240px;
+  height: 240px;
+  background: #f97316;
+  bottom: -60px;
+  left: 8%;
 }
 
 .promo-banner-content {
   position: relative;
   z-index: 2;
   display: grid;
-  grid-template-columns: 1.35fr 0.95fr;
-  gap: 36px;
+  grid-template-columns: 1.25fr 1fr;
+  gap: 40px;
   align-items: center;
 }
 
+/* LEFT COLUMN */
 .promo-top-badge {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  background: rgba(236, 38, 143, 0.15);
-  border: 1px solid rgba(236, 38, 143, 0.4);
-  color: #f472b6;
+  gap: 8px;
+  background: rgba(236, 38, 143, 0.16);
+  border: 1.5px solid rgba(244, 114, 182, 0.45);
+  color: #f472b6 !important;
   font-size: 11.5px;
-  font-weight: 700;
-  padding: 4px 12px;
+  font-weight: 800;
+  padding: 5px 14px;
   border-radius: 9999px;
   margin-bottom: 14px;
-  letter-spacing: 0.2px;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  box-shadow: 0 0 16px rgba(236, 38, 143, 0.2);
 }
 
 .promo-sparkle-icon {
+  color: #f472b6;
   animation: pulse 2s infinite ease-in-out;
 }
 
 .promo-banner-title {
-  color: #ffffff;
-  font-size: 27px;
+  color: #ffffff !important;
+  font-size: 32px;
   font-weight: 800;
-  line-height: 1.28;
-  margin-bottom: 12px;
+  line-height: 1.24;
+  margin: 0 0 14px 0;
+  letter-spacing: -0.5px;
 }
 
 .promo-banner-title .highlight-text {
-  background: linear-gradient(90deg, #f472b6, #fb7185, #fdba74);
+  background: linear-gradient(135deg, #f472b6 0%, #fb7185 50%, #fed7aa 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .promo-banner-desc {
-  color: #cbd5e1;
-  font-size: 13.5px;
-  line-height: 1.55;
-  margin-bottom: 20px;
-  max-width: 620px;
+  color: #cbd5e1 !important;
+  font-size: 14.5px;
+  line-height: 1.6;
+  margin: 0 0 24px 0;
+  max-width: 600px;
 }
 
 .promo-features-grid {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
-  margin-bottom: 24px;
+  margin-bottom: 28px;
 }
 
 .promo-feature-pill {
   display: inline-flex;
   align-items: center;
-  gap: 7px;
-  background: rgba(255, 255, 255, 0.07);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  padding: 5px 12px;
-  border-radius: 8px;
-  color: #f1f5f9;
-  font-size: 12px;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  padding: 7px 14px;
+  border-radius: 12px;
+  color: #f8fafc;
+  font-size: 12.5px;
   font-weight: 600;
-  backdrop-filter: blur(4px);
+  backdrop-filter: blur(8px);
+  transition: all 0.2s ease;
+}
+
+.promo-feature-pill:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(244, 114, 182, 0.4);
+  transform: translateY(-1.5px);
 }
 
 .promo-banner-actions {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 12px;
+  gap: 14px;
 }
 
 .promo-btn-primary {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  background: #ec268f;
-  color: #ffffff;
-  font-size: 13.5px;
-  font-weight: 700;
-  padding: 10px 20px;
+  gap: 9px;
+  background: linear-gradient(135deg, #ec268f 0%, #db2777 50%, #be185d 100%);
+  color: #ffffff !important;
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: 0.3px;
+  padding: 12px 24px;
   border-radius: 9999px;
   border: none;
   cursor: pointer;
-  box-shadow: 0 4px 16px rgba(236, 38, 143, 0.4);
-  transition: all 0.2s ease;
+  box-shadow: 0 8px 24px -2px rgba(236, 38, 143, 0.55);
+  transition: all 0.22s ease;
 }
 
 .promo-btn-primary:hover {
-  background: #db2777;
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(236, 38, 143, 0.55);
+  box-shadow: 0 12px 28px -2px rgba(236, 38, 143, 0.7);
+  filter: brightness(1.05);
 }
 
 .promo-btn-secondary {
   display: inline-flex;
   align-items: center;
-  gap: 7px;
-  background: rgba(255, 255, 255, 0.1);
-  color: #ffffff;
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  font-size: 13px;
-  font-weight: 600;
-  padding: 9px 18px;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.09);
+  color: #ffffff !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.28);
+  font-size: 13.5px;
+  font-weight: 700;
+  padding: 11px 22px;
   border-radius: 9999px;
   text-decoration: none;
-  transition: all 0.2s ease;
+  transition: all 0.22s ease;
 }
 
 .promo-btn-secondary:hover {
   background: rgba(255, 255, 255, 0.18);
   border-color: #ffffff;
+  color: #ffffff !important;
+  transform: translateY(-1.5px);
 }
 
 .promo-btn-call {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  color: #fbcfe8;
-  font-size: 12.5px;
-  font-weight: 600;
+  gap: 7px;
+  color: #fbcfe8 !important;
+  font-size: 13px;
+  font-weight: 700;
   text-decoration: none;
-  padding: 8px 12px;
-  border-radius: 8px;
+  padding: 9px 16px;
+  border-radius: 9999px;
+  background: rgba(236, 38, 143, 0.14);
+  border: 1px solid rgba(236, 38, 143, 0.35);
   transition: all 0.2s ease;
 }
 
 .promo-btn-call:hover {
-  color: #ffffff;
-  background: rgba(236, 38, 143, 0.15);
+  color: #ffffff !important;
+  background: rgba(236, 38, 143, 0.28);
+  border-color: #ec268f;
+  transform: translateY(-1px);
 }
 
+/* RIGHT COLUMN - STATS & TRUST SHOWCASE */
 .promo-banner-stats-box {
   background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  border-radius: 16px;
-  padding: 24px;
-  backdrop-filter: blur(10px);
+  border: 1.5px solid rgba(255, 255, 255, 0.14);
+  border-radius: 20px;
+  padding: 26px 28px;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.3);
 }
 
 .stats-box-header {
-  margin-bottom: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 20px;
+  text-align: left;
 }
 
 .stats-city-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   color: #f472b6;
-  font-size: 12px;
-  font-weight: 700;
+  font-size: 11px;
+  font-weight: 800;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.8px;
+}
+
+.stats-box-title {
+  color: #ffffff !important;
+  font-size: 19px;
+  font-weight: 800;
+  margin: 0;
+  letter-spacing: -0.2px;
 }
 
 .stats-box-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 14px;
+  gap: 12px;
   margin-bottom: 18px;
 }
 
 .stat-box-item {
-  background: rgba(0, 0, 0, 0.25);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 12px;
-  padding: 14px 12px;
-  text-align: center;
+  background: rgba(0, 0, 0, 0.32);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 14px;
+  padding: 16px 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  transition: all 0.22s ease;
+}
+
+.stat-box-item:hover {
+  border-color: rgba(244, 114, 182, 0.4);
+  background: rgba(0, 0, 0, 0.45);
+  transform: translateY(-2px);
+}
+
+.stat-box-full {
+  grid-column: span 2;
 }
 
 .stat-number {
-  font-size: 24px;
+  font-size: 26px;
   font-weight: 800;
   color: #ffffff;
-  margin-bottom: 2px;
+  line-height: 1.1;
+  margin-bottom: 4px;
+  background: linear-gradient(135deg, #ffffff 60%, #fed7aa 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-variant-numeric: tabular-nums;
 }
 
 .stat-label {
-  font-size: 11.5px;
-  color: #94a3b8;
-  font-weight: 500;
+  font-size: 12px;
+  color: #cbd5e1;
+  font-weight: 600;
+  line-height: 1.35;
+  margin-bottom: 6px;
+}
+
+.stat-subtag {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 700;
+  color: #f472b6;
+  background: rgba(236, 38, 143, 0.14);
+  border: 1px solid rgba(236, 38, 143, 0.3);
+  padding: 2px 7px;
+  border-radius: 6px;
+  letter-spacing: 0.2px;
 }
 
 .stats-guarantee-note {
   display: flex;
   align-items: center;
-  gap: 7px;
+  gap: 8px;
   color: #86efac;
-  font-size: 11px;
-  font-weight: 600;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  font-size: 12px;
+  font-weight: 700;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
   padding-top: 14px;
+  text-align: left;
+}
+
+/* RESPONSIVE */
+@media (max-width: 992px) {
+  .promo-banner-content {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  .home-promo-banner-card {
+    padding: 34px 28px;
+  }
+  .promo-banner-title {
+    font-size: 26px;
+  }
+}
+
+@media (max-width: 600px) {
+  .home-promo-banner-card {
+    padding: 24px 18px;
+    border-radius: 20px;
+  }
+  .promo-banner-title {
+    font-size: 22px;
+  }
+  .promo-banner-actions {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+  .promo-btn-primary,
+  .promo-btn-secondary,
+  .promo-btn-call {
+    width: 100%;
+    justify-content: center;
+    box-sizing: border-box;
+  }
+  .stats-box-grid {
+    grid-template-columns: 1fr;
+  }
+  .stat-box-full {
+    grid-column: span 1;
+  }
 }
 
 /* 3. VIP REAL ESTATE BANNER POPUP & STICKY BOTTOM RIBBON */
