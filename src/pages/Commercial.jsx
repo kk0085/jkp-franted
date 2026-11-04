@@ -18,6 +18,9 @@ export default function Commercial() {
     const [budgetLimitRent, setBudgetLimitRent] = useState(200000); // Up to 2 Lakh for Rent
     const [budgetLimitSale, setBudgetLimitSale] = useState(50000000); // Up to 5 Cr for Sale
     const [sortBy, setSortBy] = useState("recommended");
+    const [bhkFilter, setBhkFilter] = useState("all");
+    const [furnishingFilter, setFurnishingFilter] = useState("all");
+    const [verifiedOnly, setVerifiedOnly] = useState(false);
 
     useEffect(() => {
         const catParam = searchParams.get("category") || searchParams.get("tab") || "all";
@@ -65,6 +68,27 @@ export default function Commercial() {
                 if (prop.category === "sale" && Number(prop.price) > budgetLimitSale) return false;
             }
 
+            // Space / Office Type filter
+            if (bhkFilter !== "all") {
+                const s = bhkFilter.toLowerCase();
+                const matchesSpace = `${prop.title} ${prop.bhk} ${prop.badge} ${prop.description}`
+                    .toLowerCase()
+                    .includes(s);
+                if (!matchesSpace) return false;
+            }
+
+            // Furnishing filter
+            if (furnishingFilter !== "all") {
+                const f = furnishingFilter.toLowerCase();
+                const matchesFurnishing =
+                    (prop.furnishing && prop.furnishing.toLowerCase().includes(f)) ||
+                    (prop.description && prop.description.toLowerCase().includes(f));
+                if (!matchesFurnishing) return false;
+            }
+
+            // Verified filter
+            if (verifiedOnly && !prop.verified) return false;
+
             // Search query filter
             if (search.trim()) {
                 const clean = search.toLowerCase();
@@ -96,7 +120,7 @@ export default function Commercial() {
         }
 
         return result;
-    }, [properties, activeTab, search, budgetLimitRent, budgetLimitSale, sortBy]);
+    }, [properties, activeTab, search, budgetLimitRent, budgetLimitSale, sortBy, bhkFilter, furnishingFilter, verifiedOnly]);
 
     const commercialRentals = filtered.filter((p) => p.category === "rent");
     const commercialSales = filtered.filter((p) => p.category === "sale");
@@ -206,10 +230,22 @@ export default function Commercial() {
                         rateLabel={activeTab === "sale" ? "Sale Price Limit" : "Rent Rate"}
                         placeholder="Search by title or location"
                         matchCount={filtered.length}
+                        bhkFilter={bhkFilter}
+                        setBhkFilter={setBhkFilter}
+                        furnishingFilter={furnishingFilter}
+                        setFurnishingFilter={setFurnishingFilter}
+                        verifiedOnly={verifiedOnly}
+                        setVerifiedOnly={setVerifiedOnly}
+                        filterCategory="commercial"
                         onReset={() => {
                             setActiveTab("all");
+                            setSearch("");
                             setBudgetLimitRent(200000);
                             setBudgetLimitSale(50000000);
+                            setSortBy("recommended");
+                            setBhkFilter("all");
+                            setFurnishingFilter("all");
+                            setVerifiedOnly(false);
                             setSearchParams({});
                         }}
                     />
@@ -227,8 +263,90 @@ export default function Commercial() {
                             </span>
                         </div>
 
-                        {search.trim() ? (
+                        {isFilterActive ? (
                             <div>
+                                {/* ACTIVE FILTER PILLS */}
+                                <div className="active-filters-bar" style={{ display: "flex", flexWrap: "wrap", gap: "8px", marginBottom: "16px", alignItems: "center" }}>
+                                    <span style={{ fontSize: "12px", fontWeight: 700, color: "#64748b" }}>Active Filters:</span>
+                                    {search.trim() && (
+                                        <span className="filter-pill-tag">
+                                            "{search}"
+                                            <button type="button" onClick={() => {
+                                                setSearch("");
+                                                setSearchParams(activeTab !== "all" ? { category: activeTab } : {});
+                                            }}><X size={12} /></button>
+                                        </span>
+                                    )}
+                                    {(activeTab === "sale" ? budgetLimitSale < 50000000 : budgetLimitRent < 200000) && (
+                                        <span className="filter-pill-tag">
+                                            Up to ₹{(activeTab === "sale" ? budgetLimitSale : budgetLimitRent).toLocaleString("en-IN")}
+                                            <button type="button" onClick={() => {
+                                                if (activeTab === "sale") setBudgetLimitSale(50000000);
+                                                else setBudgetLimitRent(200000);
+                                            }}><X size={12} /></button>
+                                        </span>
+                                    )}
+                                    {bhkFilter !== "all" && (
+                                        <span className="filter-pill-tag">
+                                            Type: {bhkFilter}
+                                            <button type="button" onClick={() => setBhkFilter("all")}><X size={12} /></button>
+                                        </span>
+                                    )}
+                                    {furnishingFilter !== "all" && (
+                                        <span className="filter-pill-tag">
+                                            Furnishing: {furnishingFilter}
+                                            <button type="button" onClick={() => setFurnishingFilter("all")}><X size={12} /></button>
+                                        </span>
+                                    )}
+                                    {verifiedOnly && (
+                                        <span className="filter-pill-tag">
+                                            100% Verified Only
+                                            <button type="button" onClick={() => setVerifiedOnly(false)}><X size={12} /></button>
+                                        </span>
+                                    )}
+                                    {sortBy !== "recommended" && (
+                                        <span className="filter-pill-tag">
+                                            {sortBy === "price-low" ? "Price: Low to High" : sortBy === "price-high" ? "Price: High to Low" : "Newest"}
+                                            <button type="button" onClick={() => setSortBy("recommended")}><X size={12} /></button>
+                                        </span>
+                                    )}
+                                    {activeTab !== "all" && (
+                                        <span className="filter-pill-tag">
+                                            {activeTab === "rent" ? "Rent" : activeTab === "sale" ? "Sale" : "Furnished"}
+                                            <button type="button" onClick={() => {
+                                                setActiveTab("all");
+                                                setSearchParams(search ? { search } : {});
+                                            }}><X size={12} /></button>
+                                        </span>
+                                    )}
+                                    <button
+                                        type="button"
+                                        onClick={() => {
+                                            setActiveTab("all");
+                                            setSearch("");
+                                            setBudgetLimitRent(200000);
+                                            setBudgetLimitSale(50000000);
+                                            setSortBy("recommended");
+                                            setBhkFilter("all");
+                                            setFurnishingFilter("all");
+                                            setVerifiedOnly(false);
+                                            setSearchParams({});
+                                        }}
+                                        style={{
+                                            background: "none",
+                                            border: "none",
+                                            color: "#ec268f",
+                                            fontSize: "12px",
+                                            fontWeight: 700,
+                                            cursor: "pointer",
+                                            textDecoration: "underline",
+                                            marginLeft: "4px",
+                                        }}
+                                    >
+                                        Clear All
+                                    </button>
+                                </div>
+
                                 {filtered.length > 0 ? (
                                     <div className="property-grid cols-3">
                                         {filtered.map((property) => (
@@ -241,8 +359,35 @@ export default function Commercial() {
                                     </div>
                                 ) : (
                                     <div className="no-results-box">
-                                        <h3>No commercial properties found in "{search}"</h3>
-                                        <p>Try adjusting your search terms or moving the budget limit.</p>
+                                        <h3>No commercial properties match your criteria</h3>
+                                        <p>Try adjusting your search terms, changing the space type or increasing the budget limit.</p>
+                                        <button
+                                            type="button"
+                                            onClick={() => {
+                                                setActiveTab("all");
+                                                setSearch("");
+                                                setBudgetLimitRent(200000);
+                                                setBudgetLimitSale(50000000);
+                                                setSortBy("recommended");
+                                                setBhkFilter("all");
+                                                setFurnishingFilter("all");
+                                                setVerifiedOnly(false);
+                                                setSearchParams({});
+                                            }}
+                                            style={{
+                                                marginTop: "12px",
+                                                background: "#ec268f",
+                                                color: "#ffffff",
+                                                border: "none",
+                                                padding: "8px 20px",
+                                                borderRadius: "9999px",
+                                                fontWeight: 700,
+                                                fontSize: "13px",
+                                                cursor: "pointer",
+                                            }}
+                                        >
+                                            Reset All Filters
+                                        </button>
                                     </div>
                                 )}
                             </div>

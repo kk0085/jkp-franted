@@ -17,6 +17,9 @@ export default function Properties() {
         searchParams.get("category") === "sale" || searchParams.get("type") === "commercial" ? 30000000 : 200000
     );
     const [sortBy, setSortBy] = useState("recommended");
+    const [bhkFilter, setBhkFilter] = useState("all");
+    const [furnishingFilter, setFurnishingFilter] = useState("all");
+    const [verifiedOnly, setVerifiedOnly] = useState(false);
 
     // Sync from URL query params
     useEffect(() => {
@@ -88,7 +91,29 @@ export default function Properties() {
 
             const matchesBudget = Number(property.price) <= budgetLimit;
 
-            return matchesSearch && matchesType && matchesCategory && matchesBudget;
+            // BHK filter
+            let matchesBhk = true;
+            if (bhkFilter !== "all") {
+                if (bhkFilter === "4+ BHK") {
+                    matchesBhk = property.bhk && (property.bhk.includes("4 BHK") || property.bhk.includes("5 BHK"));
+                } else {
+                    matchesBhk = property.bhk && property.bhk.toLowerCase().includes(bhkFilter.toLowerCase());
+                }
+            }
+
+            // Furnishing filter
+            let matchesFurnishing = true;
+            if (furnishingFilter !== "all") {
+                const f = furnishingFilter.toLowerCase();
+                matchesFurnishing =
+                    (property.furnishing && property.furnishing.toLowerCase().includes(f)) ||
+                    (property.description && property.description.toLowerCase().includes(f));
+            }
+
+            // Verified filter
+            const matchesVerified = !verifiedOnly || property.verified === true;
+
+            return matchesSearch && matchesType && matchesCategory && matchesBudget && matchesBhk && matchesFurnishing && matchesVerified;
         });
 
         // Ensure single unique items only (no duplicates)
@@ -108,7 +133,7 @@ export default function Properties() {
         }
 
         return result;
-    }, [properties, search, typeFilter, category, budgetLimit, sortBy]);
+    }, [properties, search, typeFilter, category, budgetLimit, sortBy, bhkFilter, furnishingFilter, verifiedOnly]);
 
     return (
         <div className="page container properties-page-wrapper">
@@ -245,12 +270,22 @@ export default function Properties() {
                         rateLabel={category === "sale" || typeFilter === "commercial" ? "Price Limit" : "Rent Rate"}
                         placeholder={category === "sale" ? "Search property for sale..." : "Search by title or location"}
                         matchCount={filtered.length}
+                        bhkFilter={bhkFilter}
+                        setBhkFilter={setBhkFilter}
+                        furnishingFilter={furnishingFilter}
+                        setFurnishingFilter={setFurnishingFilter}
+                        verifiedOnly={verifiedOnly}
+                        setVerifiedOnly={setVerifiedOnly}
+                        filterCategory={category === "sale" ? "sale" : typeFilter === "commercial" ? "commercial" : "rent"}
                         onReset={() => {
                             setTypeFilter("all");
                             setCategory("all");
                             setSearch("");
                             setBudgetLimit(category === "sale" || typeFilter === "commercial" ? 50000000 : 200000);
                             setSortBy("recommended");
+                            setBhkFilter("all");
+                            setFurnishingFilter("all");
+                            setVerifiedOnly(false);
                             updateParams({ type: "all", category: "all", search: "" });
                         }}
                     />
@@ -259,7 +294,7 @@ export default function Properties() {
                 {/* RIGHT COLUMN: PROPERTY CARDS GRID */}
                 <div className="rent-main-col prop-cards-main-col">
                     {/* ACTIVE FILTER PILLS */}
-                    {(search.trim() || budgetLimit < (category === "sale" || typeFilter === "commercial" ? 50000000 : 200000) || sortBy !== "recommended" || typeFilter !== "all" || category !== "all") && (
+                    {(search.trim() || budgetLimit < (category === "sale" || typeFilter === "commercial" ? 50000000 : 200000) || sortBy !== "recommended" || typeFilter !== "all" || category !== "all" || bhkFilter !== "all" || furnishingFilter !== "all" || verifiedOnly) && (
                         <div className="active-filters-bar" style={{ display: "flex", flexWrap: "wrap", gap: "8px", marginBottom: "16px", alignItems: "center" }}>
                             <span style={{ fontSize: "12px", fontWeight: 700, color: "#64748b" }}>Active Filters:</span>
                             {search.trim() && (
@@ -275,6 +310,24 @@ export default function Properties() {
                                 <span className="filter-pill-tag">
                                     Up to ₹{budgetLimit.toLocaleString("en-IN")}
                                     <button type="button" onClick={() => setBudgetLimit(category === "sale" || typeFilter === "commercial" ? 50000000 : 200000)}><X size={12} /></button>
+                                </span>
+                            )}
+                            {bhkFilter !== "all" && (
+                                <span className="filter-pill-tag">
+                                    {bhkFilter}
+                                    <button type="button" onClick={() => setBhkFilter("all")}><X size={12} /></button>
+                                </span>
+                            )}
+                            {furnishingFilter !== "all" && (
+                                <span className="filter-pill-tag">
+                                    {furnishingFilter}
+                                    <button type="button" onClick={() => setFurnishingFilter("all")}><X size={12} /></button>
+                                </span>
+                            )}
+                            {verifiedOnly && (
+                                <span className="filter-pill-tag">
+                                    100% Verified Only
+                                    <button type="button" onClick={() => setVerifiedOnly(false)}><X size={12} /></button>
                                 </span>
                             )}
                             {sortBy !== "recommended" && (
@@ -309,6 +362,9 @@ export default function Properties() {
                                     setSearch("");
                                     setBudgetLimit(category === "sale" || typeFilter === "commercial" ? 50000000 : 200000);
                                     setSortBy("recommended");
+                                    setBhkFilter("all");
+                                    setFurnishingFilter("all");
+                                    setVerifiedOnly(false);
                                     updateParams({ type: "all", category: "all", search: "" });
                                 }}
                                 style={{

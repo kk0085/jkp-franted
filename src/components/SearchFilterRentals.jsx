@@ -1,6 +1,15 @@
 import { useState, useEffect, useRef, useMemo } from "react";
-import { Search, Filter, X, SlidersHorizontal, ChevronDown, ChevronUp, MapPin } from "lucide-react";
+import { Search, Filter, X, SlidersHorizontal, ChevronDown, ChevronUp, MapPin, ShieldCheck } from "lucide-react";
 import { popularLocations } from "../data/popularLocationsData";
+
+const topQuickLocalities = [
+    "Mansarovar",
+    "Jagatpura",
+    "Vaishali Nagar",
+    "Malviya Nagar",
+    "Tonk Road",
+    "Ajmer Road",
+];
 
 export default function SearchFilterRentals({
     title = "Search and Filter Rentals",
@@ -10,6 +19,12 @@ export default function SearchFilterRentals({
     setBudgetLimit,
     sortBy = "recommended",
     setSortBy,
+    bhkFilter = "all",
+    setBhkFilter,
+    furnishingFilter = "all",
+    setFurnishingFilter,
+    verifiedOnly = false,
+    setVerifiedOnly,
     minVal = 10000,
     maxVal = 200000,
     step = 2000,
@@ -17,22 +32,49 @@ export default function SearchFilterRentals({
     placeholder = "Search by title or location",
     onReset,
     matchCount,
+    filterCategory = "rent", // "rent" | "commercial" | "sale"
 }) {
     const [mobileFilterOpen, setMobileFilterOpen] = useState(false);
     const [localQuery, setLocalQuery] = useState(search);
     const [showSuggestions, setShowSuggestions] = useState(false);
 
-    const hasActiveFilters = Boolean(
-        (localQuery && localQuery.trim()) ||
-        budgetLimit < maxVal ||
-        sortBy !== "recommended"
-    );
+    // Fallbacks if not controlled
+    const [internalBhk, setInternalBhk] = useState(bhkFilter || "all");
+    const [internalFurnishing, setInternalFurnishing] = useState(furnishingFilter || "all");
+    const [internalVerified, setInternalVerified] = useState(verifiedOnly || false);
+
+    const currentBhk = setBhkFilter ? bhkFilter : internalBhk;
+    const handleBhkChange = (val) => {
+        if (setBhkFilter) setBhkFilter(val);
+        else setInternalBhk(val);
+    };
+
+    const currentFurnishing = setFurnishingFilter ? furnishingFilter : internalFurnishing;
+    const handleFurnishingChange = (val) => {
+        if (setFurnishingFilter) setFurnishingFilter(val);
+        else setInternalFurnishing(val);
+    };
+
+    const currentVerified = setVerifiedOnly ? verifiedOnly : internalVerified;
+    const handleVerifiedChange = (val) => {
+        if (setVerifiedOnly) setVerifiedOnly(val);
+        else setInternalVerified(val);
+    };
 
     const searchContainerRef = useRef(null);
 
     useEffect(() => {
         setLocalQuery(search);
     }, [search]);
+
+    const hasActiveFilters = Boolean(
+        (localQuery && localQuery.trim()) ||
+        budgetLimit < maxVal ||
+        sortBy !== "recommended" ||
+        currentBhk !== "all" ||
+        currentFurnishing !== "all" ||
+        currentVerified
+    );
 
     // Click / touch outside listener for suggestions
     useEffect(() => {
@@ -93,12 +135,70 @@ export default function SearchFilterRentals({
         if (setSearch) setSearch("");
         if (setBudgetLimit) setBudgetLimit(maxVal);
         if (setSortBy) setSortBy("recommended");
+        handleBhkChange("all");
+        handleFurnishingChange("all");
+        handleVerifiedChange(false);
         if (onReset) onReset();
     };
 
+    // Budget presets according to category
+    const budgetPresets = useMemo(() => {
+        if (filterCategory === "commercial") {
+            if (maxVal > 500000) {
+                // Commercial Sale
+                return [
+                    { label: "Under ₹50L", value: 5000000 },
+                    { label: "₹1 Cr", value: 10000000 },
+                    { label: "₹2 Cr", value: 20000000 },
+                    { label: "Any Budget", value: maxVal },
+                ];
+            }
+            // Commercial Rent
+            return [
+                { label: "Under ₹30k", value: 30000 },
+                { label: "₹60k", value: 60000 },
+                { label: "₹1 Lakh", value: 100000 },
+                { label: "Any Budget", value: maxVal },
+            ];
+        } else if (filterCategory === "sale" || maxVal > 500000) {
+            // Residential Sale
+            return [
+                { label: "Under ₹50L", value: 5000000 },
+                { label: "₹1 Cr", value: 10000000 },
+                { label: "₹2 Cr", value: 20000000 },
+                { label: "Any Budget", value: maxVal },
+            ];
+        }
+        // Residential Rent default
+        return [
+            { label: "Under ₹15k", value: 15000 },
+            { label: "₹25k", value: 25000 },
+            { label: "₹40k", value: 40000 },
+            { label: "Any Budget", value: maxVal },
+        ];
+    }, [filterCategory, maxVal]);
+
+    // Space / BHK options
+    const spaceOptions = useMemo(() => {
+        if (filterCategory === "commercial") {
+            return [
+                { label: "All Spaces", value: "all" },
+                { label: "🏢 Office", value: "Office" },
+                { label: "🛍️ Showroom", value: "Showroom" },
+                { label: "💼 Co-Working", value: "Coworking" },
+            ];
+        }
+        return [
+            { label: "All BHK", value: "all" },
+            { label: "2 BHK", value: "2 BHK" },
+            { label: "3 BHK", value: "3 BHK" },
+            { label: "4+ BHK", value: "4+ BHK" },
+        ];
+    }, [filterCategory]);
+
     return (
         <aside className="filter-card-widget">
-            {/* HEADER - EXACT AS SCREENSHOT */}
+            {/* HEADER */}
             <div className="filter-card-header">
                 <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
                     <Filter size={18} className="filter-header-icon" />
@@ -113,7 +213,7 @@ export default function SearchFilterRentals({
                     aria-label="Toggle filters"
                 >
                     <SlidersHorizontal size={13} />
-                    <span>{mobileFilterOpen ? "Close Filters" : "Budget & Sort"}</span>
+                    <span>{mobileFilterOpen ? "Close Filters" : "Filters & Sort"}</span>
                     {hasActiveFilters && (
                         <span
                             style={{
@@ -129,8 +229,8 @@ export default function SearchFilterRentals({
                 </button>
             </div>
 
-            {/* SEARCH INPUT FORM WITH ICON & AUTOCOMPLETE (EXACT AS SCREENSHOT) */}
-            <div ref={searchContainerRef} style={{ position: "relative", marginBottom: "18px" }}>
+            {/* SEARCH INPUT FORM WITH ICON & AUTOCOMPLETE */}
+            <div ref={searchContainerRef} style={{ position: "relative", marginBottom: "12px" }}>
                 <form onSubmit={handleFormSubmit} className="filter-search-form">
                     <div className="filter-input-wrap" style={{ marginBottom: 0 }}>
                         <Search size={18} className="filter-search-icon" />
@@ -187,7 +287,32 @@ export default function SearchFilterRentals({
                 )}
             </div>
 
-            {/* COLLAPSIBLE BODY FOR BUDGET & SORT */}
+            {/* 📍 POPULAR LOCALITIES QUICK CHIPS (1-TAP AREA FILTER) */}
+            <div className="filter-quick-chips-wrap">
+                <span className="filter-quick-chips-label">Popular Localities:</span>
+                <div className="filter-quick-chips-list">
+                    {topQuickLocalities.map((loc) => {
+                        const isLocActive = localQuery.toLowerCase() === loc.toLowerCase();
+                        return (
+                            <button
+                                key={loc}
+                                type="button"
+                                className={`filter-quick-chip-btn ${isLocActive ? "active" : ""}`}
+                                onClick={() => {
+                                    const next = isLocActive ? "" : loc;
+                                    setLocalQuery(next);
+                                    if (setSearch) setSearch(next);
+                                }}
+                            >
+                                <MapPin size={11} />
+                                <span>{loc}</span>
+                            </button>
+                        );
+                    })}
+                </div>
+            </div>
+
+            {/* COLLAPSIBLE BODY FOR BUDGET, CONFIGURATION & SORT */}
             <div className={`filter-collapsible-body ${mobileFilterOpen ? "mobile-open" : ""}`}>
                 {/* RENT / PRICE RATE ROW */}
                 <div className="filter-rate-row">
@@ -219,7 +344,79 @@ export default function SearchFilterRentals({
                     />
                 </div>
 
-                {/* RESET FILTERS BUTTON - EXACT AS SCREENSHOT */}
+                {/* ⚡ 1-TAP QUICK BUDGET PRESET PILLS */}
+                <div className="filter-budget-presets-row">
+                    {budgetPresets.map((preset) => (
+                        <button
+                            key={preset.label}
+                            type="button"
+                            className={`filter-budget-preset-pill ${budgetLimit === preset.value ? "active" : ""}`}
+                            onClick={() => setBudgetLimit && setBudgetLimit(preset.value)}
+                        >
+                            {preset.label}
+                        </button>
+                    ))}
+                </div>
+
+                {/* 🏢 BHK / SPACE TYPE SELECTOR */}
+                <div className="filter-subgroup">
+                    <span className="filter-subgroup-label">
+                        {filterCategory === "commercial" ? "Space / Office Type" : "BHK Configuration"}
+                    </span>
+                    <div className="filter-pills-selector">
+                        {spaceOptions.map((opt) => (
+                            <button
+                                key={opt.value}
+                                type="button"
+                                className={`filter-selector-btn ${currentBhk === opt.value ? "active" : ""}`}
+                                onClick={() => handleBhkChange(opt.value)}
+                            >
+                                {opt.label}
+                            </button>
+                        ))}
+                    </div>
+                </div>
+
+                {/* 🛋️ FURNISHING STATUS SELECTOR */}
+                <div className="filter-subgroup">
+                    <span className="filter-subgroup-label">Furnishing Status</span>
+                    <div className="filter-pills-selector">
+                        {[
+                            { label: "All", value: "all" },
+                            { label: "🛋️ Furnished", value: "Furnished" },
+                            { label: "🪑 Semi-Furnished", value: "Semi-Furnished" },
+                        ].map((opt) => (
+                            <button
+                                key={opt.value}
+                                type="button"
+                                className={`filter-selector-btn ${currentFurnishing === opt.value ? "active" : ""}`}
+                                onClick={() => handleFurnishingChange(opt.value)}
+                            >
+                                {opt.label}
+                            </button>
+                        ))}
+                    </div>
+                </div>
+
+                {/* 🛡️ 100% VERIFIED ONLY TOGGLE */}
+                <div
+                    className="filter-verified-toggle-box"
+                    onClick={() => handleVerifiedChange(!currentVerified)}
+                >
+                    <div className="filter-verified-label-content">
+                        <input
+                            type="checkbox"
+                            checked={currentVerified}
+                            onChange={(e) => handleVerifiedChange(e.target.checked)}
+                            onClick={(e) => e.stopPropagation()}
+                        />
+                        <ShieldCheck size={16} color="#16a34a" />
+                        <span>100% Verified Only</span>
+                    </div>
+                    <span className="filter-verified-pill-tag">Verified</span>
+                </div>
+
+                {/* RESET FILTERS BUTTON */}
                 <div style={{ display: "flex", justifyContent: "flex-end", margin: "14px 0 16px" }}>
                     <button
                         type="button"
@@ -266,8 +463,6 @@ export default function SearchFilterRentals({
                         </select>
                     </div>
                 </div>
-
-
             </div>
         </aside>
     );

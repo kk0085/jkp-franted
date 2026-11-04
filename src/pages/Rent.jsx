@@ -17,6 +17,9 @@ export default function Rent() {
     const [search, setSearch] = useState(searchParams.get("search") || "");
     const [budgetLimit, setBudgetLimit] = useState(200000);
     const [sortBy, setSortBy] = useState("recommended");
+    const [bhkFilter, setBhkFilter] = useState("all");
+    const [furnishingFilter, setFurnishingFilter] = useState("all");
+    const [verifiedOnly, setVerifiedOnly] = useState(false);
 
     useEffect(() => {
         const typeParam = searchParams.get("type") || "all";
@@ -49,7 +52,29 @@ export default function Rent() {
             // Budget slider filter (Price <= budgetLimit)
             const matchesBudget = Number(prop.price) <= budgetLimit;
 
-            return matchesTab && matchesSearch && matchesBudget;
+            // BHK filter
+            let matchesBhk = true;
+            if (bhkFilter !== "all") {
+                if (bhkFilter === "4+ BHK") {
+                    matchesBhk = prop.bhk && (prop.bhk.includes("4 BHK") || prop.bhk.includes("5 BHK"));
+                } else {
+                    matchesBhk = prop.bhk && prop.bhk.toLowerCase().includes(bhkFilter.toLowerCase());
+                }
+            }
+
+            // Furnishing filter
+            let matchesFurnishing = true;
+            if (furnishingFilter !== "all") {
+                const f = furnishingFilter.toLowerCase();
+                matchesFurnishing =
+                    (prop.furnishing && prop.furnishing.toLowerCase().includes(f)) ||
+                    (prop.description && prop.description.toLowerCase().includes(f));
+            }
+
+            // Verified filter
+            const matchesVerified = !verifiedOnly || prop.verified === true;
+
+            return matchesTab && matchesSearch && matchesBudget && matchesBhk && matchesFurnishing && matchesVerified;
         });
 
         // Ensure single unique items only (no double)
@@ -70,7 +95,7 @@ export default function Rent() {
         }
 
         return result;
-    }, [properties, activeTab, search, budgetLimit, sortBy]);
+    }, [properties, activeTab, search, budgetLimit, sortBy, bhkFilter, furnishingFilter, verifiedOnly]);
 
     const rentFlats = filtered.filter((p) => p.type === "flat");
     const rentHouses = filtered.filter((p) => p.type === "house");
@@ -80,7 +105,10 @@ export default function Rent() {
         search.trim() ||
         budgetLimit < 200000 ||
         sortBy !== "recommended" ||
-        activeTab !== "all"
+        activeTab !== "all" ||
+        bhkFilter !== "all" ||
+        furnishingFilter !== "all" ||
+        verifiedOnly
     );
 
     return (
@@ -166,11 +194,21 @@ export default function Rent() {
                         setSortBy={setSortBy}
                         placeholder="Search by title or location"
                         matchCount={filtered.length}
+                        bhkFilter={bhkFilter}
+                        setBhkFilter={setBhkFilter}
+                        furnishingFilter={furnishingFilter}
+                        setFurnishingFilter={setFurnishingFilter}
+                        verifiedOnly={verifiedOnly}
+                        setVerifiedOnly={setVerifiedOnly}
+                        filterCategory="rent"
                         onReset={() => {
                             setActiveTab("all");
                             setSearch("");
                             setBudgetLimit(200000);
                             setSortBy("recommended");
+                            setBhkFilter("all");
+                            setFurnishingFilter("all");
+                            setVerifiedOnly(false);
                             setSearchParams({});
                         }}
                     />
@@ -208,6 +246,24 @@ export default function Rent() {
                                             <button type="button" onClick={() => setBudgetLimit(200000)}><X size={12} /></button>
                                         </span>
                                     )}
+                                    {bhkFilter !== "all" && (
+                                        <span className="filter-pill-tag">
+                                            {bhkFilter}
+                                            <button type="button" onClick={() => setBhkFilter("all")}><X size={12} /></button>
+                                        </span>
+                                    )}
+                                    {furnishingFilter !== "all" && (
+                                        <span className="filter-pill-tag">
+                                            {furnishingFilter}
+                                            <button type="button" onClick={() => setFurnishingFilter("all")}><X size={12} /></button>
+                                        </span>
+                                    )}
+                                    {verifiedOnly && (
+                                        <span className="filter-pill-tag">
+                                            100% Verified Only
+                                            <button type="button" onClick={() => setVerifiedOnly(false)}><X size={12} /></button>
+                                        </span>
+                                    )}
                                     {sortBy !== "recommended" && (
                                         <span className="filter-pill-tag">
                                             {sortBy === "price-low" ? "Price: Low to High" : sortBy === "price-high" ? "Price: High to Low" : "Newest"}
@@ -229,6 +285,9 @@ export default function Rent() {
                                             setSearch("");
                                             setBudgetLimit(200000);
                                             setSortBy("recommended");
+                                            setBhkFilter("all");
+                                            setFurnishingFilter("all");
+                                            setVerifiedOnly(false);
                                             setActiveTab("all");
                                             setSearchParams({});
                                         }}
