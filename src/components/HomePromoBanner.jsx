@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Sparkles, Building2, ShieldCheck, Zap, Phone, PlusCircle, ArrowRight, Award, Users, BadgePercent, CheckCircle2 } from "lucide-react";
+import { Sparkles, Building2, ShieldCheck, Phone, PlusCircle, ArrowRight, Award, Users, CheckCircle2, MapPin } from "lucide-react";
 import { useProperty } from "../context/PropertyContext";
 
 export default function HomePromoBanner({ onOpenSiteVisit }) {
@@ -28,7 +28,7 @@ export default function HomePromoBanner({ onOpenSiteVisit }) {
                             </h2>
 
                             <p className="promo-banner-desc">
-                                Get direct owner deals with zero brokerage, 100% verified documents, and assisted property visits across Mansarovar, Jagatpura, Vaishali Nagar, and all prime localities.
+                                Explore verified residential & commercial properties with 100% genuine documents and assisted property visits across Mansarovar, Jagatpura, Vaishali Nagar, and all prime localities.
                             </p>
 
                             {/* FEATURE BADGES */}
@@ -42,8 +42,8 @@ export default function HomePromoBanner({ onOpenSiteVisit }) {
                                     <span>RERA & JDA Verified Deals</span>
                                 </div>
                                 <div className="promo-feature-pill">
-                                    <Zap size={15} color="#f59e0b" />
-                                    <span>Zero Brokerage Options</span>
+                                    <MapPin size={15} color="#f59e0b" />
+                                    <span>Pure Jaipur Platform</span>
                                 </div>
                                 <div className="promo-feature-pill">
                                     <Award size={15} color="#ec268f" />
@@ -76,7 +76,7 @@ export default function HomePromoBanner({ onOpenSiteVisit }) {
                             </div>
                         </div>
 
-                        {/* RIGHT: 3 DISTINCT PROPER STAT CARDS (10k+, 0%, 100%) */}
+                        {/* RIGHT: 3 DISTINCT PROPER STAT CARDS (10k+, #1 Pure Jaipur, 100%) */}
                         <div className="promo-stats-showcase">
                             {/* 1. 10k+ HAPPY FAMILIES */}
                             <div className="promo-stat-card stat-card-pink">
@@ -95,20 +95,20 @@ export default function HomePromoBanner({ onOpenSiteVisit }) {
                                 </div>
                             </div>
 
-                            {/* 2. 0% BROKERAGE */}
+                            {/* 2. PURE JAIPUR REAL ESTATE PLATFORM */}
                             <div className="promo-stat-card stat-card-green">
                                 <div className="stat-card-icon icon-green">
-                                    <BadgePercent size={22} />
+                                    <Building2 size={22} />
                                 </div>
                                 <div className="stat-card-num-box">
-                                    <span className="stat-card-number num-green">0%</span>
+                                    <span className="stat-card-number num-green">#1</span>
                                 </div>
                                 <div className="stat-card-content">
                                     <div className="stat-card-title-row">
-                                        <h4 className="stat-card-heading">Brokerage on Deals</h4>
-                                        <span className="stat-chip chip-green">Zero Fee</span>
+                                        <h4 className="stat-card-heading">Pure Jaipur Platform</h4>
+                                        <span className="stat-chip chip-green">Pure Jaipur</span>
                                     </div>
-                                    <p className="stat-card-sub">Direct owner connect, save brokerage</p>
+                                    <p className="stat-card-sub">Dedicated Pink City Real Estate Application</p>
                                 </div>
                             </div>
 

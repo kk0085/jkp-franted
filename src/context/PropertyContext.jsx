@@ -10,11 +10,6 @@ export const defaultSiteSettings = {
     whatsappNumber: "917023077367",
     email: "support@jaipurkiproperty.com",
     address: "Jaipur, Rajasthan, IN",
-    announcement: {
-        enabled: true,
-        text: "🎉 Exclusive Zero Brokerage Verified Properties Across Prime Jaipur Localities! Call +91 70230 77367",
-        link: "/properties",
-    },
     heroSlides: [
         {
             image: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1600&auto=format&fit=crop&q=80",
@@ -278,7 +273,11 @@ export function PropertyProvider({ children }) {
     const [siteSettings, setSiteSettings] = useState(() => {
         try {
             const saved = localStorage.getItem("jkp_site_settings");
-            if (saved) return { ...defaultSiteSettings, ...JSON.parse(saved) };
+            if (saved) {
+                const parsed = JSON.parse(saved);
+                delete parsed.announcement;
+                return { ...defaultSiteSettings, ...parsed };
+            }
         } catch {}
         return defaultSiteSettings;
     });

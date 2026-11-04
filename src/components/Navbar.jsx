@@ -115,40 +115,6 @@ export default function Navbar() {
 
     return (
         <>
-            {siteSettings?.announcement?.enabled && siteSettings.announcement.text && (
-                <div
-                    style={{
-                        background: "linear-gradient(90deg, #be185d, #ec268f)",
-                        color: "#ffffff",
-                        padding: "7px 16px",
-                        fontSize: "12.5px",
-                        fontWeight: 600,
-                        textAlign: "center",
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        gap: "10px",
-                        letterSpacing: "0.2px",
-                        position: "relative",
-                        zIndex: 1001,
-                    }}
-                >
-                    <span>{siteSettings.announcement.text}</span>
-                    {siteSettings.announcement.link && (
-                        <Link
-                            to={siteSettings.announcement.link}
-                            style={{
-                                color: "#fef08a",
-                                textDecoration: "underline",
-                                fontWeight: 700,
-                                fontSize: "12px",
-                            }}
-                        >
-                            Explore &rarr;
-                        </Link>
-                    )}
-                </div>
-            )}
             <header className={`navbar ${isScrolled ? "navbar-scrolled" : ""}`}>
             <div className="container nav-inner">
                 {/* 1. BRAND LOGO */}

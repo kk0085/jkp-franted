@@ -8,7 +8,6 @@ import {
     PhoneCall,
     Image as ImageIcon,
     CreditCard,
-    Megaphone,
     Settings,
     Search,
     PlusCircle,
@@ -171,16 +170,6 @@ export default function Admin() {
         address: siteSettings?.address || "Jaipur, Rajasthan, IN",
     });
 
-    // -------------------------------------------------------------
-    // ANNOUNCEMENT BAR SETTINGS STATE
-    // -------------------------------------------------------------
-    const [announcementForm, setAnnouncementForm] = useState({
-        enabled: siteSettings?.announcement?.enabled ?? true,
-        text:
-            siteSettings?.announcement?.text ||
-            "🎉 Exclusive Zero Brokerage Verified Properties Across Prime Jaipur Localities! Call +91 70230 77367",
-        link: siteSettings?.announcement?.link || "/properties",
-    });
 
     // -------------------------------------------------------------
     // HERO SLIDES STATE
@@ -363,14 +352,6 @@ export default function Admin() {
         showToast("Contact details & helplines updated live across the entire website!");
     };
 
-    // Save Announcement Bar
-    const handleSaveAnnouncement = (e) => {
-        e.preventDefault();
-        updateSiteSettings({
-            announcement: announcementForm,
-        });
-        showToast("Top announcement bar updated successfully!");
-    };
 
     // Save Hero Slides
     const handleSaveHeroSlides = () => {
@@ -995,37 +976,6 @@ export default function Admin() {
                         <span>Owner Listing Plans</span>
                     </button>
 
-                    <button
-                        type="button"
-                        onClick={() => {
-                            setActiveTab("announcement");
-                            setIsMobileSidebarOpen(false);
-                        }}
-                        style={{
-                            width: "100%",
-                            display: "flex",
-                            alignItems: "center",
-                            justifyContent: "space-between",
-                            padding: "10px 12px",
-                            borderRadius: "10px",
-                            border: "none",
-                            background: activeTab === "announcement" ? "linear-gradient(90deg, #ec268f, #be185d)" : "transparent",
-                            color: activeTab === "announcement" ? "#ffffff" : "#94a3b8",
-                            fontSize: "13.5px",
-                            fontWeight: 700,
-                            cursor: "pointer",
-                            marginBottom: "4px",
-                            textAlign: "left",
-                        }}
-                    >
-                        <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-                            <Megaphone size={17} />
-                            <span>Announcement Bar</span>
-                        </div>
-                        {announcementForm.enabled && (
-                            <span style={{ width: "8px", height: "8px", borderRadius: "50%", background: "#22c55e" }} />
-                        )}
-                    </button>
 
                     <div style={{ fontSize: "11px", fontWeight: 800, color: "#475569", letterSpacing: "0.8px", padding: "16px 10px 8px", textTransform: "uppercase" }}>
                         Data & Maintenance
@@ -1156,7 +1106,6 @@ export default function Admin() {
                             {activeTab === "contact" && "Helplines & Site-Wide Contact Info"}
                             {activeTab === "hero" && "Hero Slider Banners"}
                             {activeTab === "plans" && "Owner Listing Plans & Pricing"}
-                            {activeTab === "announcement" && "Top Notification Announcement Bar"}
                             {activeTab === "system" && "Backup & System Diagnostics"}
                         </div>
                     </div>
@@ -1247,20 +1196,7 @@ export default function Admin() {
                                     </div>
                                 </div>
 
-                                <div style={{ background: "#ffffff", padding: "22px 24px", borderRadius: "20px", border: "1px solid #e2e8f0", boxShadow: "0 2px 10px rgba(0,0,0,0.02)" }}>
-                                    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-                                        <span style={{ fontSize: "12px", fontWeight: 700, color: "#64748b", textTransform: "uppercase" }}>Top Announcement</span>
-                                        <div style={{ width: "38px", height: "38px", borderRadius: "10px", background: "#faf5ff", color: "#9333ea", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                                            <Megaphone size={19} />
-                                        </div>
-                                    </div>
-                                    <div style={{ fontSize: "18px", fontWeight: 800, color: announcementForm.enabled ? "#16a34a" : "#64748b", marginTop: "14px" }}>
-                                        {announcementForm.enabled ? "● Bar Active" : "○ Disabled"}
-                                    </div>
-                                    <div style={{ fontSize: "12px", color: "#64748b", marginTop: "6px", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
-                                        {announcementForm.text.substring(0, 34)}...
-                                    </div>
-                                </div>
+                                
                             </div>
 
                             {/* TWO-COLUMN GRID: RECENT LEADS & QUICK ACTIONS */}
@@ -1446,27 +1382,7 @@ export default function Admin() {
                                         <span>Edit Homepage Hero Slides</span>
                                     </button>
 
-                                    <button
-                                        type="button"
-                                        onClick={() => setActiveTab("announcement")}
-                                        style={{
-                                            display: "flex",
-                                            alignItems: "center",
-                                            gap: "10px",
-                                            padding: "12px 16px",
-                                            borderRadius: "12px",
-                                            background: "#faf5ff",
-                                            border: "1px solid #e9d5ff",
-                                            color: "#7e22ce",
-                                            fontSize: "13.5px",
-                                            fontWeight: 700,
-                                            cursor: "pointer",
-                                            textAlign: "left",
-                                        }}
-                                    >
-                                        <Megaphone size={18} />
-                                        <span>Manage Top Announcement Bar</span>
-                                    </button>
+                                    
 
                                     <button
                                         type="button"
@@ -2393,134 +2309,6 @@ export default function Admin() {
                         </div>
                     )}
 
-                    {/* ========================================================== */}
-                    {/* VIEW 7: ANNOUNCEMENT BAR                                   */}
-                    {/* ========================================================== */}
-                    {activeTab === "announcement" && (
-                        <div style={{ maxWidth: "780px", margin: "0 auto" }}>
-                            <div style={{ background: "#ffffff", borderRadius: "24px", padding: "36px 32px", border: "1px solid #e2e8f0", boxShadow: "0 4px 20px rgba(0,0,0,0.03)" }}>
-                                <div style={{ marginBottom: "24px" }}>
-                                    <h2 style={{ fontSize: "20px", fontWeight: 800, color: "#0f172a", margin: "0 0 6px" }}>
-                                        Site-Wide Top Announcement Bar
-                                    </h2>
-                                    <p style={{ fontSize: "13.5px", color: "#64748b", margin: 0 }}>
-                                        Show an alert or promotional strip directly at the top of every page of Jaipur Ki Property.
-                                    </p>
-                                </div>
-
-                                {/* LIVE PREVIEW */}
-                                <div style={{ marginBottom: "26px" }}>
-                                    <label style={{ display: "block", fontSize: "12px", fontWeight: 700, color: "#64748b", marginBottom: "6px" }}>
-                                        Live Preview:
-                                    </label>
-                                    {announcementForm.enabled ? (
-                                        <div
-                                            style={{
-                                                background: "linear-gradient(90deg, #be185d, #ec268f)",
-                                                color: "#ffffff",
-                                                padding: "9px 16px",
-                                                borderRadius: "10px",
-                                                fontSize: "12.5px",
-                                                fontWeight: 600,
-                                                textAlign: "center",
-                                                display: "flex",
-                                                alignItems: "center",
-                                                justifyContent: "center",
-                                                gap: "10px",
-                                            }}
-                                        >
-                                            <span>{announcementForm.text || "Preview of your notification text..."}</span>
-                                            {announcementForm.link && (
-                                                <span style={{ color: "#fef08a", textDecoration: "underline", fontWeight: 700, fontSize: "12px" }}>
-                                                    Explore &rarr;
-                                                </span>
-                                            )}
-                                        </div>
-                                    ) : (
-                                        <div style={{ background: "#f1f5f9", color: "#94a3b8", padding: "12px 16px", borderRadius: "10px", fontSize: "12.5px", textAlign: "center", fontStyle: "italic" }}>
-                                            Announcement Bar is currently disabled (hidden from public website).
-                                        </div>
-                                    )}
-                                </div>
-
-                                <form onSubmit={handleSaveAnnouncement}>
-                                    <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
-                                        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", background: "#f8fafc", padding: "14px 18px", borderRadius: "14px", border: "1px solid #e2e8f0" }}>
-                                            <div>
-                                                <strong style={{ fontSize: "14px", color: "#0f172a" }}>Display Announcement Bar</strong>
-                                                <div style={{ fontSize: "12px", color: "#64748b" }}>Turn visibility ON or OFF across the website</div>
-                                            </div>
-                                            <label style={{ position: "relative", display: "inline-block", width: "50px", height: "28px", cursor: "pointer" }}>
-                                                <input
-                                                    type="checkbox"
-                                                    checked={announcementForm.enabled}
-                                                    onChange={(e) => setAnnouncementForm({ ...announcementForm, enabled: e.target.checked })}
-                                                    style={{ opacity: 0, width: 0, height: 0 }}
-                                                />
-                                                <span
-                                                    style={{
-                                                        position: "absolute",
-                                                        inset: 0,
-                                                        background: announcementForm.enabled ? "#ec268f" : "#cbd5e1",
-                                                        borderRadius: "34px",
-                                                        transition: "0.2s",
-                                                    }}
-                                                />
-                                                <span
-                                                    style={{
-                                                        position: "absolute",
-                                                        height: "22px",
-                                                        width: "22px",
-                                                        left: announcementForm.enabled ? "25px" : "3px",
-                                                        bottom: "3px",
-                                                        backgroundColor: "white",
-                                                        borderRadius: "50%",
-                                                        transition: "0.2s",
-                                                    }}
-                                                />
-                                            </label>
-                                        </div>
-
-                                        <div>
-                                            <label style={{ display: "block", fontSize: "13px", fontWeight: 700, color: "#334155", marginBottom: "6px" }}>
-                                                Announcement Message
-                                            </label>
-                                            <textarea
-                                                rows={3}
-                                                value={announcementForm.text}
-                                                onChange={(e) => setAnnouncementForm({ ...announcementForm, text: e.target.value })}
-                                                placeholder="Enter message text..."
-                                                style={{ width: "100%", padding: "11px 14px", borderRadius: "10px", border: "1.5px solid #cbd5e1", fontSize: "13.5px", resize: "vertical" }}
-                                            />
-                                        </div>
-
-                                        <div>
-                                            <label style={{ display: "block", fontSize: "13px", fontWeight: 700, color: "#334155", marginBottom: "6px" }}>
-                                                Action / Redirect Link
-                                            </label>
-                                            <input
-                                                type="text"
-                                                value={announcementForm.link}
-                                                onChange={(e) => setAnnouncementForm({ ...announcementForm, link: e.target.value })}
-                                                placeholder="/properties or /post-property"
-                                                style={{ width: "100%", padding: "11px 14px", borderRadius: "10px", border: "1.5px solid #cbd5e1", fontSize: "13.5px" }}
-                                            />
-                                        </div>
-                                    </div>
-
-                                    <div style={{ marginTop: "28px", paddingTop: "20px", borderTop: "1px solid #f1f5f9", display: "flex", justifyContent: "flex-end" }}>
-                                        <button
-                                            type="submit"
-                                            style={{ display: "inline-flex", alignItems: "center", gap: "8px", background: "linear-gradient(135deg, #ec268f, #be185d)", color: "#ffffff", border: "none", borderRadius: "9999px", padding: "12px 28px", fontSize: "14.5px", fontWeight: 700, cursor: "pointer", boxShadow: "0 4px 14px rgba(236, 38, 143, 0.35)" }}
-                                        >
-                                            <Save size={16} />
-                                            <span>Update Announcement Bar</span>
-                                        </button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    )}
 
                     {/* ========================================================== */}
                     {/* VIEW 8: BACKUP & SYSTEM DIAGNOSTICS                        */}
