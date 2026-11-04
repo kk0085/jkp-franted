@@ -6,7 +6,6 @@ import PropertySection from "../components/PropertySection";
 import PropertyCard from "../components/PropertyCard";
 import WhyChooseUs from "../components/WhyChooseUs";
 import HomePromoBanner from "../components/HomePromoBanner";
-import CustomerReviewsSection from "../components/CustomerReviewsSection";
 import HeroTrustTicker from "../components/HeroTrustTicker";
 import LiveActivityToast from "../components/LiveActivityToast";
 import SiteVisitPopup from "../components/SiteVisitPopup";
@@ -418,8 +417,6 @@ export default function Home() {
                 </div>
             </section>
 
-            {/* CUSTOMER REVIEWS & 4.9 STAR RATINGS SHOWCASE */}
-            <CustomerReviewsSection />
 
             {/* WHY CHOOSE US */}
             <div className="container" style={{ marginTop: "36px" }}>
