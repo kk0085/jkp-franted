@@ -83,7 +83,7 @@ export default function PropertyCard({ property, onEnquiry }) {
                     </div>
                 </div>
 
-                {/* 2. BACK FACE (180 DEGREE FLIP) - Card ghumne ke baad Share button + 3D rotating "SHARE" text */}
+                {/* 2. BACK FACE (180 DEGREE FLIP) - Share button + 360° 3D rotating "SHARE" text (Never ulta) */}
                 <div className="property-card-back">
                     <div className="card-back-header">
                         <div className="card-back-price">
@@ -91,7 +91,7 @@ export default function PropertyCard({ property, onEnquiry }) {
                             {property.category === "rent" && <small> / month</small>}
                         </div>
 
-                        {/* SHARE BUTTON WITH GAP & 3D ROTATING TEXT UNDERNEATH */}
+                        {/* SHARE BUTTON WITH GAP & 360° 3D ROTATING TEXT (NEVER ULTA) */}
                         <div className="card-back-share-wrap">
                             <button
                                 type="button"
@@ -103,9 +103,16 @@ export default function PropertyCard({ property, onEnquiry }) {
                                 {copied ? <Check size={14} color="#ffffff" /> : <Share2 size={14} />}
                             </button>
 
-                            {/* 3D CONTINUOUSLY SPINNING TEXT (NON-CLICKABLE AS REQUESTED) */}
-                            <div className="share-3d-text-label" aria-hidden="true">
-                                {copied ? "Copied!" : "Share"}
+                            {/* 360° 3D DOUBLE-SIDED BADGE (NEVER MIRRORED / ULTA) */}
+                            <div className="share-360-badge" aria-hidden="true">
+                                <div className="share-360-inner">
+                                    <span className="share-360-side share-360-front">
+                                        {copied ? "Copied!" : "Share"}
+                                    </span>
+                                    <span className="share-360-side share-360-back">
+                                        {copied ? "Copied!" : "Share"}
+                                    </span>
+                                </div>
                             </div>
                         </div>
                     </div>
