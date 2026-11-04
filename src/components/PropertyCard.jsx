@@ -83,7 +83,7 @@ export default function PropertyCard({ property, onEnquiry }) {
                     </div>
                 </div>
 
-                {/* 2. BACK FACE (180 DEGREE FLIP) - Share button shows here after card rotates */}
+                {/* 2. BACK FACE (180 DEGREE FLIP) - Share button with icon + "Share" text underneath */}
                 <div className="property-card-back">
                     <div className="card-back-header">
                         <div className="card-back-price">
@@ -93,12 +93,15 @@ export default function PropertyCard({ property, onEnquiry }) {
 
                         <button
                             type="button"
-                            className={`share-btn ${copied ? "copied" : ""}`}
+                            className={`card-back-share-btn ${copied ? "copied" : ""}`}
                             onClick={handleShare}
                             title={copied ? "Copied!" : "Share Property"}
                             aria-label="Share property"
                         >
-                            {copied ? <Check size={13} color="#15803d" /> : <Share2 size={13} />}
+                            <div className="card-back-share-icon">
+                                {copied ? <Check size={13} color="#15803d" /> : <Share2 size={13} />}
+                            </div>
+                            <span className="card-back-share-text">{copied ? "Copied" : "Share"}</span>
                         </button>
                     </div>
 
