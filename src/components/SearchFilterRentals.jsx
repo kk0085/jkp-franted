@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef, useMemo } from "react";
-import { Search, Filter, X, SlidersHorizontal, ChevronDown, ChevronUp, MapPin, Check } from "lucide-react";
+import { Search, Filter, X, SlidersHorizontal, ChevronDown, ChevronUp, MapPin } from "lucide-react";
 import { popularLocations } from "../data/popularLocationsData";
 
 export default function SearchFilterRentals({
@@ -27,25 +27,6 @@ export default function SearchFilterRentals({
         budgetLimit < maxVal ||
         sortBy !== "recommended"
     );
-
-    const handleApplyAndClose = () => {
-        if (setSearch) {
-            setSearch(localQuery.trim());
-        }
-        setShowSuggestions(false);
-        setMobileFilterOpen(false);
-        setTimeout(() => {
-            const target =
-                document.getElementById("for-rent") ||
-                document.getElementById("commercial-listings") ||
-                document.querySelector(".prop-cards-main-col") ||
-                document.querySelector(".rent-main-col") ||
-                document.querySelector(".property-grid");
-            if (target) {
-                target.scrollIntoView({ behavior: "smooth", block: "start" });
-            }
-        }, 80);
-    };
 
     const searchContainerRef = useRef(null);
 
@@ -286,19 +267,7 @@ export default function SearchFilterRentals({
                     </div>
                 </div>
 
-                {/* MOBILE ONLY APPLY & CLOSE BUTTON */}
-                <div className="mobile-filter-apply-row">
-                    <button
-                        type="button"
-                        className="mobile-filter-apply-btn"
-                        onClick={handleApplyAndClose}
-                    >
-                        <Check size={16} style={{ marginRight: "6px" }} />
-                        <span>
-                            Apply & Close Filters{typeof matchCount === "number" ? ` (${matchCount} Found)` : ""}
-                        </span>
-                    </button>
-                </div>
+
             </div>
         </aside>
     );
