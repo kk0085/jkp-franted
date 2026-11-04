@@ -1111,7 +1111,7 @@ img {
 .card-back-header {
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: space-between;
   margin-bottom: 8px;
 }
 

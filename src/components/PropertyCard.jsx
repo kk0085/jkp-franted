@@ -1,11 +1,9 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { MapPin, Share2, Check, Car } from "lucide-react";
-import { useProperty } from "../context/PropertyContext";
+import { MapPin, Share2, Check } from "lucide-react";
 
 export default function PropertyCard({ property, onEnquiry }) {
     const [copied, setCopied] = useState(false);
-    const { openScheduleCab } = useProperty();
 
     const handleShare = async (e) => {
         e.preventDefault();
@@ -43,7 +41,7 @@ export default function PropertyCard({ property, onEnquiry }) {
     return (
         <article className="property-card">
             <div className="property-card-inner">
-                {/* 1. FRONT FACE (0 DEGREE) */}
+                {/* 1. FRONT FACE (0 DEGREE) - Clean view without share button */}
                 <div className="property-card-front">
                     <div className="property-image-link">
                         <div className="property-image">
@@ -52,8 +50,6 @@ export default function PropertyCard({ property, onEnquiry }) {
                             <span className="property-badge">
                                 {property.badge}
                             </span>
-
-
                         </div>
                     </div>
 
@@ -77,30 +73,6 @@ export default function PropertyCard({ property, onEnquiry }) {
                                 <button className="enquiry-btn" onClick={handleEnquiryClick}>
                                     Enquiry
                                 </button>
-
-                                <button
-                                    type="button"
-                                    className="card-cab-action-btn"
-                                    onClick={(e) => {
-                                        e.preventDefault();
-                                        e.stopPropagation();
-                                        if (openScheduleCab) openScheduleCab(property);
-                                    }}
-                                    title="Book Free Cab for Site Visit"
-                                    aria-label="Book Free Cab"
-                                >
-                                    <Car size={12} color="#ec268f" />
-                                    <span>Free Cab</span>
-                                </button>
-
-                                <button
-                                    className={`share-btn ${copied ? "copied" : ""}`}
-                                    onClick={handleShare}
-                                    title={copied ? "Copied!" : "Share Property"}
-                                    aria-label="Share property"
-                                >
-                                    {copied ? <Check size={13} color="#15803d" /> : <Share2 size={13} />}
-                                </button>
                             </div>
 
                             {/* BOTTOM-RIGHT CORNER OF CARD */}
@@ -111,13 +83,23 @@ export default function PropertyCard({ property, onEnquiry }) {
                     </div>
                 </div>
 
-                {/* 2. BACK FACE (180 DEGREE FLIP) */}
+                {/* 2. BACK FACE (180 DEGREE FLIP) - Share button shows here after card rotates */}
                 <div className="property-card-back">
                     <div className="card-back-header">
                         <div className="card-back-price">
                             Rs {Number(property.price).toLocaleString("en-IN")}
                             {property.category === "rent" && <small> / month</small>}
                         </div>
+
+                        <button
+                            type="button"
+                            className={`share-btn ${copied ? "copied" : ""}`}
+                            onClick={handleShare}
+                            title={copied ? "Copied!" : "Share Property"}
+                            aria-label="Share property"
+                        >
+                            {copied ? <Check size={13} color="#15803d" /> : <Share2 size={13} />}
+                        </button>
                     </div>
 
                     <div className="card-back-body">
