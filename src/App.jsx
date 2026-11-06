@@ -12,7 +12,6 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import PostProperty from "./pages/PostProperty";
 import Profile from "./pages/Profile";
-import Admin from "./pages/Admin";
 import EnquiryModal from "./components/EnquiryModal";
 import ScheduleCabModal from "./components/ScheduleCabModal";
 import SiteVisitPopup from "./components/SiteVisitPopup";
@@ -36,13 +35,11 @@ function ScrollToTop() {
 
 function AppContent() {
   const { enquiryProperty, closeEnquiry } = useProperty();
-  const location = useLocation();
-  const isAdminRoute = location.pathname.startsWith("/admin");
 
   return (
     <>
       <ScrollToTop />
-      {!isAdminRoute && <Navbar />}
+      <Navbar />
 
       <main>
         <Routes>
@@ -57,23 +54,22 @@ function AppContent() {
           <Route path="/register" element={<Register />} />
           <Route path="/post-property" element={<PostProperty />} />
           <Route path="/profile" element={<Profile />} />
-          <Route path="/admin" element={<Admin />} />
         </Routes>
       </main>
 
-      {!isAdminRoute && <Footer />}
+      <Footer />
 
-      {/* FLOATING WHATSAPP BUTTON (SIDE MEIN) - HIDDEN ON ADMIN */}
-      {!isAdminRoute && <FloatingWhatsApp />}
+      {/* FLOATING WHATSAPP BUTTON (SIDE MEIN) */}
+      <FloatingWhatsApp />
 
       {/* FREE CAB SITE VISIT BOOKING MODAL */}
       <ScheduleCabModal />
 
       {/* GLOBAL JAIPUR KI PROPERTY [VISIT] FLOATING PILL & MODAL */}
-      {!isAdminRoute && <SiteVisitPopup />}
+      <SiteVisitPopup />
 
-      {/* AUTO OPEN GMAIL OTP LOGIN POPUP - HIDDEN ON ADMIN */}
-      {!isAdminRoute && <EmailOtpLoginModal />}
+      {/* AUTO OPEN GMAIL OTP LOGIN POPUP */}
+      <EmailOtpLoginModal />
 
       {enquiryProperty && (
         <EnquiryModal
